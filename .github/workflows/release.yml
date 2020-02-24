@@ -6,7 +6,7 @@ jobs:
         steps:
         - uses: actions/checkout@v1
         - name: Install Dependencies
-          run: sudo apt-get -y quilt qemu-user-static debootstrap bsdtar
+          run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
         - name: Run Build script
           run: sudo ./build.sh
         - name: Release Image
