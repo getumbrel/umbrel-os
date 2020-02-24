@@ -1,5 +1,9 @@
-name: Release
-on: [push]
+name: Run Release Script on push to MASTER
+on: 
+    push:
+        branches:
+            - master
+
 jobs:
     build:
         runs-on: ubuntu-18.04
