@@ -4,9 +4,10 @@ Customized Underlying Raspbian Operating System for the Umbrel box (based on htt
 
 ## Config/Build instructions
 
-To come soon
+1. Run ```sudo ./build.sh```
+2. Look in deploy/
+3. Use etcher to deploy
 
 ## TODO:
 
 - Add in wifi configurations
-- Set up automated build on release because building this each time is extremely painful.
