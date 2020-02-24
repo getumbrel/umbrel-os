@@ -1,0 +1,16 @@
+name: Release
+on: [push]
+jobs:
+    build:
+        runs-on: ubuntu-18.04
+        steps:
+        - uses: actions/checkout@v1
+        - name: Run Build script
+          run: sudo ./build.sh
+        - name: Release Image
+          if: startsWith(github.ref, 'refs/tags/')
+          uses: meeDamian/github-release@v1.0.0
+          with:
+            gzip: false
+            files: dist/*.zip
+            token: ${{ secrets.GITHUB_TOKEN }}
