@@ -8,6 +8,5 @@ To come soon
 
 ## TODO:
 
-- Get source for building the base OS in here. (Use work created in [here](https://github.com/lncm/pi-gen/tree/lncmbox))
-- Customize source for Umbrel box
+- Add in wifi configurations
 - Set up automated build on release because building this each time is extremely painful.
