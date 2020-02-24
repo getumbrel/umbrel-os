@@ -1,0 +1,8 @@
+wpasupplicant wireless-tools firmware-atheros firmware-brcm80211 firmware-libertas firmware-misc-nonfree firmware-realtek
+raspberrypi-net-mods
+dhcpcd5
+net-tools
+tor
+libzbar-dev
+libzbar0
+python3-pip
