@@ -13,6 +13,10 @@ jobs:
           run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
         - name: Run Build script
           run: sudo ./build.sh
+        - name: Debug deploy dir
+          run: ls -la deploy/
+        - name: Debug current working dir
+          run: ls -la
         - name: Release Image
           if: startsWith(github.ref, 'refs/tags/')
           uses: meeDamian/github-release@v1.0.0
