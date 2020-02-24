@@ -5,6 +5,8 @@ jobs:
         runs-on: ubuntu-18.04
         steps:
         - uses: actions/checkout@v1
+        - name: Install Dependencies
+          run: sudo apt-get -y quilt qemu-user-static debootstrap bsdtar
         - name: Run Build script
           run: sudo ./build.sh
         - name: Release Image
