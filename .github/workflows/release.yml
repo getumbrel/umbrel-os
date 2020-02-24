@@ -22,5 +22,5 @@ jobs:
           uses: meeDamian/github-release@v1.0.0
           with:
             gzip: false
-            files: *.zip
+            files: "*.zip"
             token: ${{ secrets.GITHUB_TOKEN }}
