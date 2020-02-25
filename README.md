@@ -11,6 +11,10 @@ Customized Underlying Raspbian Operating System for the Umbrel box (based on htt
 2. Look in deploy/
 3. Use etcher to deploy
 
+Alternatively, you may check the latest release too and you may find the image built automatically by github (upon tagging).
+
 ## TODO:
 
-- Add in wifi configurations
+See the [following list](https://github.com/getumbrel/os-base/labels/TODO)
+
+
