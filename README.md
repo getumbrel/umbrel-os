@@ -1,5 +1,8 @@
 # Umbrel Box Base Operating system
 
+![Run Release Script on push to MASTER](https://github.com/getumbrel/os-base/workflows/Run%20Release%20Script%20on%20push%20to%20MASTER/badge.svg)
+
+
 Customized Underlying Raspbian Operating System for the Umbrel box (based on https://github.com/RPi-Distro/pi-gen)
 
 ## Config/Build instructions
