@@ -166,6 +166,7 @@ export TARGET_HOSTNAME=${TARGET_HOSTNAME:-umbrel}
 
 export FIRST_USER_NAME=${FIRST_USER_NAME:-umbrel}
 export FIRST_USER_PASS=${FIRST_USER_PASS:-moneyprintergobrrr}
+export RELEASE=${RELEASE:-buster}
 export WPA_ESSID
 export WPA_PASSWORD
 export WPA_COUNTRY
