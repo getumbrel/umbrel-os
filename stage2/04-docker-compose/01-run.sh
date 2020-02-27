@@ -15,11 +15,29 @@ cp files/umbrel-unlock.py ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-unlock.py
 # Docker compose service
 mkdir -p ${ROOTFS_DIR}/etc/init.d
 mkdir -p ${ROOTFS_DIR}/etc/rc2.d
+mkdir -p ${ROOTFS_DIR}/etc/rc3.d
+mkdir -p ${ROOTFS_DIR}/etc/rc4.d
+mkdir -p ${ROOTFS_DIR}/etc/rc5.d
+mkdir -p ${ROOTFS_DIR}/etc/rc0.d
+mkdir -p ${ROOTFS_DIR}/etc/rc1.d
+mkdir -p ${ROOTFS_DIR}/etc/rc6.d
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d
 # Run in chroot
 on_chroot << EOF
 cd /etc/rc2.d
 ln -s /etc/init.d/compose-service S01composeservice
+cd /etc/rc3.d
+ln -s /etc/init.d/compose-service S01composeservice
+cd /etc/rc4.d
+ln -s /etc/init.d/compose-service S01composeservice
+cd /etc/rc5.d
+ln -s /etc/init.d/compose-service S01composeservice
+cd /etc/rc0.d
+ln -s /etc/init.d/compose-service K01composeservice
+cd /etc/rc1.d
+ln -s /etc/init.d/compose-service K01composeservice
+cd /etc/rc6.d
+ln -s /etc/init.d/compose-service K01composeservice
 EOF
 
 echo "Docker stuff installed" >> $ROOTFS_DIR/home/$FIRST_USER_NAME/docker-compose.txt

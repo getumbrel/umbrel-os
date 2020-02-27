@@ -2,22 +2,43 @@
 
 set -e
 
+### BEGIN INIT INFO
+# Provides:          docker-compose service
+# Required-Start:    $syslog $remote_fs docker
+# Required-Stop:     $syslog $remote_fs docker
+# Should-Start:      cgroupfs-mount cgroup-lite
+# Should-Stop:       cgroupfs-mount cgroup-lite
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts docker-compose
+# Description:       Start docker-compose
+### END INIT INFO
+NAME="compose-service"
+DESCRIPTION="Docker compose service"
+SCRIPTNAME=/etc/init.d/$NAME
+
 case "$1" in
   	start)
 		echo "Starting"
 		cd /home/umbrel
 		docker-compose up -d
+        exit 0
 		;;
 	stop)
 		echo "Stopping docker"
 		cd /home/umbrel
 		docker-compose down
+        exit 0
 		;;
 	status)
 		echo "Status"
 		docker ps -a
+        exit 0
 		;;
 	*)
 		echo "Either 'start', 'stop', or 'status'"
-		;;
+		exit 1
+        ;;
 esac
+
+exit 0
