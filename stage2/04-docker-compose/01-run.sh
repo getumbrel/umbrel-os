@@ -24,12 +24,15 @@ mkdir -p ${ROOTFS_DIR}/etc/rc6.d
 
 echo "Copying the compose service to rootfs (etc and home)"
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d/compose-service
+ls -la ${ROOTFS_DIR}/etc/init.d
 echo "Copying compose service to home dir (remove this later!)"
 cp files/compose-service ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/compose-service
 
 # Run in chroot
 echo "Enable compose service"
 on_chroot << EOF
+echo "Get current working directory in chroot"
+pwd
 update-rc.d compose-service defaults
 update-rc.d compose-service enable
 EOF
