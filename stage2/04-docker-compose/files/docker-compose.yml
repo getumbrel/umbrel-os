@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+        lnd:
+                image: lncm/lnd:v0.8.0-experimental
+                volumes:
+                        - /home/umbrel/.lnd:/root/.lnd
+                        - /var/lib/tor:/var/lib/tor
+                        - /run/tor:/run/tor
+                restart: on-failure
+                network_mode: host
