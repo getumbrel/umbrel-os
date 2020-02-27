@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  	start)
+		echo "Starting"
+		cd /home/umbrel
+		docker-compose up -d
+		;;
+	stop)
+		echo "Stopping docker"
+		cd /home/umbrel
+		docker-compose down
+		;;
+	status)
+		echo "Status"
+		docker ps -a
+		;;
+	*)
+		echo "Either 'start', 'stop', or 'status'"
+		;;
+esac
