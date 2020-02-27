@@ -24,20 +24,8 @@ mkdir -p ${ROOTFS_DIR}/etc/rc6.d
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d
 # Run in chroot
 on_chroot << EOF
-cd /etc/rc2.d
-ln -s /etc/init.d/compose-service S01composeservice
-cd /etc/rc3.d
-ln -s /etc/init.d/compose-service S01composeservice
-cd /etc/rc4.d
-ln -s /etc/init.d/compose-service S01composeservice
-cd /etc/rc5.d
-ln -s /etc/init.d/compose-service S01composeservice
-cd /etc/rc0.d
-ln -s /etc/init.d/compose-service K01composeservice
-cd /etc/rc1.d
-ln -s /etc/init.d/compose-service K01composeservice
-cd /etc/rc6.d
-ln -s /etc/init.d/compose-service K01composeservice
+update-rc.d compose-service defaults
+update-rc.d compose-service enable
 EOF
 
 echo "Docker stuff installed" >> $ROOTFS_DIR/home/$FIRST_USER_NAME/docker-compose.txt
