@@ -25,6 +25,20 @@ mkdir -p ${ROOTFS_DIR}/etc/rc6.d
 echo "Copying the compose service to rootfs (etc/init.d)"
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 cp files/compose-service ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrelbox
+cd ${ROOTFS_DIR}/etc/rc2.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox S01umbrelbox
+cd ${ROOTFS_DIR}/etc/rc3.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox S01umbrelbox
+cd ${ROOTFS_DIR}/etc/rc4.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox S01umbrelbox
+cd ${ROOTFS_DIR}/etc/rc5.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox S01umbrelbox
+cd ${ROOTFS_DIR}/etc/rc0.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox K01umbrelbox
+cd ${ROOTFS_DIR}/etc/rc1.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox K01umbrelbox
+cd ${ROOTFS_DIR}/etc/rc6.d
+ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox K01umbrelbox
 
 # Run in chroot
 echo "Performing actions in chroot"
