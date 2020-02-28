@@ -17,4 +17,13 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+if [ ! -f /home/umbrel/service-configured ]; then
+    echo "Enabling defaults for umbrelbox"
+    update-rc.d umbrelbox defaults || exit 1
+    echo "Enabling startup for umbrel box"
+    update-rc.d umbrelbox enable || exit 1
+
+    touch /home/umbrel/service-configured
+fi
+
 exit 0
