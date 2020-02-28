@@ -22,19 +22,20 @@ mkdir -p ${ROOTFS_DIR}/etc/rc0.d
 mkdir -p ${ROOTFS_DIR}/etc/rc1.d
 mkdir -p ${ROOTFS_DIR}/etc/rc6.d
 
-echo "Copying the compose service to rootfs (etc and home)"
-cp files/compose-service ${ROOTFS_DIR}/etc/init.d/compose-service
-ls -la ${ROOTFS_DIR}/etc/init.d
-echo "Copying compose service to home dir (remove this later!)"
-cp files/compose-service ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/compose-service
+echo "Copying the compose service to rootfs (etc/init.d)"
+cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
+cp files/compose-service ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrelbox
 
 # Run in chroot
-echo "Enable compose service"
+echo "Performing actions in chroot"
 on_chroot << EOF
-echo "Get current working directory in chroot"
-pwd
-update-rc.d compose-service defaults
-update-rc.d compose-service enable
+echo "Get whats in /etc/init.d"
+ls /etc/init.d/
+echo "Adding to defaults"
+update-rc.d umbrelbox defaults
+
+echo "Trying to enable service"
+update-rc.d umbrelbox enable
 EOF
 
 echo "Docker stuff installed" >> $ROOTFS_DIR/home/$FIRST_USER_NAME/docker-compose.txt
