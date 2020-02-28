@@ -13,6 +13,15 @@ Customized Underlying Raspbian Operating System for the Umbrel box (based on htt
 
 Alternatively, you may check the latest release too and you may find the image built automatically by github (upon tagging).
 
+## Post bootup checks
+
+For building an API, look in /home/umbrel for the following files
+
+* disk-partitioned : meaning the disk is partitioned
+* service-configured : meaning the umbrel system bootup service is configured
+
+(To add more later)
+
 ## TODO:
 
 See the [following list](https://github.com/getumbrel/os-base/labels/TODO)
