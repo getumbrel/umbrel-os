@@ -31,6 +31,9 @@ echo "Performing actions in chroot"
 on_chroot << EOF
 echo "Get whats in /etc/init.d"
 ls /etc/init.d/
+echo "See whats in /etc/rc2.d"
+ls /etc/rc2.d
+
 echo "Adding to defaults"
 update-rc.d umbrelbox defaults
 
