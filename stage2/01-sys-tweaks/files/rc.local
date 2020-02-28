@@ -17,6 +17,11 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+if [ ! -f /home/umbrel/disk-partitioned ]; then
+    echo "Placeholder for disk partitioning tool"
+    # Do partitioning at first boot
+fi
+
 if [ ! -f /home/umbrel/service-configured ]; then
     echo "Enabling defaults for umbrelbox"
     update-rc.d umbrelbox defaults || exit 1
