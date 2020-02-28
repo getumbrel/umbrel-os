@@ -40,21 +40,6 @@ ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox K01umbrelbox
 cd ${ROOTFS_DIR}/etc/rc6.d
 ln -s ${ROOTFS_DIR}/etc/init.d/umbrelbox K01umbrelbox
 
-# Run in chroot
-echo "Performing actions in chroot"
-on_chroot << EOF
-echo "Get whats in /etc/init.d"
-ls /etc/init.d/
-echo "See whats in /etc/rc2.d"
-ls /etc/rc2.d
-
-echo "Adding to defaults"
-update-rc.d umbrelbox defaults
-
-echo "Trying to enable service"
-update-rc.d umbrelbox enable
-EOF
-
 echo "Docker stuff installed" >> $ROOTFS_DIR/home/$FIRST_USER_NAME/docker-compose.txt
 
 
