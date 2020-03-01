@@ -17,12 +17,12 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-if [ ! -f /home/umbrel/disk-partitioned ]; then
+if [ ! -f /home/umbrel/status/disk-partitioned ]; then
     echo "Placeholder for disk partitioning tool"
     # Do partitioning at first boot
 fi
 
-if [ ! -f /home/umbrel/service-configured ]; then
+if [ ! -f /home/umbrel/status/service-configured ]; then
     echo "Enabling defaults for umbrelbox"
     update-rc.d umbrelbox defaults || exit 1
     echo "Enabling startup for umbrel box"
@@ -33,7 +33,7 @@ if [ ! -f /home/umbrel/service-configured ]; then
     # TODO: maybe configure wallet when startup is complete? (or put it inside docker-compose)
 
     # Making this as done so we don't go through updates again 
-    touch /home/umbrel/service-configured
+    touch /home/umbrel/status/service-configured
 fi
 
 exit 0
