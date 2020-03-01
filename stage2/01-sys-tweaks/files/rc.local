@@ -29,6 +29,8 @@ if [ ! -f /home/umbrel/service-configured ]; then
     update-rc.d umbrelbox enable || exit 1
     echo "starting up umbrelbox"
     /etc/init.d/umbrelbox start
+    
+    # TODO: maybe configure wallet when startup is complete? (or put it inside docker-compose)
 
     # Making this as done so we don't go through updates again 
     touch /home/umbrel/service-configured
