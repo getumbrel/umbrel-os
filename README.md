@@ -23,12 +23,12 @@ Then theres other raspbian stuff, that you may find in the [Raspbian documentati
 
 ## Post bootup checks
 
-For building an API, look in /home/umbrel for the following files
+For building an API (or scripting), look in /home/umbrel/statuses for the following files
 
 * **disk-partitioned** : meaning the disk is partitioned
-* **service-configured** : meaning the umbrel system bootup service is configured.
+* **service-configured** : meaning the umbrel system bootup service is configured and running.
 
-(To add more later, maybe even put in another directory so ```$HOME``` is less cluttered)
+(To add more later as needed)
 
 ## TODO:
 
