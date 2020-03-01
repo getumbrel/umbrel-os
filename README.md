@@ -30,6 +30,38 @@ For building an API (or scripting), look in /home/umbrel/statuses for the follow
 
 (To add more later as needed)
 
+## Console Commands (Cheat codes)
+There is some console commands you can run.
+
+### Lightning Console Commands
+
+#### Get Info
+
+```
+docker exec -it "${USER}_lnd_1" lncli getinfo
+```
+
+#### Wallet Balance
+
+```
+docker exec -it "${USER}_lnd_1" lncli walletbalance
+```
+
+#### List Channels
+
+```
+docker exec -it "${USER}_lnd_1" lncli listchannels
+```
+
+#### Opening a channel
+
+```bash
+# where XXX = sats per byte and YYY = the amount
+docker exec -it "${USER}_lnd_1" lncli connect pubkey@host:port
+docker exec -it "${USER}_lnd_1" lncli open --sat_per_byte=XXX pubkey YYY
+# Return value is the txid
+```
+
 ## TODO:
 
 See the [following list](https://github.com/getumbrel/os-base/labels/TODO)
