@@ -13,14 +13,22 @@ Customized Underlying Raspbian Operating System for the Umbrel box (based on htt
 
 Alternatively, you may check the latest release too and you may find the image built automatically by github (upon tagging).
 
+### Config variables
+
+In the config file there are system defaults, which are used when building the image and for automated builds.
+
+* **GITHUB_USERNAME** - Used if you want to automatically log in to the box without typing a password. This is used at build time.
+
+Then theres other raspbian stuff, that you may find in the [Raspbian documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which will still work.
+
 ## Post bootup checks
 
 For building an API, look in /home/umbrel for the following files
 
-* disk-partitioned : meaning the disk is partitioned
-* service-configured : meaning the umbrel system bootup service is configured
+* **disk-partitioned** : meaning the disk is partitioned
+* **service-configured** : meaning the umbrel system bootup service is configured.
 
-(To add more later)
+(To add more later, maybe even put in another directory so ```$HOME``` is less cluttered)
 
 ## TODO:
 
