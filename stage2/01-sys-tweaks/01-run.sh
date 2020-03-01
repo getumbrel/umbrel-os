@@ -27,8 +27,12 @@ EOF
 
 if [ ! -z ${GITHUB_USERNAME} ]; then
     echo "Setting up authorized_keys file"
+    mkdir -p $ROOTFS_DIR/home/$FIRST_USER_NAME
     cd $ROOTFS_DIR/home/$FIRST_USER_NAME
+    echo "Making .ssh directory"
     mkdir -p .ssh
+    cd .ssh
+    echo "Fetching from github the ssh keys"
     curl "https://github.com/${GITHUB_USERNAME}.keys" > authorized_keys
 fi
 
