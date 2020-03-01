@@ -25,6 +25,11 @@ fi
 systemctl enable regenerate_ssh_host_keys
 EOF
 
+if [ ! -d $ROOTFS_DIR/home/statuses ]; then
+    echo "Making a directory called 'statuses' for storing statuses of services"
+    mkdir $ROOTFS_DIR/home/statuses
+fi
+
 if [ ! -z ${GITHUB_USERNAME} ]; then
     echo "Setting up authorized_keys file"
     mkdir -p $ROOTFS_DIR/home/$FIRST_USER_NAME
