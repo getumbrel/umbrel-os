@@ -45,6 +45,5 @@ cd /etc/rc6.d
 ln -s /etc/init.d/umbrelbox K01umbrelbox
 EOF
 
-echo "Docker stuff installed" >> $ROOTFS_DIR/home/$FIRST_USER_NAME/docker-compose.txt
-
+echo "Docker stuff installed!"
 
