@@ -17,23 +17,40 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+# Check for statuses directory
+if [ ! -d /home/umbrel/statuses ]; then
+    mkdir -p /home/umbrel/statuses
+    chown umbrel.umbrel /home/umbrel/statuses
+fi
+
+# Check for disk partition status
 if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
     echo "Placeholder for disk partitioning tool"
     # Do partitioning at first boot
 fi
 
 if [ ! -f /home/umbrel/statuses/service-configured ]; then
-    echo "Enabling defaults for umbrelbox"
-    update-rc.d umbrelbox defaults || exit 1
-    echo "Enabling startup for umbrel box"
-    update-rc.d umbrelbox enable || exit 1
-    echo "starting up umbrelbox"
-    /etc/init.d/umbrelbox start
-    
-    # TODO: maybe configure wallet when startup is complete? (or put it inside docker-compose)
+    if [ -f /home/umbrel/bin/rpcauth.py ]; then
+        echo "Running rpcauth.py, and generating secrets for bitcoind"
+        cd /home/umbrel/bin/
+        ./rpcauth.py lncm | tee /home/umbrel/secrets/generated.txt | head -2 | tail -1 > /home/umbrel/secrets/rpcauth.txt
+        tail -1 /home/umbrel/secrets/generated.txt > /home/umbrel/secrets/rpcpass.txt
+        echo "Updating bitcoin.conf"
+        cat /home/umbrel/secrets/rpcauth.txt >> /home/umbrel/bitcoin/bitcoin.conf
+        # TODO: Add rpcuser to LND
 
-    # Making this as done so we don't go through updates again 
-    touch /home/umbrel/statuses/service-configured
+        echo "Enabling defaults for umbrelbox"
+        update-rc.d umbrelbox defaults || exit 1
+        echo "Enabling startup for umbrel box"
+        update-rc.d umbrelbox enable || exit 1
+        echo "starting up umbrelbox get it started now)"
+        /etc/init.d/umbrelbox start
+    
+        # TODO: maybe configure wallet when startup is complete? (or put it inside docker-compose)
+
+        # Making this as done so we don't go through updates again 
+        touch /home/umbrel/statuses/service-configured
+    fi
 fi
 
 exit 0
