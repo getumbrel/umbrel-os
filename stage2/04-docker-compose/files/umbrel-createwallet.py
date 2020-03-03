@@ -53,7 +53,7 @@ def main():
     password_str=randompass(stringLength=15)
     temp_password_file = open(temp_password_file_path, "w")
   # Check if there is an existing file, if not generate a random password
-  if not os.path.exists("/home/umbrel/lnd/sesame.txt"):
+  if not os.path.exists("/home/umbrel/secrets/lnd-password.txt"):
     # sesame file doesnt exist
     password_str=randompass(stringLength=15)
     if not os.path.exists(save_password_control_file):
@@ -63,18 +63,17 @@ def main():
       temp_password_file.close()
     else:
       # Use sesame.txt if password_control_file exists
-      password_file = open("/home/umbrel/lnd/sesame.txt","w")
+      password_file = open("/home/umbrel/lnd/secrets/lnd-password.txt","w")
       password_file.write(password_str)
       password_file.close()
   else:
     # Get password from file if sesame file already exists
-    password_str = open('/home/umbrel/lnd/sesame.txt', 'r').read().rstrip()
-  
+    password_str = open('/home/umbrel/secrets/lnd-password.txt', 'r').read().rstrip()
+
   # Convert password to byte encoded
   password_bytes = str(password_str).encode('utf-8')
-  
   # Step 1 get seed from web or file
-  
+
   # Send request to generate seed if seed file doesnt exist
   if not os.path.exists(seed_filename):
     r = requests.get(url, verify=cert_path)
