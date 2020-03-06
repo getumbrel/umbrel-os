@@ -37,8 +37,11 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         tail -1 /home/umbrel/secrets/generated.txt > /home/umbrel/secrets/rpcpass.txt
         echo "Updating bitcoin.conf"
         cat /home/umbrel/secrets/rpcauth.txt >> /home/umbrel/bitcoin/bitcoin.conf
-        # TODO: Add rpcuser to LND
-
+        # Update RPC Passwords for both LND and INVOICER
+        RPCPASS=`cat /home/umbrel/secrets/rpcpass.txt`
+        sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/invoicer/invoicer.conf
+        sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/lnd/lnd.conf
+        
         echo "Enabling defaults for umbrelbox"
         update-rc.d umbrelbox defaults || exit 1
         echo "Enabling startup for umbrel box"
