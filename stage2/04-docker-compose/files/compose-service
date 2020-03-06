@@ -19,16 +19,26 @@ SCRIPTNAME=/etc/init.d/$NAME
 
 case "$1" in
   	start)
-		echo "Starting"
-		cd /home/umbrel
-		docker-compose up -d
-        exit 0
+        if [[ -f /home/umbrel/docker-compose.yml ]]; then
+		    echo "Starting"
+		    cd /home/umbrel
+		    docker-compose up -d
+            exit 0
+        else
+            echo "Docker-compose file doesn't exist"
+            exit 1
+        fi
 		;;
 	stop)
-		echo "Stopping docker"
-		cd /home/umbrel
-		docker-compose down
-        exit 0
+        if [[ -f /home/umbrel/docker-compose.yml ]]; then
+		    echo "Stopping docker"
+		    cd /home/umbrel
+		    docker-compose down
+            exit 0
+        else
+            echo "Docker-compose file doesn't exist"
+            exit 1
+        fi
 		;;
 	status)
 		echo "Status"
