@@ -63,7 +63,7 @@ def main():
       temp_password_file.close()
     else:
       # Use sesame.txt if password_control_file exists
-      password_file = open("/home/umbrel/lnd/secrets/lnd-password.txt","w")
+      password_file = open("/home/umbrel/secrets/lnd-password.txt","w")
       password_file.write(password_str)
       password_file.close()
   else:
