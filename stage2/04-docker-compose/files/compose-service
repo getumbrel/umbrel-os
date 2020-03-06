@@ -20,7 +20,7 @@ SCRIPTNAME=/etc/init.d/$NAME
 case "$1" in
   	start)
         if [[ -f /home/umbrel/docker-compose.yml ]]; then
-		    sed 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml >  /home/umbrel/docker-compose.yml
+		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
             echo "Starting"
 		    cd /home/umbrel
 		    docker-compose up -d
@@ -32,7 +32,7 @@ case "$1" in
 		;;
 	stop)
         if [[ -f /home/umbrel/docker-compose.yml ]]; then
-		    sed 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml >  /home/umbrel/docker-compose.yml
+		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
 		    echo "Stopping docker"
 		    cd /home/umbrel
 		    docker-compose down
