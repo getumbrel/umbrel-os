@@ -6,7 +6,7 @@ on_chroot << EOF
 pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
 wget -qO- "https://raw.githubusercontent.com/lncm/thebox-compose-system/master/install-box.sh" | sh
-chown -R ${FIRST_USER_NAME}.${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
+chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
 # Maybe generate docker-compose file so we can use it
