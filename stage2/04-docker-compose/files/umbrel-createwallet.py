@@ -33,7 +33,7 @@ url = 'https://localhost:8080/v1/genseed'
 # Initialize wallet
 url2 = 'https://localhost:8080/v1/initwallet'
 cert_path = '/home/umbrel/lnd/tls.cert'
-seed_filename  = '/home/umbrel/seed.txt' 
+seed_filename  = '/home/umbrel/secrets/seed.txt' 
 
 # save password control file (Add this file if we want to save passwords)
 save_password_control_file = '/home/umbrel/.save_password'
