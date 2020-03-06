@@ -1,17 +1,20 @@
 # Install docker via pip3 (within chroot)
 
+echo "Installing docker-compose from pip3, and also setting up the box folder structure"
+
 on_chroot << EOF
 pip3 install docker-compose
+cd /home/${FIRST_USER_NAME}
+wget -qO- "https://raw.githubusercontent.com/lncm/thebox-compose-system/master/install-box.sh" | sh
+chown -R ${FIRST_USER_NAME}.${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
 # Maybe generate docker-compose file so we can use it
-chmod 644 files/docker-compose.yml
 chmod 755 files/compose-service
 
-cp files/docker-compose.yml   ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/docker-compose.yml
+# These can be probabably removed
 cp files/umbrel-createwallet.py ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-createwallet.py
 cp files/umbrel-unlock.py ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-unlock.py
-cp -fr files/build ${ROOTFS_DIR}/home/${FIRST_USER_NAME}
 
 # Docker compose service
 on_chroot << EOF
@@ -27,7 +30,6 @@ EOF
 
 echo "Copying the compose service to rootfs (etc/init.d)"
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
-cp files/compose-service ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrelbox
 
 on_chroot << EOF
 cd /etc/rc2.d
