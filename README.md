@@ -23,6 +23,8 @@ Then theres other raspbian stuff, that you may find in the [Raspbian documentati
 
 ## Post bootup checks
 
+Login credentials [here](https://github.com/getumbrel/os-base/wiki/Box-System-Defaults)
+
 For building an API (or scripting), look in /home/umbrel/statuses for the following files
 
 * **disk-partitioned** : meaning the disk is partitioned
