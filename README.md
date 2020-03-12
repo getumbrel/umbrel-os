@@ -13,6 +13,14 @@ Customized Underlying Raspbian Operating System for the Umbrel box (based on htt
 
 Alternatively, you may check the latest release too and you may find the image built automatically by github (upon tagging).
 
+## Default logins
+
+Hostname: umbrel.local
+Username: umbrel
+Password: umbr3lb0x
+
+You may also find them [here](https://github.com/getumbrel/os-base/wiki/Box-System-Defaults)
+
 ### Config variables
 
 In the config file there are system defaults, which are used when building the image and for automated builds.
@@ -22,8 +30,6 @@ In the config file there are system defaults, which are used when building the i
 Then theres other raspbian stuff, that you may find in the [Raspbian documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which will still work.
 
 ## Post bootup checks
-
-Login credentials [here](https://github.com/getumbrel/os-base/wiki/Box-System-Defaults)
 
 For building an API (or scripting), look in /home/umbrel/statuses for the following files
 
