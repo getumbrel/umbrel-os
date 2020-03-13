@@ -1,0 +1,22 @@
+SocksPort 9050 # Default: Bind to localhost:9050 for local connections.
+
+Log notice syslog
+Log debug file /var/log/tor/debug.log
+
+#RunAsDaemon 1
+
+DataDirectory /var/lib/tor
+ControlPort 9051
+# Use password Later when lnd supports it
+#HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
+CookieAuthentication 1
+
+# Allow this for now
+# TOR HOSTNAME
+HiddenServiceDir /var/lib/tor/sshd
+HiddenServicePort 22 127.0.0.1:22
+
+HiddenServiceDir /var/lib/tor/web
+HiddenServicePort 80 127.0.0.1:80
+
+

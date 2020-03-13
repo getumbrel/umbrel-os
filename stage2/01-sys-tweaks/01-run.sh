@@ -25,6 +25,22 @@ fi
 systemctl enable regenerate_ssh_host_keys
 EOF
 
+if [ ! -d $ROOTFS_DIR/home/statuses ]; then
+    echo "Making a directory called 'statuses' for storing statuses of services"
+    mkdir $ROOTFS_DIR/home/statuses
+fi
+
+if [ ! -z ${GITHUB_USERNAME} ]; then
+    echo "Setting up authorized_keys file"
+    mkdir -p $ROOTFS_DIR/home/$FIRST_USER_NAME
+    cd $ROOTFS_DIR/home/$FIRST_USER_NAME
+    echo "Making .ssh directory"
+    mkdir -p .ssh
+    cd .ssh
+    echo "Fetching from github the ssh keys"
+    curl "https://github.com/${GITHUB_USERNAME}.keys" > authorized_keys
+fi
+
 if [ "${USE_QEMU}" = "1" ]; then
 	echo "enter QEMU mode"
 	install -m 644 files/90-qemu.rules "${ROOTFS_DIR}/etc/udev/rules.d/"
