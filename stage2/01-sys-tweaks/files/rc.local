@@ -20,7 +20,9 @@ fi
 # Check for statuses directory
 if [ ! -d /home/umbrel/statuses ]; then
     mkdir -p /home/umbrel/statuses
+    # Ensure its writable by all
     chown umbrel.umbrel /home/umbrel/statuses
+    chmod 777 /home/umbrel/statuses
 fi
 
 # Check for disk partition status
