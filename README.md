@@ -73,5 +73,3 @@ docker exec -it "${USER}_lnd_1" lncli open --sat_per_byte=XXX pubkey YYY
 ## TODO:
 
 See the [following list](https://github.com/getumbrel/umbrel-os/labels/TODO)
-
-
