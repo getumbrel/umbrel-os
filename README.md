@@ -1,6 +1,6 @@
 # Umbrel Box Base Operating system
 
-![Run Release Script on push to MASTER](https://github.com/getumbrel/os-base/workflows/Run%20Release%20Script%20on%20push%20to%20MASTER/badge.svg)
+![Run Release Script on push to MASTER](https://github.com/getumbrel/umbrel-os/workflows/Run%20Release%20Script%20on%20push%20to%20MASTER/badge.svg)
 
 
 Customized Underlying Raspbian Operating System for the Umbrel box (based on https://github.com/RPi-Distro/pi-gen)
@@ -19,7 +19,7 @@ Hostname: umbrel.local
 Username: umbrel
 Password: umbr3lb0x
 
-You may also find them [here](https://github.com/getumbrel/os-base/wiki/Box-System-Defaults)
+You may also find them [here](https://github.com/getumbrel/umbrel-os/wiki/Box-System-Defaults)
 
 ### Config variables
 
@@ -72,6 +72,6 @@ docker exec -it "${USER}_lnd_1" lncli open --sat_per_byte=XXX pubkey YYY
 
 ## TODO:
 
-See the [following list](https://github.com/getumbrel/os-base/labels/TODO)
+See the [following list](https://github.com/getumbrel/umbrel-os/labels/TODO)
 
 
