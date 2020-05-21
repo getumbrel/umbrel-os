@@ -5,7 +5,7 @@ echo "Installing docker-compose from pip3, and also setting up the box folder st
 on_chroot << EOF
 pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
-wget -qO- "https://raw.githubusercontent.com/lncm/thebox-compose-system/master/install-box.sh" | sh
+wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/install-box.sh" | sh
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
