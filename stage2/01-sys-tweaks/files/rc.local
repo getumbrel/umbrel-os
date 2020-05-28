@@ -25,6 +25,19 @@ if [ ! -d /home/umbrel/statuses ]; then
     chmod 777 /home/umbrel/statuses
 fi
 
+# Install box
+if [[ ! -f /home/umbrel/docker-compose.yml ]]; then
+  echo "Installing box"
+  cd /home/umbrel
+  wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/install-box.sh" | sh
+  echo "Configuring box"
+  ./configure-box.sh
+  cd /home
+  echo "Fixing permissions"
+  
+fi
+
+
 # Check for disk partition status
 if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
     echo "Placeholder for disk partitioning tool"
@@ -43,17 +56,17 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         RPCPASS=`cat /home/umbrel/secrets/rpcpass.txt`
         sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/invoicer/invoicer.conf
         sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/lnd/lnd.conf
-        
+
         echo "Enabling defaults for umbrelbox"
         update-rc.d umbrelbox defaults || exit 1
         echo "Enabling startup for umbrel box"
         update-rc.d umbrelbox enable || exit 1
         echo "starting up umbrelbox get it started now)"
         /etc/init.d/umbrelbox start
-    
+
         # TODO: maybe configure wallet when startup is complete? (or put it inside docker-compose)
 
-        # Making this as done so we don't go through updates again 
+        # Making this as done so we don't go through updates again
         touch /home/umbrel/statuses/service-configured
     fi
 fi
