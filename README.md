@@ -1,77 +1,94 @@
-# Umbrel Box Base Operating system
+[![Umbrel OS](https://i.imgur.com/aK27WlS.png)](https://github.com/getumbrel/umbrel-os)
 
-![Run Release Script on push to MASTER](https://github.com/getumbrel/umbrel-os/workflows/Run%20Release%20Script%20on%20push%20to%20MASTER/badge.svg)
+[![Version](https://img.shields.io/github/v/release/getumbrel/umbrel-os?color=%235351FB&label=version)](https://github.com/getumbrel/umbrel-os/releases)
+[![Docker Build](https://img.shields.io/github/workflow/status/getumbrel/umbrel-os/Run%20Release%20Script%20on%20push%20to%20MASTER?color=%235351FB)](https://github.com/getumbrel/umbrel-os/actions?query=workflow%3A"Run+Release+Script+on+push+to+MASTER")
+[![Chat](https://img.shields.io/badge/chat%20on-telegram-%235351FB)](https://t.me/getumbrel)
+
+[![Twitter](https://img.shields.io/twitter/follow/getumbrel?style=social)](https://twitter.com/getumbrel)
+[![Reddit](https://img.shields.io/reddit/subreddit-subscribers/getumbrel?label=Subscribe%20%2Fr%2Fgetumbrel&style=social)](https://reddit.com/r/getumbrel)
 
 
-Customized Underlying Raspbian Operating System for the Umbrel box (based on https://github.com/RPi-Distro/pi-gen)
+# ☂️ OS
 
-## Config/Build instructions
+Umbrel OS is the operating system of Umbrel Bitcoin and Lightning node. It's based on Raspberry Pi OS (formerly Raspbian) and uses [pi-gen](https://github.com/RPi-Distro/pi-gen) for customization.
 
-1. Run ```sudo ./build.sh```
-2. Look in deploy/
-3. Use etcher to deploy
+## 🚀 Getting started
 
-Alternatively, you may check the latest release too and you may find the image built automatically by github (upon tagging).
+Umbrel OS currently supports Raspberry Pi 3 and 4. If you'd like to run it on any other hardware, please [create an issue](https://github.com/getumbrel/umbrel-os/issues/new/choose) or drop us a message in our [community chat](https://t.me/getumbrel). We'll gladly consider your request.
 
-## Default logins
+### Instructions:
 
-Hostname: umbrel.local
-Username: umbrel
-Password: umbr3lb0x
+1. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases), or [build the image from source](#-build-umbrel-os-from-source).
+2. Use an image flasher such as [Balena Etcher](https://github.com/balena-io/etcher) to flash the image to a microSD card.
+3. Put the microSD card in your Raspberry Pi, attach an external SSD or HDD (to USB 3 port), connect the Pi to your router with an ethernet cable.
+4. Turn on the Pi and open http://umbrel.local from any device connected to the same network (it might take a while for it to be accessible).
 
-You may also find them [here](https://github.com/getumbrel/umbrel-os/wiki/Box-System-Defaults)
+**⚠️ All data on the external hard drive will be erased on first boot.**
 
-### Config variables
+> If you're running Umbrel OS on Bitcoin mainnet (default), the external SSD or HDD should be at least 500 GB in size (we recommend 1 TB+) so it can store the whole Bitcoin blockchain. If you do not have access to a large drive, Umbrel OS will still work by automatically enabling [pruning](https://bitcoin.org/en/full-node#reduce-storage), although you will lose access to some features.
 
-In the config file there are system defaults, which are used when building the image and for automated builds.
+## 💻 SSH 
 
-* **GITHUB_USERNAME** - Used if you want to automatically log in to the box without typing a password. This is used at build time.
+SSH is enabled by default and you can use the following credentials to login to your Umbrel node.
 
-Then theres other raspbian stuff, that you may find in the [Raspbian documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which will still work.
+- Hostname: `umbrel.local`  
+- User: `umbrel`  
+- Password: `umbr3lb0x`
 
-## Post bootup checks
+## 🛠 Build Umbrel OS from source
 
-For building an API (or scripting), look in /home/umbrel/statuses for the following files
+> Verify, don't trust.
 
-* **disk-partitioned** : meaning the disk is partitioned
-* **service-configured** : meaning the umbrel system bootup service is configured and running.
-
-(To add more later as needed)
-
-## Console Commands (Cheat codes)
-There is some console commands you can run.
-
-### Lightning Console Commands
-
-#### Get Info
-
+Step 1. Clone this repo
 ```
-docker exec -it "${USER}_lnd_1" lncli getinfo
+git clone https://github.com/getumbrel/umbrel-os.git
 ```
 
-#### Wallet Balance
-
+Step 2. Switch to repo's directory
 ```
-docker exec -it "${USER}_lnd_1" lncli walletbalance
-```
-
-#### List Channels
-
-```
-docker exec -it "${USER}_lnd_1" lncli listchannels
+cd umbrel-os
 ```
 
-#### Opening a channel
-
-```bash
-# where XXX = sats per byte and YYY = the amount
-docker exec -it "${USER}_lnd_1" lncli connect pubkey@host:port
-docker exec -it "${USER}_lnd_1" lncli open --sat_per_byte=XXX pubkey YYY
-# Return value is the txid
+Step 3. BUIDL!
+```
+sudo ./build.sh
 ```
 
-## TODO:
+After the build completes (it can take a looooooong time), the image will be inside `deploy/` directory.
 
-See the [following list](https://github.com/getumbrel/umbrel-os/labels/TODO)
+## 🔧 Advanced
 
+**Config variables**
 
+The `config` file has system defaults which are used when building the image and for automated builds.
+
+- `GITHUB_USERNAME` - Use this if you want to automatically login to your node without typing a password (used at build time).
+
+Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
+
+**Post bootup checks**
+
+For building an API (or scripting), look in `/home/umbrel/statuses` for the following files
+
+- `disk-partitioned`: meaning the disk is partitioned
+- `service-configured`: meaning the umbrel system bootup service is configured and running.
+
+---
+
+### ⚡️ Don't be too reckless
+
+> Umbrel is still in an early stage and things are expected to break every now and then. We **DO NOT** recommend running it on the mainnet with real money just yet, unless you want to be really *#reckless*.
+
+## ❤️ Contributing
+
+We welcome and appreciate new contributions!
+
+If you're a developer looking to help but not sure where to begin, check out [these issues](https://github.com/getumbrel/umbrel-os/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that have specifically been marked as being friendly to new contributors.
+
+If you're looking for a bigger challenge, before opening a pull request please [create an issue](https://github.com/getumbrel/umbrel-os/issues/new/choose) or [join our community chat](https://t.me/getumbrel) to get feedback, discuss the best way to tackle the challenge, and to ensure that there's no duplication of work.
+
+---
+
+[![License](https://img.shields.io/github/license/getumbrel/umbrel-os?color=%235351FB)](https://github.com/getumbrel/umbrel-os/blob/master/LICENSE)
+
+[getumbrel.com](https://getumbrel.com)
