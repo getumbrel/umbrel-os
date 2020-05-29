@@ -18,9 +18,9 @@ jobs:
           run: ls -la
         - name: Release Image to placeholder or release
           uses: meeDamian/github-release@v1.0.0
-          allow_override: true
           if: startsWith(github.ref, 'refs/tags/')
           with:
             gzip: false
             files: "*.zip"
             token: ${{ secrets.GITHUB_TOKEN }}
+            allow_override: true
