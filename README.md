@@ -1,4 +1,4 @@
-[![Umbrel OS](https://i.imgur.com/aK27WlS.png)](https://github.com/getumbrel/umbrel-os)
+[![Umbrel OS](https://static.getumbrel.com/github/github-banner-umbrel-os.svg)](https://github.com/getumbrel/umbrel-os)
 
 [![Version](https://img.shields.io/github/v/release/getumbrel/umbrel-os?color=%235351FB&label=version)](https://github.com/getumbrel/umbrel-os/releases)
 [![Docker Build](https://img.shields.io/github/workflow/status/getumbrel/umbrel-os/Run%20Release%20Script%20on%20push%20to%20MASTER?color=%235351FB)](https://github.com/getumbrel/umbrel-os/actions?query=workflow%3A"Run+Release+Script+on+push+to+MASTER")
