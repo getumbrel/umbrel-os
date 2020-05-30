@@ -26,7 +26,7 @@ if [ ! -d /home/umbrel/statuses ]; then
 fi
 
 # Install box
-if [[ ! -f /home/umbrel/docker-compose.yml ]]; then
+if [ ! -f /home/umbrel/docker-compose.yml ]; then
   echo "Installing box"
   cd /home/umbrel
   wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/install-box.sh" | sh
@@ -34,7 +34,7 @@ if [[ ! -f /home/umbrel/docker-compose.yml ]]; then
   ./configure-box.sh
   cd /home
   echo "Fixing permissions"
-  
+
 fi
 
 
