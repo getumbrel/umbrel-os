@@ -1,5 +1,7 @@
-name: Run Release Script on push to MASTER
-on: push
+name: Automatically Build image on tag ONLY
+on:
+    push:
+        tags: [ '*' ]
 
 jobs:
     build:
