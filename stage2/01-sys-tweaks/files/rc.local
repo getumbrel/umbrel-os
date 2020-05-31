@@ -28,15 +28,17 @@ fi
 # Install box
 if [ ! -f /home/umbrel/docker-compose.yml ]; then
   echo "Installing box"
-  cd /home/umbrel
-  ls
+  pushd /home/umbrel
   wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/install-box.sh" | sh
   echo "Configuring box"
-  cd /home/umbrel
+  popd
+  pushd /home/umbrel
   ./configure-box.sh
-  cd /home
+  popd
+  pushd /home
   echo "Fixing permissions"
   chown umbrel.umbrel -R /home/umbrel
+  popd
 fi
 
 
