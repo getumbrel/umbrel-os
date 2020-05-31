@@ -27,8 +27,14 @@ fi
 
 # Check for disk partition status
 if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
-    echo "Placeholder for disk partitioning tool"
-    # Do partitioning at first boot
+    if [ ! -f /home/umbrel/contrib/partitioner/partitioner.py ]; then
+      echo "Run partition tool"
+      echo "This is a placeholder - so please put in /home/umbrel/statuses/disk-partitioned and run /etc/rc.local again"
+      # Uncomment when ready
+      #touch /home/umbrel/statuses/disk-partitioned
+    else
+      echo "Could not find partition tool - some steps might be skipped"
+    fi
 fi
 
 if [ ! -f /home/umbrel/statuses/service-configured ]; then
@@ -43,18 +49,26 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         RPCPASS=`cat /home/umbrel/secrets/rpcpass.txt`
         sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/invoicer/invoicer.conf
         sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/lnd/lnd.conf
-        
-        echo "Enabling defaults for umbrelbox"
-        update-rc.d umbrelbox defaults || exit 1
-        echo "Enabling startup for umbrel box"
-        update-rc.d umbrelbox enable || exit 1
-        echo "starting up umbrelbox get it started now)"
-        /etc/init.d/umbrelbox start
-    
-        # TODO: maybe configure wallet when startup is complete? (or put it inside docker-compose)
 
-        # Making this as done so we don't go through updates again 
+        # Making this as done so we don't go through updates again
         touch /home/umbrel/statuses/service-configured
+    fi
+
+    # Next stage, check if service-configured
+    if [ -f  /home/umbrel/statuses/service-configured ]; then
+      echo "Service configured.. Checking for partitioned state"
+      if [ -f /home/umbrel/statuses/disk-partitioned ]; then
+          echo "If disk partitioned then start up Umbrel"
+          # Do partitioning at first boot
+          echo "Enabling defaults for umbrelbox"
+          update-rc.d umbrelbox defaults || exit 1
+          echo "Enabling startup for umbrel box"
+          update-rc.d umbrelbox enable || exit 1
+          echo "starting up umbrelbox get it started now)"
+          /etc/init.d/umbrelbox start
+      else
+          echo "Disk not partitioned, will not start umbrel-compose framework (Please do it manually)"
+      fi
     fi
 fi
 
