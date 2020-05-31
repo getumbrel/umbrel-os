@@ -48,7 +48,7 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         cat /home/umbrel/secrets/rpcauth.txt >> /home/umbrel/bitcoin/bitcoin.conf
         # Update RPC Passwords for both LND and INVOICER
         RPCPASS=`cat /home/umbrel/secrets/rpcpass.txt`
-        sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/invoicer/invoicer.conf
+        sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/docker-compose.yml
         sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/lnd/lnd.conf
 
         # Making this as done so we don't go through updates again
@@ -61,6 +61,14 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
       echo "Service configured.. Checking for partitioned state"
       if [ -f /home/umbrel/statuses/disk-partitioned ]; then
           echo "If disk partitioned then start up Umbrel"
+          echo "Set up symlinks"
+          ln -s /etc/init.d/umbrelbox /etc/rc2.d/S01umbrelbox
+          ln -s /etc/init.d/umbrelbox /etc/rc3.d/S01umbrelbox
+          ln -s /etc/init.d/umbrelbox /etc/rc4.d/S01umbrelbox
+          ln -s /etc/init.d/umbrelbox /etc/rc5.d/S01umbrelbox
+          ln -s /etc/init.d/umbrelbox /etc/rc0.d/K01umbrelbox
+          ln -s /etc/init.d/umbrelbox /etc/rc1.d/K01umbrelbox
+          ln -s /etc/init.d/umbrelbox /etc/rc6.d/K01umbrelbox
           # Do partitioning at first boot
           echo "Enabling defaults for umbrelbox"
           update-rc.d umbrelbox defaults || exit 1
