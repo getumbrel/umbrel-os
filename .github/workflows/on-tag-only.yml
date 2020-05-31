@@ -26,4 +26,3 @@ jobs:
             allow_override: true
             files: "*.zip"
             token: ${{ secrets.GITHUB_TOKEN }}
-            allow_override: true
