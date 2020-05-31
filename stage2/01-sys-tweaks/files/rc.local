@@ -32,9 +32,11 @@ if [ ! -f /home/umbrel/docker-compose.yml ]; then
   wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/install-box.sh" | sh
   echo "Configuring box"
   popd
+  ls /home/umbrel
   pushd /home/umbrel
   ./configure-box.sh
   popd
+  ls /home/umbrel
   pushd /home
   echo "Fixing permissions"
   chown umbrel.umbrel -R /home/umbrel
@@ -44,8 +46,14 @@ fi
 
 # Check for disk partition status
 if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
-    echo "Placeholder for disk partitioning tool"
-    # Do partitioning at first boot
+    if [ ! -f /home/umbrel/contrib/partitioner/partitioner.py ]; then
+      echo "Run partition tool"
+      echo "This is a placeholder - so please put in /home/umbrel/statuses/disk-partitioned and run /etc/rc.local again"
+      # Uncomment when ready
+      #touch /home/umbrel/statuses/disk-partitioned
+    else
+      echo "Could not find partition tool - some steps might be skipped"
+    fi
 fi
 
 if [ ! -f /home/umbrel/statuses/service-configured ]; then
