@@ -31,22 +31,5 @@ EOF
 echo "Copying the compose service to rootfs (etc/init.d)"
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
-on_chroot << EOF
-cd /etc/rc2.d
-ln -s /etc/init.d/umbrelbox S01umbrelbox
-cd /etc/rc3.d
-ln -s /etc/init.d/umbrelbox S01umbrelbox
-cd /etc/rc4.d
-ln -s /etc/init.d/umbrelbox S01umbrelbox
-cd /etc/rc5.d
-ln -s /etc/init.d/umbrelbox S01umbrelbox
-cd /etc/rc0.d
-ln -s /etc/init.d/umbrelbox K01umbrelbox
-cd /etc/rc1.d
-ln -s /etc/init.d/umbrelbox K01umbrelbox
-cd /etc/rc6.d
-ln -s /etc/init.d/umbrelbox K01umbrelbox
-EOF
 
 echo "Docker stuff installed!"
-
