@@ -21,7 +21,7 @@ fi
 if [ ! -d /home/umbrel/statuses ]; then
     mkdir -p /home/umbrel/statuses
     # Ensure its writable by all
-    chown umbrel.umbrel /home/umbrel/statuses
+    chown -R umbrel.umbrel /home/umbrel/statuses
     chmod 777 /home/umbrel/statuses
 fi
 
@@ -32,6 +32,7 @@ if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
       echo "This is a placeholder - so please put in /home/umbrel/statuses/disk-partitioned and run /etc/rc.local again"
       # Uncomment when ready
       #touch /home/umbrel/statuses/disk-partitioned
+      #chown -R umbrel.umbrel /home/umbrel/statuses/disk-partitioned
     else
       echo "Could not find partition tool - some steps might be skipped"
     fi
@@ -52,6 +53,7 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
 
         # Making this as done so we don't go through updates again
         touch /home/umbrel/statuses/service-configured
+        chown -R umbrel.umbrel /home/umbrel/statuses/service-configured
     fi
 
     # Next stage, check if service-configured
