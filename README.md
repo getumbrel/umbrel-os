@@ -27,7 +27,7 @@ Umbrel OS currently supports Raspberry Pi 3 and 4. If you'd like to run it on an
 
 > If you're running Umbrel OS on Bitcoin mainnet (default), the external SSD or HDD should be at least 500 GB in size (we recommend 1 TB+) so it can store the whole Bitcoin blockchain. If you do not have access to a large drive, Umbrel OS will still work by automatically enabling [pruning](https://bitcoin.org/en/full-node#reduce-storage), although you will lose access to some features.
 
-## 💻 SSH 
+## 💻 SSH
 
 SSH is enabled by default and you can use the following credentials to login to your Umbrel node.
 
@@ -70,8 +70,12 @@ Other Raspbian-related stuff can be found in [Raspbian's documentation](https://
 
 For building an API (or scripting), look in `/home/umbrel/statuses` for the following files
 
-- `disk-partitioned`: meaning the disk is partitioned
+- `disk-partitioned`: meaning the disk is partitioned.
 - `service-configured`: meaning the umbrel system bootup service is configured and running.
+
+The above variables control whether or not the umbrelbox startup script is run (for SD Card safety).
+
+If you want to overricde the checks, please delete ```service-configured``` file and add a ```disk-partitioned```, and then reinstall/configure [Umbrel Compose](https://github.com/getumbrel/umbrel-compose). Then run ```/etc/rc.local``` as root again (or restart your box)
 
 ---
 
