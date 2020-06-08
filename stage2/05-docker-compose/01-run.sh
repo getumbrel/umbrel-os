@@ -1,5 +1,6 @@
-# Install docker via pip3 (within chroot)
+#!/bin/bash -e
 
+# Install docker via pip3 (within chroot)
 echo "Installing docker-compose from pip3, and also setting up the box folder structure"
 
 on_chroot << EOF
