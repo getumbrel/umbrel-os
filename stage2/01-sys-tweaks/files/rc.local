@@ -27,12 +27,12 @@ fi
 
 # Check for disk partition status
 if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
-    if [ ! -f /home/umbrel/contrib/partitioner/partitioner.py ]; then
-      echo "Run partition tool"
-      echo "This is a placeholder - so please put in /home/umbrel/statuses/disk-partitioned and run /etc/rc.local again"
-      # Uncomment when ready
-      #touch /home/umbrel/statuses/disk-partitioned
-      #chown -R umbrel.umbrel /home/umbrel/statuses/disk-partitioned
+    if [ -f /home/umbrel/contrib/partitioner/partitioner.py ]; then
+      echo "Run partition tool or quit out if unavailable"
+      /home/umbrel/contrib/partitioner/partitioner.py || exit 1
+
+      touch /home/umbrel/statuses/disk-partitioned
+      chown -R umbrel.umbrel /home/umbrel/statuses/disk-partitioned
     else
       echo "Could not find partition tool - some steps might be skipped"
     fi
