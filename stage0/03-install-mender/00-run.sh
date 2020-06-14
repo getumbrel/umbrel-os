@@ -12,4 +12,5 @@ mender setup \
         --device-type $DEVICE_TYPE \
         --demo \
         --server-ip $SERVER_IP_ADDR
+rm mender-client_2.3.0b1-1_armhf.deb
 EOF
