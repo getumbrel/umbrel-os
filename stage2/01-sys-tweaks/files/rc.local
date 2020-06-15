@@ -81,29 +81,4 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
     fi
 fi
 
-# Configure mender-client for OTA updates
-if [ ! -f /home/umbrel/statuses/mender-configured ]; then
-
-    echo "Configuring mender-client"
-
-    MACHINE_MODEL="$(dmesg | grep 'Machine model')"
-    DEVICE_TYPE="raspberrypi3"
-    if grep -q "Raspberry Pi 4" <<< "$MACHINE_MODEL"; then
-        DEVICE_TYPE="raspberrypi4"
-    fi
-    echo "Device is $DEVICE_TYPE"
-
-    mender setup \
-        --device-type $DEVICE_TYPE \
-        --server-ip "54.159.58.48" \
-        --demo
-
-    echo "Restarting mender-client"
-    systemctl restart mender-client
-
-    echo "mender-client configured successfully, creating status file"
-    touch /home/umbrel/statuses/mender-configured
-    chown -R umbrel.umbrel /home/umbrel/statuses/mender-configured
-fi
-
 exit 0
