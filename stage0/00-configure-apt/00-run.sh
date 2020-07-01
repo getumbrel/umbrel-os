@@ -15,10 +15,3 @@ on_chroot << EOF
 apt-get update
 apt-get dist-upgrade -y
 EOF
-
-on_chroot << EOF
-wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
-chmod +x download-frozen-image-v2.sh
-./download-frozen-image-v2.sh docker-images getumbrel/dashboard:latest
-tar -cC 'target_dir' . | docker load
-EOF
