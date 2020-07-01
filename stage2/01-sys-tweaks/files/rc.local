@@ -41,6 +41,7 @@ fi
 if [ ! -f /home/umbrel/statuses/service-configured ]; then
 
     cd /home/umbrel
+    export REGTEST=1
     ./configure-box.sh
 
     # Next stage, check if service-configured
