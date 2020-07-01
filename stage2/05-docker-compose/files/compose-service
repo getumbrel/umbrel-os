@@ -16,26 +16,27 @@ set -e
 NAME="compose-service"
 DESCRIPTION="Docker compose service"
 SCRIPTNAME=/etc/init.d/$NAME
+UMBREL_DIR=/home/umbrel
 
 case "$1" in
-  	start)
-        if [ -f /home/umbrel/docker-compose.yml ]; then
-		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
-            echo "Starting"
-		    cd /home/umbrel
-		    docker-compose up -d
+        start)
+        if [ -f $UMBREL_DIR/docker-compose.yml ]; then
+                    cd $UMBREL_DIR
+                    echo "Monitoring for OTA update signal file"
+                    fswatch -o -v -0 --event Updated $UMBREL_DIR/update/START | xargs -0 -n 1 bash update.sh &
+                    echo "Starting Umbrel containers"
+                    docker-compose up -d
             exit 0
         else
             echo "Docker-compose file doesn't exist"
             exit 1
         fi
-		;;
-	stop)
-        if [ -f /home/umbrel/docker-compose.yml ]; then
-		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
-		    echo "Stopping docker"
-		    cd /home/umbrel
-		    docker-compose down
+                ;;
+        stop)
+        if [ -f $UMBREL_DIR/docker-compose.yml ]; then
+                    echo "Stopping docker"
+                    cd $UMBREL_DIR
+                    docker-compose down
             exit 0
         else
             echo "Docker-compose file doesn't exist"
