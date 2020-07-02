@@ -17,6 +17,8 @@ apt-get dist-upgrade -y
 EOF
 
 echo "Installing Go"
+apt-get update
+apt-get install golang-go
 go version
 echo "Go installed, now downloading images"
 
