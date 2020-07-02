@@ -27,9 +27,9 @@ chmod +x download-frozen-image-v2.sh
 ./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest
 ls docker-images/
 mkdir -p ${ROOTFS_DIR}/tmp/docker-images
-cp -avr docker-images/ ${ROOTFS_DIR}/tmp/docker-images
+cp -avr docker-images/ ${ROOTFS_DIR}/tmp
 
 on_chroot << EOF
-ls /tmp
+echo "Verifying images on device"
 ls /tmp/docker-images
 EOF

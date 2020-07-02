@@ -54,6 +54,10 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         # Making this as done so we don't go through updates again
         touch /home/umbrel/statuses/service-configured
         chown -R umbrel.umbrel /home/umbrel/statuses/service-configured
+
+        #Load docker images
+        echo "Loading docker images"
+        tar -cC '/tmp/docker-images' . | docker load
     fi
 
     # Next stage, check if service-configured
