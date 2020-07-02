@@ -18,3 +18,4 @@ git
 lsmod:kmod
 bc
 jq
+golang-go
