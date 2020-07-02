@@ -24,7 +24,7 @@ echo "Go installed, now downloading images"
 
 wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
 chmod +x download-frozen-image-v2.sh
-./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest
+./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest getumbrel/manager:latest getumbrel/dashboard:latest 
 ls docker-images/
 mkdir -p ${ROOTFS_DIR}/tmp/docker-images
 cp -avr docker-images/ ${ROOTFS_DIR}/tmp

@@ -30,7 +30,3 @@ cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
 
 echo "Docker stuff installed!"
-
-on_chroot << EOF
-tar -cC '/tmp/docker-images' . | docker load
-EOF
