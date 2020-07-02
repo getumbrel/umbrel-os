@@ -26,7 +26,7 @@ wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-fro
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 IMAGES=`grep '^\s*image' docker-compose.yml | sed 's/image://' | sort | uniq`
 echo "Images to download $IMAGES"
-chmod +x download-froze
+chmod +x ./download-frozen-image-v2.sh
 ./download-frozen-image-v2.sh docker-images $IMAGES
 ls docker-images/
 mkdir -p ${ROOTFS_DIR}/tmp/docker-images
