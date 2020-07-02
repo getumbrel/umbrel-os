@@ -23,8 +23,11 @@ go version
 echo "Go installed, now downloading images"
 
 wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
-chmod +x download-frozen-image-v2.sh
-./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest getumbrel/manager:latest getumbrel/dashboard:latest 
+wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
+IMAGES=`grep '^\s*image' docker-compose.yml | sed 's/image://'
+echo "Images to download $IMAGES"
+chmod +x download-froze
+./download-frozen-image-v2.sh docker-images $IMAGES
 ls docker-images/
 mkdir -p ${ROOTFS_DIR}/tmp/docker-images
 cp -avr docker-images/ ${ROOTFS_DIR}/tmp
