@@ -30,11 +30,3 @@ cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
 
 echo "Docker stuff installed!"
-
-echo "Downloading images from Docker Hub"
-on_chroot << EOF
-wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
-chmod +x download-frozen-image-v2.sh
-./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest
-tar -cC 'target_dir' . | docker load
-EOF

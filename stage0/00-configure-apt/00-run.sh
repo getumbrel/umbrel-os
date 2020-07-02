@@ -15,3 +15,26 @@ on_chroot << EOF
 apt-get update
 apt-get dist-upgrade -y
 EOF
+
+echo "Installing Go"
+cd ~
+curl -O "https://golang.org/dl/go1.14.4.linux-amd64.tar.gz"
+tar xvf go1.14.4.linux-amd64.tar.gz
+sudo chown -R root:root ./go
+sudo mv go /usr/local
+export GOPATH=$HOME/work
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+go version
+echo "Go installed, now downloading images"
+
+wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
+chmod +x download-frozen-image-v2.sh
+./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest
+ls docker-images/
+cp -avr docker-images/ ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/docker-images
+
+on_chroot << EOF
+ls /home/${FIRST_USER_NAME}/
+ls /home/${FIRST_USER_NAME}/docker-images
+EOF
