@@ -24,7 +24,7 @@ echo "Go installed, now downloading images"
 
 wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
-IMAGES=`grep '^\s*image' docker-compose.yml | sed 's/image://'
+IMAGES=`grep '^\s*image' docker-compose.yml | sed 's/image://' | sort | uniq`
 echo "Images to download $IMAGES"
 chmod +x download-froze
 ./download-frozen-image-v2.sh docker-images $IMAGES
