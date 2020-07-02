@@ -26,8 +26,8 @@ wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-fro
 chmod +x download-frozen-image-v2.sh
 ./download-frozen-image-v2.sh docker-images getumbrel/middleware:latest
 ls docker-images/
-mkdir -p ${ROOTFS_DIR}/etc/tmp/docker-images
-cp -avr docker-images/ ${ROOTFS_DIR}/etc/tmp/docker-images
+mkdir -p ${ROOTFS_DIR}/tmp/docker-images
+cp -avr docker-images/ ${ROOTFS_DIR}/tmp/docker-images
 
 on_chroot << EOF
 ls /tmp
