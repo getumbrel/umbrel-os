@@ -42,4 +42,5 @@ while IFS= read -r image; do
 done <<< "$IMAGES"
 
 docker save $IMAGES -o umbrel-docker-images.tar
+du -h umbrel-docker-images.tar
 cp umbrel-docker-images.tar ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-docker-images.tar
