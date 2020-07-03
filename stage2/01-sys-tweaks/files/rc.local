@@ -57,7 +57,7 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
 
         #Load docker images
         echo "Loading docker images"
-        tar -cC '/home/umbrel/images' . | docker load
+        docker load -i /home/umbrel/umbrel-docker-images.tar
     fi
 
     # Next stage, check if service-configured

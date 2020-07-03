@@ -7,4 +7,4 @@ while IFS= read -r image; do
     docker pull --platform=linux/arm/v7 $image
 done <<< "$IMAGES"
 docker save $IMAGES -o umbrel-docker-images.tar
-ls -al
+du -h umbrel-docker-images.tar
