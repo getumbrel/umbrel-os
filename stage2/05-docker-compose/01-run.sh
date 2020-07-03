@@ -30,3 +30,18 @@ cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
 
 echo "Docker stuff installed!"
+
+echo "Bundling Docker images required to run Umbrel services"
+apt-get update
+apt-get install golang-go
+go version
+wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
+wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
+#IMAGES=`grep '^\s*image' docker-compose.yml | sed 's/image://' | sort | uniq`
+IMAGES="getumbrel/dashboard:v0.2.1 getumbrel/manager:v0.1.1 getumbrel/middleware:v0.1.1 lncm/bitcoind:v0.20.0 lncm/lnd:v0.9.2-root-experimental nginx:1.17.8 alpine:3.11"
+echo "Images to download: $IMAGES"
+chmod +x ./download-frozen-image-v2.sh
+./download-frozen-image-v2.sh docker-images $IMAGES
+
+mkdir -p ${ROOTFS_DIR}/tmp/docker-images
+cp -avr docker-images/ ${ROOTFS_DIR}/tmp
