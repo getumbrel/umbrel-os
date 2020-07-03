@@ -37,7 +37,7 @@ apt-get install golang-go
 go version
 wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
-IMAGES=`grep '^\s*image' docker-compose.yml | sed 's/image://' | sort | uniq`
+IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq | tr \\n " ")
 echo "List of images to download: $IMAGES"
 chmod +x ./download-frozen-image-v2.sh
 ./download-frozen-image-v2.sh docker-images "${IMAGES//\"}"
