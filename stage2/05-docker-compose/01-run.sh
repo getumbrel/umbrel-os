@@ -32,15 +32,14 @@ cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 echo "Docker stuff installed!"
 
 echo "Bundling Docker images required to run Umbrel services"
-apt-get update
-apt-get install golang-go
-go version
-wget -q "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh"
-wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
-IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq | tr \\n " ")
-echo "List of images to download: $IMAGES"
-chmod +x ./download-frozen-image-v2.sh
-./download-frozen-image-v2.sh docker-images "${IMAGES//\"}"
 
-mkdir ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/images
-cp -avr docker-images/ ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/images
+wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
+IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
+echo "List of images to download: $IMAGES"
+
+while IFS= read -r image; do
+    docker pull --platform=linux/arm/v7 $image
+done <<< "$IMAGES"
+
+docker save $IMAGES -o umbrel-docker-images.tar
+cp umbrel-docker-images.tar ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-docker-images.tar
