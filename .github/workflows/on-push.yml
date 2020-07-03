@@ -1,0 +1,13 @@
+name: Testing only
+on:
+    push:
+        branches:
+            - *
+
+jobs:
+    build:
+        runs-on: ubuntu-18.04
+        steps:
+        - uses: actions/checkout@v1
+        - name: Run Build script
+          run: sudo ./build-test.sh
