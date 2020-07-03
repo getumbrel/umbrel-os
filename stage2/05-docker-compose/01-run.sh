@@ -43,5 +43,5 @@ echo "Images to download: $IMAGES"
 chmod +x ./download-frozen-image-v2.sh
 ./download-frozen-image-v2.sh docker-images $IMAGES
 
-mkdir -p ${ROOTFS_DIR}/tmp/docker-images
-cp -avr docker-images/ ${ROOTFS_DIR}/tmp
+mkdir ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/images
+cp -avr docker-images/ ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/images
