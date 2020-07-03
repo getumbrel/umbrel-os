@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 docker --version
-export DOCKER_CLI_EXPERIMENTAL=enabled
+echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
 echo "List of images to download: $IMAGES"
