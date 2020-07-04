@@ -44,10 +44,13 @@ fi
 
 # Check if docker images have been loaded
 if [ ! -f /home/umbrel/statuses/images-loaded ]; then
-    if [ -f /home/umbrel/umbrel-docker-images.tar ]; then
-      echo "Loading docker images"
-      docker load -i /home/umbrel/umbrel-docker-images.tar || exit 1
-      rm -f /home/umbrel/umbrel-docker-images.tar
+    if [ -f /home/umbrel/umbrel-docker-images.tar.gz ]; then
+      echo "Loading pre-bundled Docker images"
+      start=`date +%s`
+      docker load -i /home/umbrel/umbrel-docker-images.tar.gz || exit 1
+      end=`date +%s`
+      echo "It took $((($end - $start)/60)) minutes ($((end - start)) seconds) to load all the images"
+      rm -f /home/umbrel/umbrel-docker-images.tar.gz
       touch /home/umbrel/statuses/images-loaded
       chown -R umbrel.umbrel /home/umbrel/statuses/images-loaded
     else

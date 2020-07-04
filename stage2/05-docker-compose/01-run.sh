@@ -41,6 +41,6 @@ while IFS= read -r image; do
     docker pull --platform=linux/arm/v7 $image
 done <<< "$IMAGES"
 
-docker save $IMAGES -o umbrel-docker-images.tar
-du -h umbrel-docker-images.tar
-cp umbrel-docker-images.tar ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-docker-images.tar
+docker save $IMAGES | gzip > umbrel-docker-images.tar.gz
+du -h umbrel-docker-images.tar.gz
+cp umbrel-docker-images.tar.gz ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-docker-images.tar.gz
