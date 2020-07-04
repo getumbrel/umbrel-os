@@ -8,3 +8,5 @@ while IFS= read -r image; do
 done <<< "$IMAGES"
 docker save $IMAGES -o umbrel-docker-images.tar
 du -h umbrel-docker-images.tar
+docker save $IMAGES | gzip > umbrel-docker-images.tar.gz 
+du -h umbrel-docker-images.tar.gz
