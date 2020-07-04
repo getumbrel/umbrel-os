@@ -42,6 +42,19 @@ if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
     fi
 fi
 
+# Check if docker images have been loaded
+if [ ! -f /home/umbrel/statuses/images-loaded ]; then
+    if [ -f /home/umbrel/umbrel-docker-images.tar ]; then
+      echo "Loading docker images"
+      docker load -i /home/umbrel/umbrel-docker-images.tar || exit 1
+      rm -f /home/umbrel/umbrel-docker-images.tar
+      touch /home/umbrel/statuses/images-loaded
+      chown -R umbrel.umbrel /home/umbrel/statuses/images-loaded
+    else
+      echo "Could not find pre-bundled Docker images"
+    fi
+fi
+
 if [ ! -f /home/umbrel/statuses/service-configured ]; then
     if [ -f /home/umbrel/bin/rpcauth.py ]; then
         echo "Running rpcauth.py, and generating secrets for bitcoind"
@@ -58,10 +71,6 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         # Making this as done so we don't go through updates again
         touch /home/umbrel/statuses/service-configured
         chown -R umbrel.umbrel /home/umbrel/statuses/service-configured
-
-        #Load docker images
-        echo "Loading docker images"
-        docker load -i /home/umbrel/umbrel-docker-images.tar
     fi
 
     # Next stage, check if service-configured
