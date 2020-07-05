@@ -28,7 +28,7 @@ echo "List of images to download: $IMAGES"
 docker ps
 echo "Pulling images in docker"
 while IFS= read -r image; do
-    docker run --rm -dt -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
+    docker run --rm -t -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
 done <<< "$IMAGES"
 docker ps
 ls docker-dir
