@@ -10,6 +10,8 @@ mkdir docker-dir
 docker run --rm -dt --name dockerdebian --privileged -v docker-dir:/var/lib/docker debian:buster-slim bash
 docker exec -t dockerdebian bash -c 'apt-get update; apt-get install curl -y; export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt; curl -fsSL https://get.docker.com -o get-docker.sh; chmod +x get-docker.sh; sh get-docker.sh;'
 docker exec -t dockerdebian docker --version
+docker exec -t dockerdebian service docker status
+docker exec -t dockerdebian service docker start
 
 ls docker-dir
 
