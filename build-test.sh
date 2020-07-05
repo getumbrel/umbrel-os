@@ -1,12 +1,20 @@
 #!/bin/bash -e
+set -x
 
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
 echo "List of images to download: $IMAGES"
+
+mkdir dockerpi
+docker run -it -v dockerpi:/sdcard lukechilds/dockerpi --name "dockerpi"
+docker exec -it dockerpi curl -fsSL https://get.docker.com -o docker-install.sh
+docker exec -it dockerpi ./docker-install.sh
 while IFS= read -r image; do
-    docker pull --platform=linux/arm/v7 $image
+    docker exec -it docker pull --platform=linux/arm/v7 $image
 done <<< "$IMAGES"
-docker save $IMAGES -o umbrel-docker-images.tar
-du -h umbrel-docker-images.tar
-docker save $IMAGES | gzip > umbrel-docker-images.tar.gz 
-du -h umbrel-docker-images.tar.gz
+ls dockerpi
+ls dockerpi/var/lib/tor
+# docker save $IMAGES -o umbrel-docker-images.tar
+# du -h umbrel-docker-images.tar
+# docker save $IMAGES | gzip > umbrel-docker-images.tar.gz 
+# du -h umbrel-docker-images.tar.gz
