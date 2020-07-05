@@ -41,7 +41,7 @@ jobs:
         #     token: ${{ secrets.GITHUB_TOKEN }}
         #     allow_override: true
 
-        - uses: actions/upload-artifact@v2
         - name: Upload artifact
+          uses: actions/upload-artifact@v2
           with:
             path: "*.zip"
