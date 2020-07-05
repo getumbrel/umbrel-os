@@ -7,7 +7,7 @@ echo "Removing Docker"
 docker ps
 docker images -a
 du -h /var/lib/docker/overlay2
-sudo systemctl restart stop
+sudo systemctl stop docker
 sudo apt-get purge docker-ce docker-ce-cli containerd.io moby-engine moby-cli
 sudo rm -rf /var/lib/docker
 
@@ -18,9 +18,6 @@ docker ps
 docker images -a
 sudo rm -rf /etc/docker/daemon.json
 echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-
-ls /var/lib/docker 
-ls /var/lib/docker/overlay2
 
 
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
@@ -34,8 +31,6 @@ done <<< "$IMAGES"
 docker images -a
 
 
-ls /var/lib/docker 
-ls /var/lib/docker/overlay2
 du -h /var/lib/docker/overlay2
 # ls dockerpi
 # ls dockerpi/var/lib/tor
