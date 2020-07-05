@@ -1,7 +1,7 @@
 #!/bin/bash -e
 set -x
 
-docker ps
+docker images -a
 
 # wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 # IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
