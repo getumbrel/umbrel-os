@@ -7,6 +7,7 @@ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This st
 
 mkdir docker-dir
 docker run --rm -d --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
+sleep 10s
 docker ps
 docker exec -t dockerdebian uname -m
 
