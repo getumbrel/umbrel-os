@@ -2,36 +2,34 @@
 set -x
 
 uname -m
-# sudo apt-get install qemu binfmt-support qemu-user-static # Install the qemu packages
-# docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
 
-mkdir docker-dir
-# docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
-# docker run --rm -dt --name dind -v docker-dir:/var/lib/docker docker:stable-dind bash
-# docker exec -t dockerdebian bash -c 'apt-get update; apt-get install curl -y; export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt; curl -fsSL https://get.docker.com -o get-docker.sh; chmod +x get-docker.sh; sh get-docker.sh;'
-# docker exec -t dind docker --version
+echo "Removing Docker"
+docker ps
+docker --version
+sudo apt-get purge docker-ce docker-ce-cli containerd.io moby-engine
+sudo rm -rf /var/lib/docker
 
-ls docker-dir
+ls /var/lib
 
-wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
-IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
-echo "List of images to download: $IMAGES"
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+docker --version
+docker ps
 
-# mkdir dockerpi
-# echo "Running Docker Pi"
-# docker run --name dockerpi -v dockerpi:/sdcard lukechilds/dockerpi 
+ls /var/lib
+
+
+# wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
+# IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
+# echo "List of images to download: $IMAGES"
+
+
+# echo "Pulling images in docker"
+# while IFS= read -r image; do
+#     docker run --rm -t -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
+# done <<< "$IMAGES"
 # docker ps
-# echo "Downloading install script"
-# docker exec -d dockerpi curl -fsSL https://get.docker.com -o docker-install.sh
-# echo "Running install script"
-# docker exec -d dockerpi ./docker-install.sh
-docker ps
-echo "Pulling images in docker"
-while IFS= read -r image; do
-    docker run --rm -t -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
-done <<< "$IMAGES"
-docker ps
-ls docker-dir
+# ls docker-dir
 
 # ls dockerpi
 # ls dockerpi/var/lib/tor
