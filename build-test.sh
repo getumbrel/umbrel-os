@@ -25,11 +25,12 @@ echo "List of images to download: $IMAGES"
 # docker exec -d dockerpi curl -fsSL https://get.docker.com -o docker-install.sh
 # echo "Running install script"
 # docker exec -d dockerpi ./docker-install.sh
+docker ps
 echo "Pulling images in docker"
 while IFS= read -r image; do
-    docker run --rm -dt --name dind -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
+    docker run --rm -dt -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
 done <<< "$IMAGES"
-
+docker ps
 ls docker-dir
 
 # ls dockerpi
