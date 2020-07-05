@@ -2,7 +2,7 @@
 set -x
 
 uname -m
-sudo apt-get install qemu binfmt-support qemu-user-static # Install the qemu packages
+# sudo apt-get install qemu binfmt-support qemu-user-static # Install the qemu packages
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
 docker run --rm -t multiarch/debian-debootstrap:armhf-buster-slim uname -m
 
