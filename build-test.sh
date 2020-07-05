@@ -7,12 +7,14 @@ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This st
 
 mkdir docker-dir
 docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
-docker exec -t dockerdebian bash -c 'apt-get update; apt-get install curl -y; export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt; ls /var/lib/docker; curl -fsSL https://get.docker.com -o get-docker.sh; chmod +x get-docker.sh; sh get-docker.sh; docker --version; ls /var/lib/docker;'
+docker exec -t dockerdebian bash -c 'apt-get update; apt-get install curl -y; export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt; curl -fsSL https://get.docker.com -o get-docker.sh; chmod +x get-docker.sh; sh get-docker.sh;'
 docker exec -t dockerdebian docker --version
 
-# wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
-# IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
-# echo "List of images to download: $IMAGES"
+ls docker-dir
+
+wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
+IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
+echo "List of images to download: $IMAGES"
 
 # mkdir dockerpi
 # echo "Running Docker Pi"
@@ -22,10 +24,13 @@ docker exec -t dockerdebian docker --version
 # docker exec -d dockerpi curl -fsSL https://get.docker.com -o docker-install.sh
 # echo "Running install script"
 # docker exec -d dockerpi ./docker-install.sh
-# echo "Pulling images in docker"
-# while IFS= read -r image; do
-#     docker exec -d docker pull --platform=linux/arm/v7 $image
-# done <<< "$IMAGES"
+echo "Pulling images in docker"
+while IFS= read -r image; do
+    docker exec -t dockerdebian docker pull --platform=linux/arm/v7 $image
+done <<< "$IMAGES"
+
+ls docker-dir
+
 # ls dockerpi
 # ls dockerpi/var/lib/tor
 # docker save $IMAGES -o umbrel-docker-images.tar
