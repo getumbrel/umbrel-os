@@ -6,8 +6,8 @@ uname -m
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
 
 mkdir docker-dir
-docker run --rm -d --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
-sleep 10s
+docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
+sleep 5s
 docker ps
 docker exec -t dockerdebian uname -m
 
