@@ -13,6 +13,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 ./get-docker.sh
 docker --version
 EOF
+docker exec -t dockerdebian docker --version
 
 # wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 # IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
