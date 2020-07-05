@@ -44,4 +44,4 @@ jobs:
         - uses: actions/upload-artifact@v2
         - name: Upload artifact
           with:
-            path: *.zip
+            path: "*.zip"
