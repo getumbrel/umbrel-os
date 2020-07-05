@@ -4,7 +4,10 @@ set -x
 uname -m
 # sudo apt-get install qemu binfmt-support qemu-user-static # Install the qemu packages
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
-docker run --rm -t multiarch/debian-debootstrap:armhf-buster-slim uname -m
+
+mkdir docker-dir
+docker run --rm -t --name dockerpi -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim uname -m
+docker ps
 
 # wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 # IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
