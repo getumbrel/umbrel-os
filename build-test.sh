@@ -7,8 +7,12 @@ docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This st
 
 mkdir docker-dir
 docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
-docker exec -t dockerdebian uname -m
-docker exec -t dockerdebian docker --version
+docker exec -t dockerdebian bash <<EOF
+ls /var/lib/docker/overlay2
+curl -fsSL https://get.docker.com -o get-docker.sh
+./get-docker.sh
+docker --version
+EOF
 
 # wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
 # IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
