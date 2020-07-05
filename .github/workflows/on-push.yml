@@ -1,6 +1,8 @@
 name: Testing only
 on:
-    push
+    push:
+        branch: 
+          - *
 
 jobs:
     build:
