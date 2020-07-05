@@ -7,9 +7,9 @@ uname -m
 
 mkdir docker-dir
 # docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
-docker run --rm -dt --name dind -v docker-dir:/var/lib/docker docker:stable-dind bash
+# docker run --rm -dt --name dind -v docker-dir:/var/lib/docker docker:stable-dind bash
 # docker exec -t dockerdebian bash -c 'apt-get update; apt-get install curl -y; export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt; curl -fsSL https://get.docker.com -o get-docker.sh; chmod +x get-docker.sh; sh get-docker.sh;'
-docker exec -t dind docker --version
+# docker exec -t dind docker --version
 
 ls docker-dir
 
@@ -27,7 +27,7 @@ echo "List of images to download: $IMAGES"
 # docker exec -d dockerpi ./docker-install.sh
 echo "Pulling images in docker"
 while IFS= read -r image; do
-    docker exec -t dind docker pull --platform=linux/arm/v7 $image
+    docker run --rm -dt --name dind -v docker-dir:/var/lib/docker docker:stable-dind docker pull --platform=linux/arm/v7 $image
 done <<< "$IMAGES"
 
 ls docker-dir
