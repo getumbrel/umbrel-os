@@ -60,6 +60,6 @@ done <<< "$IMAGES"
 
 # docker save $IMAGES | gzip > umbrel-docker-images.tar.gz
 # du -h umbrel-docker-images.tar.gz
-mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/docker/
+mkdir -p ${ROOTFS_DIR}/var/lib/docker/overlay2
+rsync -avPHSX /var/lib/docker/overlay2 ${ROOTFS_DIR}/var/lib/docker/overlay2/
 # cp umbrel-docker-images.tar.gz ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel-docker-images.tar.gz
