@@ -3,10 +3,11 @@ set -x
 
 uname -m
 # sudo apt-get install qemu binfmt-support qemu-user-static # Install the qemu packages
-docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
+# docker run --rm --privileged multiarch/qemu-user-static --reset -p yes # This step will execute the registering scripts
 
 mkdir docker-dir
-docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
+# docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker multiarch/debian-debootstrap:armhf-buster-slim bash
+docker run --rm -dt --name dockerdebian -v docker-dir:/var/lib/docker debian:buster-slim
 docker exec -t dockerdebian bash -c 'apt-get update; apt-get install curl -y; export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt; curl -fsSL https://get.docker.com -o get-docker.sh; chmod +x get-docker.sh; sh get-docker.sh;'
 docker exec -t dockerdebian docker --version
 
