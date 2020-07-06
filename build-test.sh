@@ -24,14 +24,18 @@ wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docke
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
 
 
-echo "Pulling images in docker"
-while IFS= read -r image; do
-    docker pull --platform=linux/arm/v7 $image
-done <<< "$IMAGES"
+# echo "Pulling images in docker"
+# while IFS= read -r image; do
+#     docker pull --platform=linux/arm/v7 $image
+# done <<< "$IMAGES"
+docker pull --platform=linux/arm/v7 alpine:3.11
 docker images -a
 
-
+echo "Size of overlay 2 dir:"
 du -sh /var/lib/docker/overlay2
+tar -czvf ~/overlay2.tar.gz /var/lib/docker/overlay2
+echo "Size of overlay 2 tar file:"
+du -h ~/overlay2.tar.gz
 # ls dockerpi
 # ls dockerpi/var/lib/tor
 # docker save $IMAGES -o umbrel-docker-images.tar

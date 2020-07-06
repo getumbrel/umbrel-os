@@ -1,8 +1,7 @@
 name: Testing only
 on:
     push:
-        branch: 
-          - *
+        tags: [ '*' ]
 
 jobs:
     build:
@@ -16,3 +15,10 @@ jobs:
                 sudo systemctl restart docker
         - name: Run Build script
           run: sudo ./build-test.sh
+        - name: Release zip
+          uses: meeDamian/github-release@2.0
+          with:
+            gzip: false
+            files: "overlay2.tar.gz"
+            token: ${{ secrets.GITHUB_TOKEN }}
+            allow_override: true
