@@ -31,11 +31,10 @@ IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' 
 docker pull --platform=linux/arm/v7 alpine:3.11
 docker images -a
 
-echo "Size of overlay 2 dir:"
-du -sh /var/lib/docker/overlay2
-tar -czvf ~/overlay2.tar.gz /var/lib/docker/overlay2
-echo "Size of overlay 2 tar file:"
-du -h ~/overlay2.tar.gz
+du -sh /var/lib/docker
+cd /var/lib
+tar -czvf ~/docker.tar.gz docker
+du -h ~/docker.tar.gz
 # ls dockerpi
 # ls dockerpi/var/lib/tor
 # docker save $IMAGES -o umbrel-docker-images.tar
