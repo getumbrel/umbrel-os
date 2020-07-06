@@ -1,6 +1,6 @@
 name: Testing only
 on:
-    push:
+  push:
       tags: [ '*' ]
 
 jobs:
