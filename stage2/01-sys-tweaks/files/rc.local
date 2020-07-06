@@ -11,10 +11,6 @@
 #
 # By default this script does nothing.
 
-exec 2> /tmp/rc.local.log  # send stderr from rc.local to a log file
-exec 1>&2                      # send stdout to the same log file
-set -x                         # tell sh to display commands before execution
-
 # Print the IP address
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
@@ -39,22 +35,6 @@ if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
       chown -R umbrel.umbrel /home/umbrel/statuses/disk-partitioned
     else
       echo "Could not find partition tool - some steps might be skipped"
-    fi
-fi
-
-# Check if docker images have been loaded
-if [ ! -f /home/umbrel/statuses/images-loaded ]; then
-    if [ -f /home/umbrel/umbrel-docker-images.tar.gz ]; then
-      echo "Loading pre-bundled Docker images"
-      start=`date +%s`
-      docker load -i /home/umbrel/umbrel-docker-images.tar.gz || exit 1
-      end=`date +%s`
-      echo "It took $((($end - $start)/60)) minutes ($((end - start)) seconds) to load all the images"
-      rm -f /home/umbrel/umbrel-docker-images.tar.gz
-      touch /home/umbrel/statuses/images-loaded
-      chown -R umbrel.umbrel /home/umbrel/statuses/images-loaded
-    else
-      echo "Could not find pre-bundled Docker images"
     fi
 fi
 
