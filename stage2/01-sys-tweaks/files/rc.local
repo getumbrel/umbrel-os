@@ -39,19 +39,11 @@ if [ ! -f /home/umbrel/statuses/disk-partitioned ]; then
 fi
 
 if [ ! -f /home/umbrel/statuses/service-configured ]; then
-    if [ -f /home/umbrel/bin/rpcauth.py ]; then
-        echo "Running rpcauth.py, and generating secrets for bitcoind"
-        cd /home/umbrel/bin/
-        ./rpcauth.py lncm | tee /home/umbrel/secrets/generated.txt | head -2 | tail -1 > /home/umbrel/secrets/rpcauth.txt
-        tail -1 /home/umbrel/secrets/generated.txt > /home/umbrel/secrets/rpcpass.txt
-        echo "Updating bitcoin.conf"
-        cat /home/umbrel/secrets/rpcauth.txt >> /home/umbrel/bitcoin/bitcoin.conf
-        # Update RPC Passwords for both LND and INVOICER
-        RPCPASS=`cat /home/umbrel/secrets/rpcpass.txt`
-        sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/docker-compose.yml
-        sed -i "s/RPCPASS/${RPCPASS}/g;" /home/umbrel/lnd/lnd.conf
-
-        # Making this as done so we don't go through updates again
+    if [ -f /home/umbrel/configure-box.sh ]; then
+        echo "Running configuration script"
+        cd /home/umbrel
+        ./configure-box.sh || exit 1
+        # Marking this as done so we don't do configuration again
         touch /home/umbrel/statuses/service-configured
         chown -R umbrel.umbrel /home/umbrel/statuses/service-configured
     fi
