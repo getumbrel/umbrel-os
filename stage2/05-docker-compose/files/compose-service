@@ -23,7 +23,7 @@ case "$1" in
 		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
             echo "Starting"
 		    cd /home/umbrel
-		    docker-compose up -d
+		    docker-compose up --build -d
             exit 0
         else
             echo "Docker-compose file doesn't exist"
