@@ -1,7 +1,7 @@
 name: Testing only
 on:
     push:
-        branches: 
+        branches:
           - *
 
 jobs:
