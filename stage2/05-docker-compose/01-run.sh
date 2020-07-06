@@ -29,4 +29,15 @@ echo "Copying the compose service to rootfs (etc/init.d)"
 cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
 
-echo "Docker stuff installed!"
+echo "Pulling Docker images required to run Umbrel services"
+
+wget -q "https://raw.githubusercontent.com/getumbrel/umbrel-compose/master/docker-compose.yml"
+IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
+echo "List of images to download: $IMAGES"
+
+while IFS= read -r image; do
+    docker pull --platform=linux/arm/v7 $image
+done <<< "$IMAGES"
+
+mkdir -p ${ROOTFS_DIR}/var/lib/docker
+rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
