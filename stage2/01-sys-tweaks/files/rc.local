@@ -69,7 +69,7 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
         /etc/init.d/umbrelbox start
       fi
     else
-        echo "Disk not partitioned, will not start umbrel-compose framework (Please do it manually)"
+        echo "Disk not partitioned, will not start umbrel framework (Please do it manually)"
     fi
 fi
 
