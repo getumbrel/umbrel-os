@@ -1,0 +1,54 @@
+name: Build image on push
+
+on:
+    push:
+        branches:    
+            - '*'
+    
+jobs:
+    build:
+
+        runs-on: ubuntu-18.04
+        
+        steps:
+        
+        - uses: actions/checkout@v1
+
+        - name: Run Apt-get update
+            run: sudo apt-get update
+
+        - name: Install dependencies
+            run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
+
+        - name: Nuke current Docker installation
+            run: |
+                sudo systemctl stop docker
+                sudo apt-get purge docker-ce docker-ce-cli containerd.io moby-engine moby-cli
+                sudo rm -rf /var/lib/docker
+        
+        - name: Re-install Docker
+            run: |
+                curl -fsSL https://get.docker.com -o get-docker.sh
+                sudo sh get-docker.sh
+                docker --version
+
+        - name: Enable experimental features in Docker
+            run: |
+                sudo rm -rf /etc/docker/daemon.json
+                echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+                sudo systemctl restart docker
+
+        - name: Run build script
+            run: sudo ./build.sh
+
+        - name: Copy ZIP to current working dir
+            run: cp deploy/*.zip ./
+
+        - name: Debug current working dir
+            run: ls -la
+        
+        - name: Upload artifact
+            uses: actions/upload-artifact@v2
+            with:
+                name: umbr3l-lite.zip
+                path: ./umbr3l-lite.zip

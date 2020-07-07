@@ -1,7 +1,9 @@
 name: Automatically Build image on tag ONLY
 on:
     push:
-        tags: [ '*' ]
+        tags:
+          - v[0-9]+.[0-9]+.[0-9]+
+          - v[0-9]+.[0-9]+.[0-9]+-*
 
 jobs:
     build:
