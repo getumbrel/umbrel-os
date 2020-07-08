@@ -40,4 +40,4 @@ while IFS= read -r image; do
 done <<< "$IMAGES"
 
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/git res
+rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
