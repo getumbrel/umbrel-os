@@ -6,7 +6,7 @@ echo "Installing docker-compose from pip3, and also setting up the box folder st
 on_chroot << EOF
 pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
-wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel/master/install-box.sh" | sh
+wget -qO- "https://raw.githubusercontent.com/mayankchhabra/umbrel/v0.1.3-beta/install-box.sh" | sh
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
@@ -31,7 +31,7 @@ cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
 echo "Pulling Docker images required to run Umbrel services"
 
-wget -q "https://raw.githubusercontent.com/getumbrel/umbrel/master/docker-compose.yml"
+wget -q "https://raw.githubusercontent.com/mayankchhabra/umbrel/v0.1.3-beta/docker-compose.yml"
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
 echo "List of images to download: $IMAGES"
 
@@ -40,4 +40,4 @@ while IFS= read -r image; do
 done <<< "$IMAGES"
 
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
+rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/git res
