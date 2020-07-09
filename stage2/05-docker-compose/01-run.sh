@@ -33,7 +33,7 @@ IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' 
 echo "List of images to download: $IMAGES"
 
 while IFS= read -r image; do
-    docker pull --platform=linux/arm/v7 $image
+    docker pull --platform=linux/arm64 $image
 done <<< "$IMAGES"
 
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
