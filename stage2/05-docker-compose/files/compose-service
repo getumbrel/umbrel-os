@@ -16,7 +16,7 @@ set -e
 NAME="compose-service"
 DESCRIPTION="Docker compose service"
 SCRIPTNAME=/etc/init.d/$NAME
-UMBREL_ROOT=$UMBREL_ROOT
+UMBREL_ROOT=/home/umbrel
 
 case "$1" in
   	start)
