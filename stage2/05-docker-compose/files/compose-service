@@ -16,29 +16,30 @@ set -e
 NAME="compose-service"
 DESCRIPTION="Docker compose service"
 SCRIPTNAME=/etc/init.d/$NAME
+UMBREL_ROOT=/home/umbrel
 
 case "$1" in
   	start)
-        if [ -f /home/umbrel/docker-compose.yml ]; then
-		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
-            echo "Starting"
-		    cd /home/umbrel
+        if [ -f $UMBREL_ROOT/docker-compose.yml ]; then
+		    cd $UMBREL_ROOT
+			echo "Starting karen"
+			./karen &
+			echo "Starting Umbrel Docker services"
 		    docker-compose up --build -d
             exit 0
         else
-            echo "Docker-compose file doesn't exist"
+            echo "Cannot start umbrelbox service. No docker-compose.yml found in $UMBREL_ROOT"
             exit 1
         fi
 		;;
 	stop)
-        if [ -f /home/umbrel/docker-compose.yml ]; then
-		    sed -i 's/\${HOME}/\/home\/umbrel/g; ' /home/umbrel/docker-compose.yml
-		    echo "Stopping docker"
-		    cd /home/umbrel
+        if [ -f $UMBREL_ROOT/docker-compose.yml ]; then
+		    echo "Stopping Umbrel Docker services"
+		    cd $UMBREL_ROOT
 		    docker-compose down
             exit 0
         else
-            echo "Docker-compose file doesn't exist"
+            echo "Cannot stop umbrelbox service. No docker-compose.yml found in $UMBREL_ROOT"
             exit 1
         fi
 		;;
