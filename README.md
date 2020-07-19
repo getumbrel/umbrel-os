@@ -81,7 +81,7 @@ If you want to overricde the checks, please delete ```service-configured``` file
 
 ### ⚡️ Don't be too reckless
 
-> Umbrel is still in an early stage and things are expected to break every now and then. We **DO NOT** recommend running it on the mainnet with real money just yet, unless you want to be really *#reckless*.
+> Umbrel is still in an early stage and things are expected to break every now and then. We **DO NOT** recommend running it on mainnet with real money just yet, unless you want to be really *#reckless*.
 
 ## ❤️ Contributing
 
