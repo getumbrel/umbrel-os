@@ -37,7 +37,7 @@ SSH is enabled by default and you can use the following credentials to login to 
 
 ## 🛠 Build Umbrel OS from source
 
-> Verify, don't trust.
+> Don't trust. Verify.
 
 Step 1. Clone this repo
 ```
