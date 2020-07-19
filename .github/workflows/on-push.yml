@@ -1,4 +1,4 @@
-name: Build image on push
+name: Build image on push or PR
 on: ["push", "pull_request"]
 
 jobs:
