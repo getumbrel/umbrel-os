@@ -1,9 +1,6 @@
 name: Build image on push
-on:
-    push:
-        branches:    
-          - '*'
-    
+on: ["push", "pull_request"]
+
 jobs:
     build:
 
