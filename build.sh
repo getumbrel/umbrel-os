@@ -151,10 +151,16 @@ if [ -z "${IMG_NAME}" ]; then
 	exit 1
 fi
 
+
+TAG=""
+if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+	TAG="-$(git describe --tags)"
+fi
+
 export USE_QEMU="${USE_QEMU:-0}"
 export IMG_DATE="${IMG_DATE:-"$(date +%Y-%m-%d)"}"
-export IMG_FILENAME="${IMG_FILENAME:-"${IMG_DATE}-${IMG_NAME}"}"
-export ZIP_FILENAME="${ZIP_FILENAME:-"${IMG_NAME}"}"
+export IMG_FILENAME="${IMG_FILENAME:-"${IMG_DATE}-${IMG_NAME}${TAG}"}"
+export ZIP_FILENAME="${ZIP_FILENAME:-"${IMG_NAME}${TAG}"}"
 
 export SCRIPT_DIR="${BASE_DIR}/scripts"
 export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}"

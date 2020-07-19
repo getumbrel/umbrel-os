@@ -1,9 +1,6 @@
-name: Build image on push
-on:
-    push:
-        branches:    
-          - '*'
-    
+name: Build image on push or PR
+on: ["push", "pull_request"]
+
 jobs:
     build:
 
@@ -49,5 +46,4 @@ jobs:
         - name: Upload artifact
           uses: actions/upload-artifact@v2
           with:
-            name: umbr3l-lite.zip
-            path: ./umbr3l-lite.zip
+            path: umbrel-*.zip

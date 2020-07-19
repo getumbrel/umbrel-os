@@ -1,5 +1,5 @@
-IMG_NAME=umbr3l
-TARGET_HOSTNAME=umbrel
+IMG_NAME=umbrel
+TARGET_HOSTNAME=umbrel-os
 TIMEZONE_DEFAULT="Etc/UTC"
 FIRST_USER_NAME=umbrel
 FIRST_USER_PASS=moneyprintergobrrr
