@@ -49,5 +49,4 @@ jobs:
         - name: Upload artifact
           uses: actions/upload-artifact@v2
           with:
-            name: umbrel-os.zip
-            path: ./umbrel-os.zip
+            path: umbrel-*.zip
