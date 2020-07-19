@@ -1,4 +1,4 @@
-IMG_NAME=umbrel-os
+IMG_NAME=umbrel
 TARGET_HOSTNAME=umbrel
 TIMEZONE_DEFAULT="Etc/UTC"
 FIRST_USER_NAME=umbrel
