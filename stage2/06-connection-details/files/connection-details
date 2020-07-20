@@ -74,7 +74,6 @@ def read_file_when_available(file_path, timeout):
 
     return file_contents
 
-
 def main():
     timeout = 30
     tor_hostname_file = "/home/umbrel/tor/data/web/hostname"
