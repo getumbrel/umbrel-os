@@ -89,14 +89,16 @@ def main():
     tor_hostname_qr_ascii = create_qr(tor_hostname.strip())
     ascii_banner = combine_ascii(umbrel_ascii, tor_hostname_qr_ascii, spacing=10)
 
-    print()
-    print()
-    print()
-    print(ascii_banner)
-    print()
-    print("    Your Umbrel is up and running at:")
-    print()
-    print("        http://umbrel.local")
-    print(f"        http://{tor_hostname}")
+    connection_details = f"""
+
+
+{ascii_banner}
+
+    Your Umbrel is up and running at:
+
+        http://umbrel.local
+        http://{tor_hostname}
+    """
+    print(connection_details)
 
 main()
