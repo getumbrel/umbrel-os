@@ -32,7 +32,7 @@ umbrel_ascii = '''
 def create_qr(data):
     output_buffer = TextIOWrapper(BytesIO(), sys.stdout.encoding)
 
-    qr = qrcode.QRCode(border=0, error_correction=qrcode.constants.ERROR_CORRECT_H)
+    qr = qrcode.QRCode(border=0, error_correction=qrcode.constants.ERROR_CORRECT_Q)
     qr.add_data(data)
     qr.print_ascii(out=output_buffer)
 
