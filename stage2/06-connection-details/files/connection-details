@@ -77,8 +77,6 @@ def read_file_when_available(file_path, timeout):
 
 def main():
     timeout = 30
-    print(f"Attempting to get connection details for up to {timeout} seconds")
-
     tor_hostname_file = "/home/umbrel/tor/data/web/hostname"
     tor_hostname = read_file_when_available(tor_hostname_file, timeout)
 
