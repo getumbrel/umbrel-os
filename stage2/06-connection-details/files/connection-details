@@ -3,6 +3,7 @@
 import sys
 import os
 import time
+import subprocess
 from io import TextIOWrapper, BytesIO
 import qrcode
 
@@ -74,6 +75,10 @@ def read_file_when_available(file_path, timeout):
 
     return file_contents
 
+def run(command):
+    result = subprocess.run(command, stdout=subprocess.PIPE)
+    return result.stdout.decode('utf-8').rstrip("\n")
+
 def main():
     timeout = 30
     tor_hostname_file = "/home/umbrel/tor/data/web/hostname"
@@ -86,6 +91,8 @@ def main():
     tor_hostname_qr_ascii = create_qr(tor_hostname.strip())
     ascii_banner = combine_ascii(umbrel_ascii, tor_hostname_qr_ascii, spacing=10)
 
+    ip = run(['hostname', '-I']).split(" ")[0]
+
     connection_details = f"""
 
 
@@ -94,6 +101,7 @@ def main():
     Your Umbrel is up and running at:
 
         http://umbrel.local
+        http://{ip}
         http://{tor_hostname}
     """
     print(connection_details)
