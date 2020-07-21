@@ -18,7 +18,7 @@ Umbrel OS currently supports Raspberry Pi 3 and 4. If you'd like to run it on an
 
 ### Instructions:
 
-1. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases), or [build the image from source](#-build-umbrel-os-from-source).
+1. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest), or [build the image from source](#-build-umbrel-os-from-source).
 2. Use an image flasher such as [Balena Etcher](https://github.com/balena-io/etcher) to flash the image to a microSD card.
 3. Put the microSD card in your Raspberry Pi, attach an external SSD or HDD (to USB 3 port), connect the Pi to your router with an ethernet cable.
 4. Turn on the Pi and open http://umbrel.local from any device connected to the same network (it might take a while for it to be accessible).
