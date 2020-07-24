@@ -1,0 +1,11 @@
+Index: jessie-stage2/rootfs/etc/profile
+===================================================================
+--- jessie-stage2.orig/rootfs/etc/profile
++++ jessie-stage2/rootfs/etc/profile
+@@ -32,3 +32,6 @@
+   done
+   unset i
+ fi
++
++DEVICE_IP="$(hostname -I | cut -d ' ' -f 1)"
++UMBREL_OS="0.0.4.beta.4"
