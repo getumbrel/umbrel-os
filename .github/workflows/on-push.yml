@@ -42,7 +42,10 @@ jobs:
               echo "::set-env name=ZIP_FILENAME::$IMAGE_NAME"
 
         - name: Run build script
-          run: sudo ./build.sh
+          run: |
+              echo $IMG_FILENAME
+              echo $ZIP_FILENAME
+              sudo ./build.sh
 
         # - name: Copy ZIP to current working dir
         #   run: cp deploy/*.zip ./
