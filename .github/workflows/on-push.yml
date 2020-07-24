@@ -53,5 +53,5 @@ jobs:
         - name: Upload artifact
           uses: actions/upload-artifact@v2
           with:
-            path: "$ZIP_FILENAME".zip
-            name: "$ZIP_FILENAME".zip
+            path: $ZIP_FILENAME.zip
+            name: $ZIP_FILENAME.zip
