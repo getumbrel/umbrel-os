@@ -18,7 +18,7 @@ Umbrel OS currently supports Raspberry Pi 3 and 4. If you'd like to run it on an
 
 ### Instructions:
 
-1. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases), or [build the image from source](#-build-umbrel-os-from-source).
+1. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest), or [build the image from source](#-build-umbrel-os-from-source).
 2. Use an image flasher such as [Balena Etcher](https://github.com/balena-io/etcher) to flash the image to a microSD card.
 3. Put the microSD card in your Raspberry Pi, attach an external SSD or HDD (to USB 3 port), connect the Pi to your router with an ethernet cable.
 4. Turn on the Pi and open http://umbrel.local from any device connected to the same network (it might take a while for it to be accessible).
@@ -33,11 +33,11 @@ SSH is enabled by default and you can use the following credentials to login to 
 
 - Hostname: `umbrel.local`  
 - User: `umbrel`  
-- Password: `umbr3lb0x`
+- Password: `moneyprintergobrrr`
 
 ## 🛠 Build Umbrel OS from source
 
-> Verify, don't trust.
+> Don't trust. Verify.
 
 Step 1. Clone this repo
 ```
@@ -62,6 +62,8 @@ After the build completes (it can take a looooooong time), the image will be ins
 
 The `config` file has system defaults which are used when building the image and for automated builds.
 
+- `UMBREL_VERSION` - Use this to install the specific [Umbrel](https://github.com/getumbrel/umbrel) version
+
 - `GITHUB_USERNAME` - Use this if you want to automatically login to your node without typing a password (used at build time).
 
 Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
@@ -81,7 +83,7 @@ If you want to overricde the checks, please delete ```service-configured``` file
 
 ### ⚡️ Don't be too reckless
 
-> Umbrel is still in an early stage and things are expected to break every now and then. We **DO NOT** recommend running it on the mainnet with real money just yet, unless you want to be really *#reckless*.
+> Umbrel is still in an early stage and things are expected to break every now and then. We **DO NOT** recommend running it on mainnet with real money just yet, unless you want to be really *#reckless*.
 
 ## ❤️ Contributing
 
