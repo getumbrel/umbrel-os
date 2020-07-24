@@ -37,10 +37,13 @@ jobs:
           run: |
               IMAGE_NAME="umbrel-os-$(git describe --tags)"
               echo $IMAGE_NAME
-              echo "::set-env name=IMAGE_NAME::IMAGE_NAME"
+              echo "::set-env name=IMG_FILENAME::$IMAGE_NAME"
+              echo "::set-env name=ZIP_FILENAME::$IMAGE_NAME"
                   
         - name: Verify image name
-          run: echo $IMAGE_NAME
+          run: |
+              echo "Image: $IMG_FILENAME"
+              echo "Zip: $ZIP_FILENAME"
 
         # - name: Run build script
         #   run: sudo ./build.sh
