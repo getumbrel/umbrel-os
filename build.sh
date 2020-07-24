@@ -230,33 +230,36 @@ log "Begin ${BASE_DIR}"
 
 STAGE_LIST=${STAGE_LIST:-${BASE_DIR}/stage*}
 
-for STAGE_DIR in $STAGE_LIST; do
-	STAGE_DIR=$(realpath "${STAGE_DIR}")
-	run_stage
-done
+echo "Image file name: $IMG_FILENAME"
+echo "Zip file name: $ZIP_FILENAME"
 
-CLEAN=1
-for EXPORT_DIR in ${EXPORT_DIRS}; do
-	STAGE_DIR=${BASE_DIR}/export-image
-	# shellcheck source=/dev/null
-	source "${EXPORT_DIR}/EXPORT_IMAGE"
-	EXPORT_ROOTFS_DIR=${WORK_DIR}/$(basename "${EXPORT_DIR}")/rootfs
-	run_stage
-	if [ "${USE_QEMU}" != "1" ]; then
-		if [ -e "${EXPORT_DIR}/EXPORT_NOOBS" ]; then
-			# shellcheck source=/dev/null
-			source "${EXPORT_DIR}/EXPORT_NOOBS"
-			STAGE_DIR="${BASE_DIR}/export-noobs"
-			run_stage
-		fi
-	fi
-done
+# for STAGE_DIR in $STAGE_LIST; do
+# 	STAGE_DIR=$(realpath "${STAGE_DIR}")
+# 	run_stage
+# done
 
-if [ -x ${BASE_DIR}/postrun.sh ]; then
-	log "Begin postrun.sh"
-	cd "${BASE_DIR}"
-	./postrun.sh
-	log "End postrun.sh"
-fi
+# CLEAN=1
+# for EXPORT_DIR in ${EXPORT_DIRS}; do
+# 	STAGE_DIR=${BASE_DIR}/export-image
+# 	# shellcheck source=/dev/null
+# 	source "${EXPORT_DIR}/EXPORT_IMAGE"
+# 	EXPORT_ROOTFS_DIR=${WORK_DIR}/$(basename "${EXPORT_DIR}")/rootfs
+# 	run_stage
+# 	if [ "${USE_QEMU}" != "1" ]; then
+# 		if [ -e "${EXPORT_DIR}/EXPORT_NOOBS" ]; then
+# 			# shellcheck source=/dev/null
+# 			source "${EXPORT_DIR}/EXPORT_NOOBS"
+# 			STAGE_DIR="${BASE_DIR}/export-noobs"
+# 			run_stage
+# 		fi
+# 	fi
+# done
 
-log "End ${BASE_DIR}"
+# if [ -x ${BASE_DIR}/postrun.sh ]; then
+# 	log "Begin postrun.sh"
+# 	cd "${BASE_DIR}"
+# 	./postrun.sh
+# 	log "End postrun.sh"
+# fi
+
+# log "End ${BASE_DIR}"
