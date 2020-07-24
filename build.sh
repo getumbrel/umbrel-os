@@ -207,7 +207,7 @@ source "${SCRIPT_DIR}/common"
 # shellcheck source=scripts/dependencies_check
 source "${SCRIPT_DIR}/dependencies_check"
 
-dependencies_check "${BASE_DIR}/depends"
+# dependencies_check "${BASE_DIR}/depends"
 
 #check username is valid
 if [[ ! "$FIRST_USER_NAME" =~ ^[a-z][-a-z0-9_]*$ ]]; then
