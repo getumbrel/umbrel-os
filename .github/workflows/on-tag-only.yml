@@ -37,9 +37,16 @@ jobs:
                 sudo rm -rf /etc/docker/daemon.json
                 echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
                 sudo systemctl restart docker
+        
+        - name: Set image name
+          run: |
+                IMAGE_NAME="umbrel-os-$(git describe --tags)"
+                echo "::set-env name=IMAGE_NAME::$IMAGE_NAME"
 
         - name: Run build script
-          run: sudo ./build.sh
+          run: |
+                echo "Building $IMAGE_NAME"
+                sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME ./build.sh
 
         - name: Copy ZIP to current working dir
           run: cp deploy/*.zip ./
@@ -65,5 +72,6 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-            asset_path: umbrel-*.zip
+            asset_path: ${{ env.IMAGE_NAME }}.zip
+            asset_name: ${{ env.IMAGE_NAME }}.zip
             asset_content_type: application/gzip
