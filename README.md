@@ -62,6 +62,8 @@ After the build completes (it can take a looooooong time), the image will be ins
 
 The `config` file has system defaults which are used when building the image and for automated builds.
 
+- `UMBREL_VERSION` - Use this to install the specific [Umbrel](https://github.com/getumbrel/umbrel) version
+
 - `GITHUB_USERNAME` - Use this if you want to automatically login to your node without typing a password (used at build time).
 
 Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
