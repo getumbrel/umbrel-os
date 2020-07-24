@@ -4,7 +4,7 @@ import sys
 import os
 import time
 import subprocess
-from io import TextIOWrapper, BytesIO
+import io
 import qrcode
 
 umbrel_ascii = '''
@@ -31,7 +31,7 @@ umbrel_ascii = '''
 '''.strip('\n')
 
 def create_qr(data):
-    output_buffer = TextIOWrapper(BytesIO(), sys.stdout.encoding)
+    output_buffer = io.TextIOWrapper(io.BytesIO(), sys.stdout.encoding)
 
     qr = qrcode.QRCode(border=0, error_correction=qrcode.constants.ERROR_CORRECT_Q)
     qr.add_data(data)
