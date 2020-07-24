@@ -37,15 +37,12 @@ jobs:
         - name: Set image name
           run: |
               IMAGE_NAME="umbrel-os-$(git describe --tags)"
-              echo $IMAGE_NAME
-              echo "::set-env name=IMG_FILENAME::$IMAGE_NAME"
-              echo "::set-env name=ZIP_FILENAME::$IMAGE_NAME"
+              echo "::set-env name=IMAGE_NAME::$IMAGE_NAME"
 
         - name: Run build script
           run: |
-              echo $IMG_FILENAME
-              echo $ZIP_FILENAME
-              sudo ./build.sh
+              echo "Building $IMAGE_NAME"
+              sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME ./build.sh
 
         # - name: Copy ZIP to current working dir
         #   run: cp deploy/*.zip ./
@@ -56,5 +53,5 @@ jobs:
         # - name: Upload artifact
         #   uses: actions/upload-artifact@v2
         #   with:
-        #     path: $ZIP_FILENAME.zip
-        #     name: $ZIP_FILENAME.zip
+        #     path: $IMAGE_NAME.zip
+        #     name: $IMAGE_NAME.zip
