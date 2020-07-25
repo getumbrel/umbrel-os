@@ -7,5 +7,4 @@ Index: jessie-stage2/rootfs/etc/profile
    unset i
  fi
 +
-+DEVICE_IP="$(hostname -I | cut -d ' ' -f 1)"
-+UMBREL_OS="0.0.4.beta.4"
++source /etc/default/umbrel
