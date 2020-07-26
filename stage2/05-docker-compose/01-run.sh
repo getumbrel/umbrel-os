@@ -10,9 +10,6 @@ wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
-# Maybe generate docker-compose file so we can use it
-chmod 755 files/compose-service
-
 # Docker compose service
 on_chroot << EOF
 mkdir -p /etc/init.d
@@ -26,7 +23,7 @@ mkdir -p /etc/rc6.d
 EOF
 
 echo "Copying the compose service to rootfs (etc/init.d)"
-cp files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
+install -m 755 files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
 
 
 echo "Pulling Docker images required to run Umbrel services"
