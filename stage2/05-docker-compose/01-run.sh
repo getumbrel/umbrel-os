@@ -35,7 +35,6 @@ EOF
 echo "Copying the umbrel service to rootfs (etc/init.d)"
 install -m 755 files/umbrel-service ${ROOTFS_DIR}/etc/init.d/umbrel-service
 
-
 echo "Pulling Docker images required to run Umbrel services"
 
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}/docker-compose.yml"
@@ -47,4 +46,4 @@ while IFS= read -r image; do
 done <<< "$IMAGES"
 
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
+rsync -qavPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
