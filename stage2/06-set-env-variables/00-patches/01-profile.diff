@@ -7,4 +7,5 @@ Index: jessie-stage2/rootfs/etc/profile
    unset i
  fi
 +
++# Load Umbrel OS environment variables
 +source /etc/default/umbrel
