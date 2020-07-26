@@ -20,10 +20,7 @@ rm -fr install-box.sh
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
-# Maybe generate docker-compose file so we can use it
-chmod 755 files/umbrel-service
-
-# Umbrel service
+# Docker compose service
 on_chroot << EOF
 mkdir -p /etc/init.d
 mkdir -p /etc/rc2.d
@@ -35,8 +32,8 @@ mkdir -p /etc/rc1.d
 mkdir -p /etc/rc6.d
 EOF
 
-echo "Copying the compose service to rootfs (etc/init.d)"
-cp files/umbrel-service ${ROOTFS_DIR}/etc/init.d/umbrel-service
+echo "Copying the umbrel service to rootfs (etc/init.d)"
+install -m 755 files/umbrel-service ${ROOTFS_DIR}/etc/init.d/umbrel-service
 
 
 echo "Pulling Docker images required to run Umbrel services"
