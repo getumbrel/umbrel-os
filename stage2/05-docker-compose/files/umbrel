@@ -13,7 +13,7 @@ set -e
 # Short-Description: Starts Umbrel
 # Description:       Start Umbrel
 ### END INIT INFO
-NAME="umbrelbox"
+NAME="umbrel"
 DESCRIPTION="Umbrel service"
 SCRIPTNAME=/etc/init.d/$NAME
 UMBREL_ROOT=/home/umbrel

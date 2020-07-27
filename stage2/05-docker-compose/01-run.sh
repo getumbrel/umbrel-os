@@ -33,7 +33,7 @@ mkdir -p /etc/rc6.d
 EOF
 
 echo "Copying the umbrel service to rootfs (etc/init.d)"
-install -m 755 files/umbrelbox ${ROOTFS_DIR}/etc/init.d/umbrelbox
+install -m 755 files/umbrel "${ROOTFS_DIR}/etc/init.d/"
 
 echo "Pulling Docker images required to run Umbrel services"
 
