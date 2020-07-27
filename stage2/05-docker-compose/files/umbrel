@@ -20,10 +20,10 @@ UMBREL_ROOT=/home/umbrel
 
 case "$1" in
   	start)
-        if [[ -x $UMBREL_ROOT/start ]]; then
+        if [ -x $UMBREL_ROOT/start ]; then
 			echo "Starting Umbrel..."
 			echo
-			if [[ -f /etc/default/umbrel ]]; then
+			if [ -f /etc/default/umbrel ]; then
 				echo "Loading Umbrel OS environment variables..."
 				source /etc/default/umbrel
 			fi
@@ -36,7 +36,7 @@ case "$1" in
         fi
 		;;
 	stop)
-        if [[ -f $UMBREL_ROOT/stop ]]; then
+        if [ -x $UMBREL_ROOT/stop ]; then
 		    echo "Stopping Umbrel..."
 		    cd $UMBREL_ROOT
 		    ./stop
@@ -47,7 +47,7 @@ case "$1" in
         fi
 		;;
 	status)
-		if [[ -f $UMBREL_ROOT/status ]]; then
+		if [ -x $UMBREL_ROOT/status ]; then
 		    echo "Getting Umbrel status..."
 		    cd $UMBREL_ROOT
 		    ./status
