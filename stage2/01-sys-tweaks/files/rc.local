@@ -73,4 +73,12 @@ if [ ! -f /home/umbrel/statuses/service-configured ]; then
     fi
 fi
 
+# Display connection details on the TTY
+if [ -x "$(command -v umbrel-details)" ]; then
+  # We run this in the background because it waits for the Tor hidden service
+  # to be created on first boot. rc.local needs to exit so the boot process
+  # can continue.
+  umbrel-details &
+fi
+
 exit 0
