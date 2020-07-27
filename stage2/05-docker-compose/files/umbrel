@@ -53,7 +53,7 @@ case "$1" in
 		    ./status
             exit 0
         else
-            echo "Cannot stop umbrel service. No status script found in $UMBREL_ROOT"
+            echo "Cannot get umbrel service's status. No status script found in $UMBREL_ROOT"
             exit 1
         fi
 		;;
