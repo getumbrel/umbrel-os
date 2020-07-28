@@ -20,7 +20,7 @@ UMBREL_ROOT=/home/umbrel
 
 case "$1" in
   	start)
-        if [ -x $UMBREL_ROOT/start ]; then
+        if [ -x $UMBREL_ROOT/scripts/start ]; then
 			echo "Starting Umbrel..."
 			echo
 			if [ -f /etc/default/umbrel ]; then
@@ -28,7 +28,7 @@ case "$1" in
 				source /etc/default/umbrel
 			fi
 		    cd $UMBREL_ROOT
-			./start
+			./scripts/start
             exit 0
         else
             echo "Cannot start umbrel service. No start script found in $UMBREL_ROOT"
@@ -36,10 +36,10 @@ case "$1" in
         fi
 		;;
 	stop)
-        if [ -x $UMBREL_ROOT/stop ]; then
+        if [ -x $UMBREL_ROOT/scripts/stop ]; then
 		    echo "Stopping Umbrel..."
 		    cd $UMBREL_ROOT
-		    ./stop
+		    ./scripts/stop
             exit 0
         else
             echo "Cannot stop umbrel service. No stop script found in $UMBREL_ROOT"
@@ -47,10 +47,10 @@ case "$1" in
         fi
 		;;
 	status)
-		if [ -x $UMBREL_ROOT/status ]; then
+		if [ -x $UMBREL_ROOT/scripts/status ]; then
 		    echo "Getting Umbrel status..."
 		    cd $UMBREL_ROOT
-		    ./status
+		    ./scripts/status
             exit 0
         else
             echo "Cannot get umbrel service's status. No status script found in $UMBREL_ROOT"
