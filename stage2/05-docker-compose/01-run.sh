@@ -6,18 +6,7 @@ echo "Installing docker-compose from pip3, and also setting up the box folder st
 on_chroot << EOF
 pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
-git init
-git remote add origin https://github.com/mayankchhabra/umbrel.git
-git fetch --all --tags
-git checkout patch/cors
-git reset --hard patch/cors
-rm -fr .git
-rm -fr README.md
-rm -fr NETWORKING.md
-rm -fr CONTRIBUTING.md
-rm -fr LICENSE
-rm -fr install-box.sh
-chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
+wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}/install-box.sh" | sh
 EOF
 
 # Docker compose service
