@@ -75,7 +75,7 @@ For building an API (or scripting), look in `/home/umbrel/statuses` for the foll
 - `disk-partitioned`: meaning the disk is partitioned.
 - `service-configured`: meaning the umbrel system bootup service is configured and running.
 
-The above variables control whether or not the umbrelbox startup script is run (for SD Card safety).
+The above variables control whether or not the umbrel startup script is run (for SD Card safety).
 
 If you want to overricde the checks, please delete ```service-configured``` file and add a ```disk-partitioned```, and then reinstall/configure [Umbrel](https://github.com/getumbrel/umbrel). Then run ```/etc/rc.local``` as root again (or restart your box)
 

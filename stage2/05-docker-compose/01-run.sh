@@ -6,7 +6,13 @@ echo "Installing docker-compose from pip3, and also setting up the box folder st
 on_chroot << EOF
 pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
-wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}/install-box.sh" | sh
+
+git init
+git remote add origin https://github.com/getumbrel/umbrel.git
+git fetch --all
+git checkout origin/master
+git reset --hard origin/master
+
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
@@ -22,9 +28,8 @@ mkdir -p /etc/rc1.d
 mkdir -p /etc/rc6.d
 EOF
 
-echo "Copying the compose service to rootfs (etc/init.d)"
-install -m 755 files/compose-service ${ROOTFS_DIR}/etc/init.d/umbrelbox
-
+echo "Copying the umbrel service to rootfs (etc/init.d)"
+install -m 755 files/umbrel "${ROOTFS_DIR}"/etc/init.d/umbrel
 
 echo "Pulling Docker images required to run Umbrel services"
 
@@ -37,4 +42,4 @@ while IFS= read -r image; do
 done <<< "$IMAGES"
 
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -avPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
+rsync -qavPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
