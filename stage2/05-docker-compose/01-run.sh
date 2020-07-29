@@ -8,12 +8,12 @@ pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
 
 git init
-git remote add origin https://github.com/mayankchhabra/umbrel.git
+git remote add origin https://github.com/getumbrel/umbrel.git
 git fetch --all
-git checkout origin/patch/boot-script
-git reset --hard origin/patch/boot-script
+git checkout origin/master
+git reset --hard origin/master
 
-chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}	
+chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
 # Docker compose service
