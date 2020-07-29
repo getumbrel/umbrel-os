@@ -7,7 +7,7 @@ on_chroot << EOF
 pip3 install docker-compose
 cd /home/${FIRST_USER_NAME}
 wget -qO- "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}/install-box.sh" | sh
-chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}	
+chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
 # Docker compose service
