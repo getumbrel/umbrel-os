@@ -18,6 +18,11 @@ DESCRIPTION="Umbrel service"
 SCRIPTNAME=/etc/init.d/$NAME
 UMBREL_ROOT=/home/umbrel
 
+is_pifour() {
+   grep -q "^Revision\s*:\s*[ 123][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]11[0-9a-fA-F]$" /proc/cpuinfo
+   return $?
+}
+
 case "$1" in
   	start)
         if [ -x $UMBREL_ROOT/scripts/start ]; then
@@ -27,7 +32,11 @@ case "$1" in
 				echo "Loading Umbrel OS environment variables..."
 				source /etc/default/umbrel
 			fi
-		    cd $UMBREL_ROOT
+			cd $UMBREL_ROOT
+			if ! is_pifour ; then
+				sed -i -e 's/dbcache=1000/dbcache=64/g' bitcoin/bitcoin.conf
+				sed -i -e 's/maxmempool=512/maxmempool=64/g' bitcoin/bitcoin.conf
+			fi
 			./scripts/start
             exit 0
         else
