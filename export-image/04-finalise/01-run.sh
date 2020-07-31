@@ -69,7 +69,7 @@ cp "$ROOTFS_DIR/etc/rpi-issue" "$INFO_FILE"
 		kernel="$(curl -s -L "https://github.com/raspberrypi/firmware/raw/$firmware/extra/git_hash")"
 		printf "Kernel: https://github.com/raspberrypi/linux/tree/%s\n" "$kernel"
 
-		uname="$(curl -s -L "https://github.com/raspberrypi/firmware/raw/$firmware/extra/uname_string7")"
+		uname="$(curl -s -L "https://github.com/raspberrypi/firmware/raw/$firmware/extra/uname_string8")"
 		printf "Uname string: %s\n" "$uname"
 	fi
 
