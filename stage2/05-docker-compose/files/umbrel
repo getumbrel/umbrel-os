@@ -16,7 +16,7 @@ set -e
 NAME="umbrel"
 DESCRIPTION="Umbrel service"
 SCRIPTNAME=/etc/init.d/$NAME
-UMBREL_ROOT=/home/umbrel
+UMBREL_ROOT=/home/umbrel/umbrel
 
 case "$1" in
   	start)

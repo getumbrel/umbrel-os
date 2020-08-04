@@ -70,7 +70,7 @@ Other Raspbian-related stuff can be found in [Raspbian's documentation](https://
 
 **Post bootup checks**
 
-For building an API (or scripting), look in `/home/umbrel/statuses` for the following files
+For building an API (or scripting), look in `/home/umbrel/umbrel/statuses` for the following files
 
 - `disk-partitioned`: meaning the disk is partitioned.
 - `service-configured`: meaning the umbrel system bootup service is configured and running.
