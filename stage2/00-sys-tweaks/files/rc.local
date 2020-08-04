@@ -18,7 +18,7 @@ if [ "$_IP" ]; then
     printf "My IP address is %s\n" "$_IP"
 fi
 
-UMBREL_BOOT_SCRIPT=/home/umbrel/scripts/umbrel-os/boot
+UMBREL_BOOT_SCRIPT=/home/umbrel/umbrel/scripts/umbrel-os/boot
 
 # Check for statuses directory
 if [ -x "$UMBREL_BOOT_SCRIPT" ]; then
