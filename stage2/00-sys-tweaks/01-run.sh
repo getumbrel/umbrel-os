@@ -72,3 +72,10 @@ usermod --pass='*' root
 EOF
 
 rm -f "${ROOTFS_DIR}/etc/ssh/"ssh_host_*_key*
+
+# Copy modified avahi configuration to prevent (https://github.com/getumbrel/umbrel-os/issues/76)
+if [ ! -d ${ROOTFS_DIR}/etc/avahi ] ; then
+	echo "Setup avahi directory"
+	mkdir /etc/avahi
+fi
+install -m 644 files/avahi-daemon.conf "${ROOTFS_DIR}/etc/avahi/avahi-daemon.conf"
