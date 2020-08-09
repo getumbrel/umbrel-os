@@ -40,13 +40,15 @@ jobs:
         
         - name: Set image name
           run: |
-                IMAGE_NAME="umbrel-os-$(git describe --tags)"
+                UMBREL_OS_VERSION="$(git describe --tags)"
+                IMAGE_NAME="umbrel-os-${UMBREL_OS_VERSION}"
+                echo "::set-env name=UMBREL_OS_VERSION::$UMBREL_OS_VERSION"
                 echo "::set-env name=IMAGE_NAME::$IMAGE_NAME"
 
         - name: Run build script
           run: |
                 echo "Building $IMAGE_NAME"
-                sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME ./build.sh
+                sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION ./build.sh
 
         - name: Copy ZIP to current working dir
           run: cp deploy/*.zip ./
