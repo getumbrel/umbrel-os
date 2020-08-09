@@ -8,7 +8,6 @@
 echo "Installing Docker..."
 echo
 on_chroot << EOF
-export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 curl -fsSL https://get.docker.com | sh
 usermod -a -G docker $FIRST_USER_NAME
 EOF
