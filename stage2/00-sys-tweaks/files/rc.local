@@ -11,20 +11,13 @@
 #
 # By default this script does nothing.
 
-# Print the IP address
-_IP=$(hostname -I) || true
-
-if [ "$_IP" ]; then
-    printf "My IP address is %s\n" "$_IP"
-fi
-
 UMBREL_BOOT_SCRIPT=/home/umbrel/umbrel/scripts/umbrel-os/boot
 
 # Check for statuses directory
 if [ -x "$UMBREL_BOOT_SCRIPT" ]; then
     "$UMBREL_BOOT_SCRIPT" || exit 1
 else
-    echo "There's no boot script at $UMBREL_BOOT_SCRIPT"
+    echo "Error: No boot script found at $UMBREL_BOOT_SCRIPT"
 fi
 
 exit 0
