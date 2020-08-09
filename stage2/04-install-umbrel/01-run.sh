@@ -1,25 +1,47 @@
 #!/bin/bash -e
 
-# Install docker via pip3 (within chroot)
-echo "Installing docker-compose from pip3, and also setting up the box folder structure"
+# This script:
+# - Installs Umbrel's dependencies
+# - Installs Umbrel
 
+# Install Docker
+echo "Installing Docker..."
+echo
+on_chroot << EOF
+curl -fsSL https://get.docker.com | sh
+usermod -a -G docker $FIRST_USER_NAME
+EOF
+
+# Install Docker Compose with pip3
+echo "Installing Docker Compose..."
+echo
 on_chroot << EOF
 pip3 install docker-compose
+EOF
+
+# Install Umbrel
+echo "Installing Umbrel..."
+echo
+on_chroot << EOF
 mkdir /home/${FIRST_USER_NAME}/umbrel
 cd /home/${FIRST_USER_NAME}/umbrel
 git clone https://github.com/getumbrel/umbrel.git .
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
-echo "Pulling Docker images required to run Umbrel services"
-
+# Bundle Umbrel's Docker images
+echo "Pulling Umbrel's Docker images..."
+echo
 wget -q "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}/docker-compose.yml"
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
-echo "List of images to download: $IMAGES"
+echo
+echo "Images to bundle: $IMAGES"
+echo
 
 while IFS= read -r image; do
     docker pull --platform=linux/arm64 $image
 done <<< "$IMAGES"
 
+# Copy the entire /var/lib/docker directory to image
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
 rsync -qavPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
