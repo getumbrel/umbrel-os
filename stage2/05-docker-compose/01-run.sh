@@ -7,7 +7,7 @@ on_chroot << EOF
 pip3 install docker-compose
 mkdir /home/${FIRST_USER_NAME}/umbrel
 cd /home/${FIRST_USER_NAME}/umbrel
-git clone -b patch/mount https://github.com/mayankchhabra/umbrel.git .
+git clone https://github.com/getumbrel/umbrel.git .
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
