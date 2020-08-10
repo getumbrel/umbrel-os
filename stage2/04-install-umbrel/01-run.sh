@@ -27,6 +27,8 @@ mkdir /home/${FIRST_USER_NAME}/umbrel
 cd /home/${FIRST_USER_NAME}/umbrel
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
+sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" scripts/umbrel-os/umbrel-details
+sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" scripts/umbrel-os/services/umbrel-connection-details.service
 EOF
 
 # Bundle Umbrel's Docker images

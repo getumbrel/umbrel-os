@@ -23,6 +23,8 @@ else
 	systemctl disable ssh
 fi
 systemctl enable regenerate_ssh_host_keys
+
+sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" /etc/rc.local
 EOF
 
 if [ ! -d $ROOTFS_DIR/home/statuses ]; then
