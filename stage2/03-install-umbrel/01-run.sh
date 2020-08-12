@@ -22,36 +22,44 @@ EOF
 # Install Umbrel
 echo "Installing Umbrel..."
 echo
+
+# Download Umbrel
+mkdir /umbrel
+cd /umbrel
 if [ -z ${UMBREL_REPO} ]; then
-on_chroot << EOF
-mkdir /home/${FIRST_USER_NAME}/umbrel
-cd /home/${FIRST_USER_NAME}/umbrel
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
-chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
-EOF
 else
-on_chroot << EOF
-mkdir /home/${FIRST_USER_NAME}/umbrel
-cd /home/${FIRST_USER_NAME}/umbrel
 git clone ${UMBREL_REPO} -b "${UMBREL_BRANCH}" .
-chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
-EOF
 fi
 
+# Enable Umbrel OS systemd services
+cd scripts/umbrel-os/services
+UMBREL_SYSTEMD_SERVICES=$(ls *.service)
+echo "Enabling Umbrel systemd services: ${UMBREL_SYSTEMD_SERVICES}"
+for service in $UMBREL_SYSTEMD_SERVICES; do
+    sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "${service}"
+    install -m 644 "${service}"   "${ROOTFS_DIR}/etc/systemd/system/${service}"
+    on_chroot << EOF
+systemctl enable "${service}"
+EOF
+done
+
+# Replace /home/umbrel with home/$FIRST_USER_NAME in other scripts
+sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "/umbrel/scripts/umbrel-os/umbrel-details"
+
+# Copy Umbrel to image
+mkdir "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
+rsync --quiet --archive --partial --hard-links --sparse --xattrs /umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
+
+# Fix permissions
 on_chroot << EOF
-sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" scripts/umbrel-os/umbrel-details
-sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" scripts/umbrel-os/services/umbrel-connection-details.service
+chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}/umbrel/
 EOF
 
 # Bundle Umbrel's Docker images
 echo "Pulling Umbrel's Docker images..."
 echo
-if [ -z ${UMBREL_REPO} ]; then
-wget -q "https://raw.githubusercontent.com/getumbrel/umbrel/v${UMBREL_VERSION}/docker-compose.yml"
-else
-export UMBREL_REPO_NAME=$(echo ${UMBREL_REPO} | sed "s/https:\/\/github.com\///g" | sed "s/.git//" | sed 's/"//g')
-wget -q "https://raw.githubusercontent.com/${UMBREL_REPO_NAME}/${UMBREL_BRANCH}/docker-compose.yml"
-fi
+cd /umbrel
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
 echo
 echo "Images to bundle: $IMAGES"
@@ -63,4 +71,4 @@ done <<< "$IMAGES"
 
 # Copy the entire /var/lib/docker directory to image
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -qavPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
+rsync --quiet --archive --partial --hard-links --sparse --xattrs /var/lib/docker ${ROOTFS_DIR}/var/lib/
