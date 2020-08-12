@@ -28,7 +28,7 @@ cd /umbrel
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
 echo "Debugging dir:"
 ls 
-cd /scripts/umbrel-os/services
+cd scripts/umbrel-os/services
 echo "Debugging services:"
 ls
 UMBREL_SYSTEMD_SERVICES=$(ls *.service)
