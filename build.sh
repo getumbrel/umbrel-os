@@ -144,7 +144,7 @@ do
 done
 
 export BUILD_SCRIPTS="${BUILD_SCRIPTS:-Umbrel OS official build scripts}"
-export BUILD_SCRIPTS_REPO="${BUILD_SCRIPTS:-https://github.com/getumbrel/umbrel-os}"
+export BUILD_SCRIPTS_REPO="${BUILD_SCRIPTS_REPO:-https://github.com/getumbrel/umbrel-os}"
 
 if [ -z "${IMG_NAME}" ]; then
 	echo "IMG_NAME not set" 1>&2
