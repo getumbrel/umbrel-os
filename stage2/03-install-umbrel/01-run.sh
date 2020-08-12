@@ -23,40 +23,31 @@ EOF
 echo "Installing Umbrel..."
 echo
 
+# Download Umbrel
 mkdir /umbrel
 cd /umbrel
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
-echo "Debugging dir:"
-ls 
+
+# Enable Umbrel OS systemd services
 cd scripts/umbrel-os/services
-echo "Debugging services:"
-ls
 UMBREL_SYSTEMD_SERVICES=$(ls *.service)
-echo "Services:"
-echo $UMBREL_SYSTEMD_SERVICES
+echo "Enabling Umbrel systemd services: ${UMBREL_SYSTEMD_SERVICES}"
 for service in $UMBREL_SYSTEMD_SERVICES; do
-    echo "Replacing /home/umbrel in ${service} with /home/${FIRST_USER_NAME}"
     sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "${service}"
-    echo "Installing  ${service} at ${ROOTFS_DIR}/etc/systemd/system/${service}"
     install -m 644 "${service}"   "${ROOTFS_DIR}/etc/systemd/system/${service}"
-    echo "Enabling ${service}"
     on_chroot << EOF
 systemctl enable "${service}"
 EOF
 done
 
-echo "Creating ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
+# Copy Umbrel to image
 mkdir "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
+rsync -qavPHSX /umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 
-echo "Copying /umbrel to ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
-rsync -avPHSX /umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
-
-echo "Debugging ROOTFS home"
-ls ${ROOTFS_DIR}/home/${FIRST_USER_NAME}
-echo "Debugging ROOTFS umbrel"
-ls ${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel
-echo "Debugging ROOTFS systemd"
-ls ${ROOTFS_DIR}/etc/systemd/system/
+# Fix permissions
+on_chroot << EOF
+chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}/umbrel/
+EOF
 
 # Bundle Umbrel's Docker images
 echo "Pulling Umbrel's Docker images..."
