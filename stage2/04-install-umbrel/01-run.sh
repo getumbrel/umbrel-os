@@ -22,12 +22,12 @@ EOF
 # Install Umbrel
 echo "Installing Umbrel..."
 echo
+
 on_chroot << EOF
 mkdir /home/${FIRST_USER_NAME}/umbrel
 cd /home/${FIRST_USER_NAME}/umbrel
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
-cd scripts/umbrel-os/services
-UMBREL_SYSTEMD_SERVICES=$(ls *.service)
+UMBREL_SYSTEMD_SERVICES=$(ls /home/${FIRST_USER_NAME}/umbrel/scripts/umbrel-os/services/*.service)
 for service in $UMBREL_SYSTEMD_SERVICES; do
     cp "${service}" "/etc/systemd/system/${service}"
     systemctl enable "${service}"
