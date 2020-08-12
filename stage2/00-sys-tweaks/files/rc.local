@@ -10,14 +10,3 @@
 # bits.
 #
 # By default this script does nothing.
-
-UMBREL_BOOT_SCRIPT=/home/umbrel/umbrel/scripts/umbrel-os/boot
-
-# Check for statuses directory
-if [ -x "$UMBREL_BOOT_SCRIPT" ]; then
-    "$UMBREL_BOOT_SCRIPT" || exit 1
-else
-    echo "Error: No boot script found at $UMBREL_BOOT_SCRIPT"
-fi
-
-exit 0

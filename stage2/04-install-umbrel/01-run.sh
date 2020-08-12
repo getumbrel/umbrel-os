@@ -26,6 +26,12 @@ on_chroot << EOF
 mkdir /home/${FIRST_USER_NAME}/umbrel
 cd /home/${FIRST_USER_NAME}/umbrel
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
+cd scripts/umbrel-os/services
+UMBREL_SYSTEMD_SERVICES=$(ls *.service)
+for service in $UMBREL_SYSTEMD_SERVICES; do
+    cp "${service}" "/etc/systemd/system/${service}"
+    systemctl enable "${service}"
+done
 chown -R ${FIRST_USER_NAME}:${FIRST_USER_NAME} /home/${FIRST_USER_NAME}
 EOF
 
