@@ -49,7 +49,13 @@ sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "/umbrel/scripts/umbre
 
 # Copy Umbrel to image
 mkdir "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
-rsync -qavPHSX /umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
+rsync --quiet \
+    --archive \
+    --partial \
+    --hard-links \
+    --sparse \
+    --xattrs \
+    /umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 
 # Fix permissions
 on_chroot << EOF
@@ -71,4 +77,10 @@ done <<< "$IMAGES"
 
 # Copy the entire /var/lib/docker directory to image
 mkdir -p ${ROOTFS_DIR}/var/lib/docker
-rsync -qavPHSX /var/lib/docker ${ROOTFS_DIR}/var/lib/
+rsync --quiet \
+    --archive \
+    --partial \
+    --hard-links \
+    --sparse \
+    --xattrs \ 
+    /var/lib/docker ${ROOTFS_DIR}/var/lib/
