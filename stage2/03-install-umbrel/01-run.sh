@@ -39,6 +39,7 @@ EOF
 fi
 
 on_chroot << EOF
+cd /home/${FIRST_USER_NAME}/umbrel
 sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" scripts/umbrel-os/umbrel-details
 sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" scripts/umbrel-os/services/umbrel-connection-details.service
 EOF
