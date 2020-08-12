@@ -143,8 +143,8 @@ do
 	esac
 done
 
-export PI_GEN=${PI_GEN:-pi-gen}
-export PI_GEN_REPO=${PI_GEN_REPO:-https://github.com/RPi-Distro/pi-gen}
+export BUILD_SCRIPTS="${BUILD_SCRIPTS:-Umbrel OS official build scripts}"
+export BUILD_SCRIPTS_REPO="${BUILD_SCRIPTS_REPO:-https://github.com/getumbrel/umbrel-os}"
 
 if [ -z "${IMG_NAME}" ]; then
 	echo "IMG_NAME not set" 1>&2
@@ -162,14 +162,14 @@ export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
 export DEPLOY_ZIP="${DEPLOY_ZIP:-1}"
 export LOG_FILE="${WORK_DIR}/build.log"
 
-export TARGET_HOSTNAME=${TARGET_HOSTNAME:-raspberrypi}
+export TARGET_HOSTNAME=${TARGET_HOSTNAME:-umbrel}
 
-export FIRST_USER_NAME=${FIRST_USER_NAME:-pi}
-export FIRST_USER_PASS=${FIRST_USER_PASS:-raspberry}
+export FIRST_USER_NAME=${FIRST_USER_NAME:-umbrel}
+export FIRST_USER_PASS=${FIRST_USER_PASS:-moneyprintergobrrr}
 export WPA_ESSID
 export WPA_PASSWORD
 export WPA_COUNTRY
-export ENABLE_SSH="${ENABLE_SSH:-0}"
+export ENABLE_SSH="${ENABLE_SSH:-1}"
 
 export LOCALE_DEFAULT="${LOCALE_DEFAULT:-en_GB.UTF-8}"
 

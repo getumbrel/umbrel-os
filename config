@@ -4,4 +4,6 @@ TIMEZONE_DEFAULT="Etc/UTC"
 FIRST_USER_NAME=umbrel
 FIRST_USER_PASS=moneyprintergobrrr
 ENABLE_SSH=1
+BUILD_SCRIPTS="Umbrel OS official build scripts"
+BUILD_SCRIPTS_REPO="https://github.com/getumbrel/umbrel-os"
 UMBREL_VERSION=0.1.7-beta
