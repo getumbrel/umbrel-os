@@ -26,7 +26,11 @@ echo
 # Download Umbrel
 mkdir /umbrel
 cd /umbrel
+if [ -z ${UMBREL_REPO} ]; then
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
+else
+git clone ${UMBREL_REPO} -b "${UMBREL_BRANCH}" .
+fi
 
 # Enable Umbrel OS systemd services
 cd scripts/umbrel-os/services
