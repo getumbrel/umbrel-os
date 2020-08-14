@@ -26,8 +26,16 @@ echo
 # Download Umbrel
 mkdir /umbrel
 cd /umbrel
+if [ "${UMBREL_VERSION}" = "latest-tag" ]; then
+UMBREL_VERSION_TMP=$(curl https://api.github.com/repos/getumbrel/umbrel/tags | jq ".[0].name" | sed 's/"//g')
+UMBREL_VERSION=${UMBREL_VERSION_TMP:1}
+fi
 if [ -z ${UMBREL_REPO} ]; then
+if [ "${UMBREL_VERSION}" = "master" ]; then
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
+else
+curl -L https://github.com/getumbrel/umbrel/archive/master.tar.gz | tar -xz --strip-components=1
+fi
 else
 git clone ${UMBREL_REPO} -b "${UMBREL_BRANCH}" .
 fi
