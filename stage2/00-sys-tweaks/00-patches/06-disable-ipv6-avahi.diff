@@ -1,0 +1,11 @@
+--- stage2.orig/rootfs/etc/avahi/avahi-daemon.conf	2020-08-18 04:01:58.720148631 +0000
++++ stage2/rootfs/etc/avahi/avahi-daemon.conf	2020-08-18 04:02:41.067356557 +0000
+@@ -23,7 +23,7 @@
+ #domain-name=local
+ #browse-domains=0pointer.de, zeroconf.org
+ use-ipv4=yes
+-use-ipv6=yes
++use-ipv6=no
+ #allow-interfaces=eth0
+ #deny-interfaces=eth1
+ #check-response-ttl=no
