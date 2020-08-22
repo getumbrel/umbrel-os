@@ -19,6 +19,13 @@ on_chroot << EOF
 pip3 install docker-compose
 EOF
 
+# Bind Avahi to eth0,wlan0 interfaces to prevent hostname cycling
+# https://github.com/getumbrel/umbrel-os/issues/76
+echo "Binding Avahi to eth0 and wlan0 interfaces..."
+on_chroot << EOF
+sed -i "s/#allow-interfaces=eth0/allow-interfaces=eth0,wlan0/g;" "/etc/avahi/avahi-daemon.conf";
+EOF
+
 # Install Umbrel
 echo "Installing Umbrel..."
 echo

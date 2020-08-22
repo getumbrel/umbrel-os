@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-echo "Patching avahi-daemon.conf with fix to bind to specific interfaces"
-
-sed -i "s/#allow-interfaces=eth0/allow-interfaces=eth0,wlan0/g;" "${ROOTFS_DIR}"/etc/avahi/avahi-daemon.conf
