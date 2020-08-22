@@ -23,8 +23,6 @@ EOF
 # https://github.com/getumbrel/umbrel-os/issues/76
 echo "Binding Avahi to eth0 and wlan0 interfaces..."
 on_chroot << EOF
-ls /etc/avahi
-cat /etc/avahi/avahi-daemon.conf
 sed -i "s/#allow-interfaces=eth0/allow-interfaces=eth0,wlan0/g;" "/etc/avahi/avahi-daemon.conf";
 EOF
 
