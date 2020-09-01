@@ -6,7 +6,7 @@
 # named for the tool (i.e., qemu-user-static).
 dependencies_check()
 {
-	local depfile deps missing
+	local depfile deps missing missing2
 
 	for depfile in "$@"; do
 		if [[ -e "$depfile" ]]; then
@@ -14,8 +14,9 @@ dependencies_check()
 
 		fi
 		for dep in $deps; do
-			if ! hash "${dep%:*}" 2>/dev/null; then
-				missing="${missing:+$missing }${dep#*:}"
+			if ! hash "$(echo ${dep} | sed 's/:.*//')" 2>/dev/null; then	
+				missing="$missing $(echo ${dep} | sed 's/^.*\(:.*:\).*$/\1/' | sed 's/://g')"
+				missing2="$missing2 $(echo ${dep} | sed 's/.*://')"
 			fi
 		done
 	done
@@ -23,8 +24,11 @@ dependencies_check()
 	if [[ "$missing" ]]; then
 		echo "Required dependencies not installed"
 		echo
-		echo "This can be resolved on Debian/Raspbian systems by installing:"
+		echo "This can be resolved on Debian/Raspberry Pi OS systems by installing:"
 		echo "$missing"
+		echo
+		echo "On Ubuntu (after 18.04) based systems install these packages instead:"
+		echo "$missing2"
 		false
 	fi
 
