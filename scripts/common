@@ -22,7 +22,14 @@ bootstrap(){
 		mkdir -p "$2/usr"
 		mkdir -p "$2/usr/bin"
 		echo "Using QEMU $(which qemu-aarch64-static)"
+		echo "Folder Contents"
+		echo $(ls $2)
+		echo "Folder Contents (2)"
+		echo $(ls $2/*)
+		echo "Copying to" 
+		echo "$2/usr/bin/qemu-aarch64-static"
 		cp /usr/bin/qemu-aarch64-static "$2/usr/bin/qemu-aarch64-static"
+		echo $(ls $2/usr/bin)
 		chroot "$2" "qemu-aarch64-static /debootstrap/debootstrap --second-stage"
 	else
 		chroot "$2" "/debootstrap/debootstrap --second-stage"
