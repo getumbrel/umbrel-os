@@ -22,10 +22,10 @@ bootstrap(){
 		mkdir -p "$2/usr"
 		mkdir -p "$2/usr/bin"
 		echo "Using QEMU $(which qemu-aarch64-static)"
-		sudo cp "$(which qemu-aarch64-static)" "$2/usr/bin/qemu-aarch64-static"
-		sudo chroot "$2" "/usr/bin/qemu-aarch64-static '/debootstrap/debootstrap --second-stage'"
+		cp /usr/bin/qemu-aarch64-static "$2/usr/bin/qemu-aarch64-static"
+		chroot "$2" "qemu-aarch64-static /debootstrap/debootstrap --second-stage"
 	else
-		sudo chroot "$2" "/debootstrap/debootstrap --second-stage"
+		chroot "$2" "/debootstrap/debootstrap --second-stage"
 	fi
 	if [ -d "$2/debootstrap" ]; then
 		rmdir "$2/debootstrap"
