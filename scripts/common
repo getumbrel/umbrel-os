@@ -19,7 +19,9 @@ bootstrap(){
 	capsh --drop=cap_setfcap -- -c "debootstrap $BOOTSTRAP_STR" || true
 	if [ "$(dpkg --print-architecture)" !=  "arm64" ]; then
 		echo "Starting second debootstrap stage..."
-		sudo cp "$(which qemu-aarch64-static)" "$2/usr/bin"
+		mkdir -p "$2/usr"
+		mkdir -p "$2/usr/bin"
+		sudo cp "$(which qemu-aarch64-static)" "$2/usr/bin/"
 		sudo chroot "$2" "/usr/bin/qemu-aarch64-static /debootstrap/debootstrap --second-stage"
 	else
 		sudo chroot "$2" "/debootstrap/debootstrap --second-stage"
