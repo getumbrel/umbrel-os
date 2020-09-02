@@ -17,9 +17,12 @@ bootstrap(){
 	printf -v BOOTSTRAP_STR '%q ' "${BOOTSTRAP_ARGS[@]}"
 
 	capsh --drop=cap_setfcap -- -c "debootstrap $BOOTSTRAP_STR" || true
-
-	sudo cp "$(which qemu-aarch64-static)" "$2/usr/bin"
-	sudo chroot "$2" /debootstrap/debootstrap --second-stage
+	if [ "$(dpkg --print-architecture)" !=  "arm64" ]; then
+		sudo cp "$(which qemu-aarch64-static)" "$2/usr/bin"
+		sudo chroot "$2" /usr/bin/qemu-aarch64-static /debootstrap/debootstrap --second-stage
+	else
+		sudo chroot "$2" /debootstrap/debootstrap --second-stage
+	fi
 	if [ -d "$2/debootstrap" ]; then
 		rmdir "$2/debootstrap"
 	fi
@@ -88,8 +91,11 @@ on_chroot() {
 	if ! mount | grep -q "$(realpath "${ROOTFS_DIR}"/sys)"; then
 		mount --bind /sys "${ROOTFS_DIR}/sys"
 	fi
-
-	capsh --drop=cap_setfcap "--chroot=${ROOTFS_DIR}/" -- -e "$@"
+	if [ "$(dpkg --print-architecture)" !=  "arm64" ]; then
+		capsh --drop=cap_setfcap "--chroot=${ROOTFS_DIR}/" -- -e /usr/bin/qemu-aarch64-static "$@"
+	else
+		capsh --drop=cap_setfcap "--chroot=${ROOTFS_DIR}/" -- -e "$@"
+	fi
 }
 export -f on_chroot
 
