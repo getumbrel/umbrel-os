@@ -13,6 +13,28 @@ install -m 644 files/console-setup   	"${ROOTFS_DIR}/etc/default/"
 
 install -m 755 files/rc.local		"${ROOTFS_DIR}/etc/"
 
+if [ -n "${PUBKEY_SSH_FIRST_USER}" ]; then
+    echo "Setting up authorized_keys file"
+	install -v -m 0700 -o 1000 -g 1000 -d "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh
+	printf "${PUBKEY_SSH_FIRST_USER}" >> "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh/authorized_keys
+	chown 1000:1000 "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh/authorized_keys
+	chmod 0600 "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh/authorized_keys
+fi
+
+if [ ! -z ${GITHUB_USERNAME} ]; then
+    echo "Setting up authorized_keys file"
+	install -v -m 0700 -o 1000 -g 1000 -d "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh
+	chown 1000:1000 "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh/authorized_keys
+	chmod 0600 "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh/authorized_keys
+	printf "\n" >> "${ROOTFS_DIR}"/home/"${FIRST_USER_NAME}"/.ssh/authorized_keys
+    curl "https://github.com/${GITHUB_USERNAME}.keys" >> authorized_keys
+fi
+
+if [ "${PUBKEY_ONLY_SSH}" = "1" ]; then
+	sed -i -Ee 's/^#?[[:blank:]]*PubkeyAuthentication[[:blank:]]*no[[:blank:]]*$/PubkeyAuthentication yes/
+s/^#?[[:blank:]]*PasswordAuthentication[[:blank:]]*yes[[:blank:]]*$/PasswordAuthentication no/' "${ROOTFS_DIR}"/etc/ssh/sshd_config
+fi
+
 on_chroot << EOF
 systemctl disable hwclock.sh
 systemctl disable nfs-common
@@ -30,17 +52,6 @@ EOF
 if [ ! -d $ROOTFS_DIR/home/statuses ]; then
     echo "Making a directory called 'statuses' for storing statuses of services"
     mkdir $ROOTFS_DIR/home/statuses
-fi
-
-if [ ! -z ${GITHUB_USERNAME} ]; then
-    echo "Setting up authorized_keys file"
-    mkdir -p $ROOTFS_DIR/home/$FIRST_USER_NAME
-    cd $ROOTFS_DIR/home/$FIRST_USER_NAME
-    echo "Making .ssh directory"
-    mkdir -p .ssh
-    cd .ssh
-    echo "Fetching from github the ssh keys"
-    curl "https://github.com/${GITHUB_USERNAME}.keys" > authorized_keys
 fi
 
 if [ "${USE_QEMU}" = "1" ]; then
