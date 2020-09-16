@@ -1,11 +1,9 @@
-ssh less fbset sudo psmisc strace ed ncdu crda
-console-setup keyboard-configuration debconf-utils parted unzip
-manpages-dev bash-completion pkg-config
-v4l-utils
+ssh less fbset sudo psmisc
+console-setup keyboard-configuration parted unzip
+bash-completion
 avahi-daemon
 hardlink ca-certificates curl
 fake-hwclock usbutils
-libraspberrypi-dev libraspberrypi-doc libfreetype6-dev
 dosfstools
 raspberrypi-sys-mods
 pi-bluetooth
@@ -13,7 +11,6 @@ apt-listchanges
 usb-modeswitch
 libpam-chksshpwd
 rpi-update
-libmtp-runtime
 rsync
 htop
 man-db
@@ -25,4 +22,3 @@ vl805fw
 ntfs-3g
 pciutils
 rpi-eeprom
-vim
