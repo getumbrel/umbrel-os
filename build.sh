@@ -180,6 +180,8 @@ export TIMEZONE_DEFAULT="${TIMEZONE_DEFAULT:-Europe/London}"
 
 export GIT_HASH=${GIT_HASH:-"$(git rev-parse HEAD)"}
 
+export PUBKEY_SSH_FIRST_USER
+
 export CLEAN
 export IMG_NAME
 export APT_PROXY
@@ -226,6 +228,11 @@ fi
 
 if [[ -n "${WPA_PASSWORD}" && ${#WPA_PASSWORD} -lt 8 || ${#WPA_PASSWORD} -gt 63  ]] ; then
 	echo "WPA_PASSWORD" must be between 8 and 63 characters
+	exit 1
+fi
+
+if [[ "${PUBKEY_ONLY_SSH}" = "1" && -z "${PUBKEY_SSH_FIRST_USER}" ]]; then
+	echo "Must set 'PUBKEY_SSH_FIRST_USER' to a valid SSH public key if using PUBKEY_ONLY_SSH"
 	exit 1
 fi
 
