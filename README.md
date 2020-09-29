@@ -15,7 +15,11 @@ Umbrel OS is the operating system of Umbrel Bitcoin and Lightning node. It's bas
 
 ## 🚀 Getting started
 
-Umbrel OS is curently supported for only Raspberry Pi 4 (use Umbrel OS v0.2.10 for Raspberry Pi 3). If you'd like to run Umbrel on any other hardware, please follow the [these instructions](https://github.com/getumbrel/umbrel#-installation) instead.
+To run Umbrel on:
+
+- Raspberry Pi 4 (most recommended) — [Download the latest Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest)
+- Raspberry Pi 3 - [Download Umbrel OS v0.2.10](https://github.com/getumbrel/umbrel-os/releases/tag/v0.2.10)
+- Any other hardware - [Manually install Umbrel](https://github.com/getumbrel/umbrel#-installation)
 
 ### Instructions:
 
