@@ -15,7 +15,11 @@ Umbrel OS is the operating system of Umbrel Bitcoin and Lightning node. It's bas
 
 ## 🚀 Getting started
 
-Umbrel OS currently supports Raspberry Pi 3 and 4. If you'd like to run it on any other hardware, please [create an issue](https://github.com/getumbrel/umbrel-os/issues/new/choose) or drop us a message in our [community chat](https://t.me/getumbrel). We'll gladly consider your request.
+To run Umbrel on:
+
+- Raspberry Pi 4 (most recommended) — [Download the latest Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest)
+- Raspberry Pi 3 - [Download Umbrel OS v0.2.10](https://github.com/getumbrel/umbrel-os/releases/tag/v0.2.10)
+- Any other hardware - [Manually install Umbrel](https://github.com/getumbrel/umbrel#-installation)
 
 ### Instructions:
 
@@ -26,7 +30,7 @@ Umbrel OS currently supports Raspberry Pi 3 and 4. If you'd like to run it on an
 
 **⚠️ All data on the external hard drive will be erased on first boot.**
 
-> If you're running Umbrel OS on Bitcoin mainnet (default), the external SSD or HDD should be at least 500 GB in size (we recommend 1 TB+) so it can store the whole Bitcoin blockchain. If you do not have access to a large drive, Umbrel OS will still work by automatically enabling [pruning](https://bitcoin.org/en/full-node#reduce-storage), although you will lose access to some features.
+> If you're running Umbrel OS on Bitcoin mainnet (default), the external SSD or HDD should be at least 750 GB in size (we recommend 1 TB+) so it can store the whole Bitcoin blockchain.
 
 ## 💻 SSH
 
