@@ -2,3 +2,4 @@ git
 fswatch
 jq
 python3-qrcode
+libqt5gui5 libqt5svg5 libqt5network5
