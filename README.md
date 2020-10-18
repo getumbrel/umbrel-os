@@ -23,10 +23,19 @@ To run Umbrel on:
 
 ### Instructions:
 
-1. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest), or [build the image from source](#-build-umbrel-os-from-source).
-2. Use an image flasher such as [Balena Etcher](https://github.com/balena-io/etcher) to flash the image to a microSD card.
-3. Put the microSD card in your Raspberry Pi, attach an external SSD or HDD (to USB 3 port), connect the Pi to your router with an ethernet cable.
-4. Turn on the Pi and open http://umbrel.local from any device connected to the same network (it might take a while for it to be accessible).
+1. Make sure you've everything ready:
+    1. [Raspberry Pi 4 with 4GB or 8GB RAM](https://www.amazon.com/gp/product/B08C4SK5C3/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B08C4SK5C3&linkCode=as2&tag=umbrel08-20&linkId=d3f17fd4813568c4863d239839311d67)
+    2. [1TB SSD](https://www.amazon.com/gp/product/B077SF8KMG/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B077SF8KMG&linkId=5fa12eae55f9ecaed22984bdb9ebb546)
+    3. [SSD Enclosure](https://www.amazon.com/gp/product/B01LY97QE8/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LY97QE8&linkId=c73e0df3b8ebd4e5a03f37b7e3b371b3)
+    4. [16GB+ microSD Card](https://www.amazon.com/gp/product/B07B98GXQT/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07B98GXQT&linkId=e72147bff5eef2a86d9d74300af70180)
+    5. [microSD Card Reader](https://www.amazon.com/gp/product/B07G5JV2B5/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07G5JV2B5&linkId=474cdf41a783f4ea511b9affa05f33d8)
+    6. [Ethernet Cable](https://www.amazon.com/gp/product/B07ZTR9K9Z/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07ZTR9K9Z&linkId=41269d57d8fbc8dfaf312893e689f5be)
+    7. [Case](https://www.amazon.com/gp/product/B07WG4DW52/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07WG4DW52&linkId=738df0605882b2422080f18d8a74e669)
+
+2. Download the [latest release of Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest), or [build the image from source](#-build-umbrel-os-from-source).
+3. Use an image flasher such as [Balena Etcher](https://github.com/balena-io/etcher) to flash the image to a microSD card.
+4. Put the microSD card in your Raspberry Pi, attach an external SSD or HDD (to USB 3 port), connect the Pi to your router with an ethernet cable.
+5. Turn on the Pi and open http://umbrel.local from any device connected to the same network (it might take a while for it to be accessible).
 
 **⚠️ All data on the external hard drive will be erased on first boot.**
 
