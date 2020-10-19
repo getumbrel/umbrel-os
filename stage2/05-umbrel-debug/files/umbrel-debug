@@ -41,7 +41,7 @@ cat /etc/default/umbrel
 echo
 echo "Umbrel version"
 echo "---------------"
-echo $cat /home/umbrel/umbrel/info.json | jq .version | sed 's/"//g')
+cat /home/umbrel/umbrel/info.json | jq .version | sed 's/"//g'
 
 echo
 echo "Raspberry Pi Model"
@@ -58,13 +58,13 @@ vcgencmd version
 
 echo
 echo "Tempature"
-echo "--------"
+echo "---------"
 
 vcgencmd measure_temp
 
 echo
 echo "Throttling"
-echo "--------"
+echo "----------"
 
 vcgencmd get_throttled
 
