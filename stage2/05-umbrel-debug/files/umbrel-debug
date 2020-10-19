@@ -94,6 +94,20 @@ docker-compose logs
 echo
 echo "SSD test"
 echo "--------"
+
+list_block_devices () {
+  # We need to run sync here to make sure the filesystem is reflecting the
+  # the latest changes in /sys/block/sd*
+  sync
+  # We use "2>/dev/null || true" to swallow errors if there are
+  # no block devices. In that case the function just returns nothing
+  # instead of an error which is what we want.
+  #
+  # sed 's!.*/!!' is to return the device path so we get sda
+  # instead of /sys/block/sda
+  (ls -d /sys/block/sd* 2>/dev/null || true) | sed 's!.*/!!'
+}
+
 no_of_block_devices=$(list_block_devices | wc -l)
 if [[ $no_of_block_devices -lt 1 ]]; then
   echo "Multiple block devices found, only one drive is supported"
