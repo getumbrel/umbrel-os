@@ -80,6 +80,10 @@ The `config` file has system defaults which are used when building the image and
 
 - `GITHUB_USERNAME` - To automatically login to your Umbrel without typing a password.
 
+- `UMBREL_REPO` - A custom git repo used to download Umbrel. `UMBREL_VERSION` is ignored if this is set, but it is required to also set `UMBREL_BRANCH`.
+
+- `UMBREL_BRANCH` - The git branch or commit SHA in the custom repo that should be checked out.
+
 Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
 
 ---
