@@ -6,4 +6,4 @@ FIRST_USER_PASS=moneyprintergobrrr
 ENABLE_SSH=1
 BUILD_SCRIPTS="Umbrel OS official build scripts"
 BUILD_SCRIPTS_REPO="https://github.com/getumbrel/umbrel-os"
-UMBREL_VERSION=0.2.13
+UMBREL_VERSION=0.2.14
