@@ -63,7 +63,7 @@ Step 2. Switch to repo's directory
 cd umbrel-os
 ```
 
-Step 3. BUIDL!
+Step 3. BUILD!
 ```
 sudo ./build.sh
 ```
