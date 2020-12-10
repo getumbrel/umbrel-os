@@ -1,1 +1,1 @@
-UMBREL_OS=<version>
+export UMBREL_OS=<version>
