@@ -84,6 +84,13 @@ The `config` file has system defaults which are used when building the image and
 
 - `UMBREL_BRANCH` - The git branch or commit SHA in the custom repo that should be checked out.
 
+**WIFI setup**
+[raspberrypi.org - setting up wireless networking](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md)
+```
+cd /boot
+sudo nano wpa_supplicant.conf
+```
+
 Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
 
 ---
