@@ -54,7 +54,7 @@ EOF
 done
 
 # Replace /home/umbrel with home/$FIRST_USER_NAME in other scripts
-sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "/umbrel/scripts/umbrel-os/umbrel-details"
+sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "/tmp/umbrel-build/umbrel/umbrel/scripts/umbrel-os/umbrel-details"
 
 # Copy Umbrel to image
 mkdir "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
