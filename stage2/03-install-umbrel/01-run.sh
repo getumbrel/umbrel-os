@@ -57,7 +57,7 @@ sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" "/umbrel/scripts/umbre
 
 # Copy Umbrel to image
 mkdir "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/umbrel"
-rsync --quiet --archive --partial --hard-links --sparse --xattrs /umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
+rsync --quiet --archive --partial --hard-links --sparse --xattrs /tmp/umbrel-build/umbrel "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/"
 
 # Fix permissions
 on_chroot << EOF
@@ -67,7 +67,7 @@ EOF
 # Bundle Umbrel's Docker images
 echo "Pulling Umbrel's Docker images..."
 echo
-cd /umbrel
+cd /tmp/umbrel-build/umbrel
 IMAGES=$(grep '^\s*image' docker-compose.yml | sed 's/image://' | sed 's/\"//g' | sed '/^$/d;s/[[:blank:]]//g' | sort | uniq)
 echo
 echo "Images to bundle: $IMAGES"
