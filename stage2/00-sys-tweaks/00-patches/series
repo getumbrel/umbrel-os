@@ -1,4 +1,4 @@
 01-useradd.diff
-04-inputrc.diff
-05-path.diff
-07-resize-init.diff
+02-inputrc.diff
+03-path.diff
+04-resize-init.diff

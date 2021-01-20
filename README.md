@@ -84,7 +84,7 @@ The `config` file has system defaults which are used when building the image and
 
 - `UMBREL_BRANCH` - The git branch or commit SHA in the custom repo that should be checked out.
 
-Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
+Other Raspberry Pi OS-related stuff can be found in the [Raspberry Pi OS documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
 
 ---
 

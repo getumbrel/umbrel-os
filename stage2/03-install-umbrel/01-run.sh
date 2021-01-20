@@ -31,8 +31,8 @@ echo "Installing Umbrel..."
 echo
 
 # Download Umbrel
-mkdir /umbrel
-cd /umbrel
+mkdir /tmp/umbrel-build/umbrel
+cd /tmp/umbrel-build/umbrel
 if [ -z ${UMBREL_REPO} ]; then
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
 else
