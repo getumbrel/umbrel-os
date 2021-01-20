@@ -31,6 +31,7 @@ echo "Installing Umbrel..."
 echo
 
 # Download Umbrel
+mkdir /tmp/umbrel-build
 mkdir /tmp/umbrel-build/umbrel
 cd /tmp/umbrel-build/umbrel
 if [ -z ${UMBREL_REPO} ]; then
