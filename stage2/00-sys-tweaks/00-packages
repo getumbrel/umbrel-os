@@ -5,7 +5,6 @@ avahi-daemon
 hardlink ca-certificates curl
 fake-hwclock usbutils
 dosfstools
-raspberrypi-sys-mods
 pi-bluetooth
 apt-listchanges
 usb-modeswitch
