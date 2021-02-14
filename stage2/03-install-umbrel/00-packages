@@ -3,3 +3,4 @@ fswatch
 jq
 python3-qrcode
 unattended-upgrades
+fail2ban
