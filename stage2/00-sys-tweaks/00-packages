@@ -4,6 +4,7 @@ bash-completion
 avahi-daemon
 hardlink ca-certificates curl
 fake-hwclock usbutils
+raspberrypi-sys-mods=20201026
 dosfstools
 pi-bluetooth
 apt-listchanges
