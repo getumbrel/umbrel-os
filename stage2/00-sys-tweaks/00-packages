@@ -5,11 +5,9 @@ avahi-daemon
 hardlink ca-certificates curl
 fake-hwclock usbutils
 dosfstools
-pi-bluetooth
 apt-listchanges
 usb-modeswitch
 libpam-chksshpwd
-rpi-update
 rsync
 htop
 man-db
@@ -17,7 +15,4 @@ policykit-1
 ssh-import-id
 rng-tools
 ethtool
-vl805fw
-ntfs-3g
 pciutils
-rpi-eeprom
