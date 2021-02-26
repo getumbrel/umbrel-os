@@ -47,7 +47,7 @@ echo "/:     offset $ROOT_OFFSET, length $ROOT_LENGTH"
 mkdosfs -n boot -F 32 -v "$BOOT_DEV" > /dev/null
 mkfs.btrfs -L rootfs "$ROOT_DEV" > /dev/null
 
-mount -v "$ROOT_DEV" "${ROOTFS_DIR}" -t ext4
+mount -v "$ROOT_DEV" "${ROOTFS_DIR}" -t btrfs
 mkdir -p "${ROOTFS_DIR}/boot"
 mount -v "$BOOT_DEV" "${ROOTFS_DIR}/boot" -t vfat
 
