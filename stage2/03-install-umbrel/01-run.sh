@@ -10,6 +10,7 @@ echo
 on_chroot << EOF
 curl -fsSL https://get.docker.com | sh
 usermod -a -G docker $FIRST_USER_NAME
+sed -i '/^ExecStart/s/-H/-g \/mnt\/data\/docker\/ -H/g' "${ROOTFS_DIR}/lib/systemd/system/docker.service"
 EOF
 
 # Install Docker Compose with pip3
