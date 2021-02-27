@@ -65,7 +65,12 @@ Step 2. Switch to repo's directory
 cd umbrel-os
 ```
 
-Step 3. BUIDL!
+Step 3. Install build dependencies
+```
+sudo apt install quilt qemu-user-static debootstrap zerofree zip libarchive-tools
+```
+
+Step 4. BUIDL!
 ```
 sudo ./build.sh
 ```
