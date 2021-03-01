@@ -49,6 +49,8 @@ SSH is enabled by default and you can use the following credentials to login to 
 - User: `umbrel`  
 - Password: `moneyprintergobrrr`
 
+> Once your umbrel node is setup, the ssh password will be your dashboard password.
+
 ## 🛠 Build Umbrel OS from source
 
 > Don't trust. Verify.
