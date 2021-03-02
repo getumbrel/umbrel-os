@@ -43,7 +43,7 @@ To run Umbrel on:
 
 ## 💻 SSH
 
-SSH is enabled by default and you can use the following credentials to login to your Umbrel node.
+SSH is enabled by default and you can use the following credentials to login to your Umbrel node. The password listed here is the default password before setting up access to the dashboard. **After setup the password for user `umbrel` will be set to the password entered during setup**.
 
 - Hostname: `umbrel.local`  
 - User: `umbrel`  
