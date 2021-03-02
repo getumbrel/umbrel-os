@@ -7,3 +7,5 @@ ENABLE_SSH=1
 BUILD_SCRIPTS="Umbrel OS official build scripts"
 BUILD_SCRIPTS_REPO="https://github.com/getumbrel/umbrel-os"
 UMBREL_VERSION=0.3.5
+UMBREL_REPO="https://github.com/AaronDewes/umbrel.git"
+UMBREL_BRANCH=patch-33
