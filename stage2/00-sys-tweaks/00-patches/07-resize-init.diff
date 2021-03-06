@@ -1,5 +1,5 @@
 --- stage2.orig/rootfs/boot/cmdline.txt
 +++ stage2/rootfs/boot/cmdline.txt
 @@ -1 +1 @@
--usb-storage.quirks=152d:1561:u,152d:1576:u,152d:0578:u,125f:a76a:u,04e8:61b6:u,174c:55aa:u,04e8:61f5:u,04e8:4001:u,1058:082a:u,2109:0711:u,152d:0562:u,7825:a2a4:u,04e8:4001:u console=serial0,115200 console=tty1 root=ROOTDEV rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
-+usb-storage.quirks=152d:1561:u,152d:1576:u,152d:0578:u,125f:a76a:u,04e8:61b6:u,174c:55aa:u,04e8:61f5:u,04e8:4001:u,1058:082a:u,2109:0711:u,152d:0562:u,7825:a2a4:u,04e8:4001:u console=serial0,115200 console=tty1 root=ROOTDEV rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet init=/usr/lib/raspi-config/init_resize.sh
+-usb-storage.quirks=152d:1561:u,152d:1576:u,152d:0578:u,125f:a76a:u,04e8:61b6:u console=serial0,115200 console=tty1 root=ROOTDEV rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
++usb-storage.quirks=152d:1561:u,152d:1576:u,152d:0578:u,125f:a76a:u,04e8:61b6:u console=serial0,115200 console=tty1 root=ROOTDEV rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet init=/usr/lib/raspi-config/init_resize.sh
