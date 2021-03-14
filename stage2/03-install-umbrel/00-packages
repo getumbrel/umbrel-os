@@ -3,3 +3,4 @@ fswatch
 jq
 python3-qrcode
 unattended-upgrades
+btrfs-progs
