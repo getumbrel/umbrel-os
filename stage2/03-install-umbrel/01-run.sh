@@ -5,18 +5,12 @@
 # - Installs Umbrel
 
 # Install Docker
-echo "Installing Docker..."
+# The version in Debian Bullseye is recent enough to be installed via apt
+echo "Installing Docker and Docker Compose..."
 echo
 on_chroot << EOF
-curl -fsSL https://get.docker.com | sh
+apt install docker docker-compose -y
 usermod -a -G docker $FIRST_USER_NAME
-EOF
-
-# Install Docker Compose with pip3
-echo "Installing Docker Compose..."
-echo
-on_chroot << EOF
-pip3 install docker-compose
 EOF
 
 # Bind Avahi to eth0,wlan0 interfaces to prevent hostname cycling

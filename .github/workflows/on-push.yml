@@ -4,35 +4,22 @@ on: ["push", "pull_request"]
 jobs:
     build:
 
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         
         steps:
         
         - uses: actions/checkout@v1
 
-        - name: Run Apt-get update
-          run: sudo apt-get update
-
-        - name: Install dependencies
-          run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
-
-        - name: Nuke current Docker installation
+        - name: Dependencies
           run: |
-              sudo systemctl stop docker
-              sudo apt-get purge docker-ce docker-ce-cli containerd.io moby-engine moby-cli
-              sudo rm -rf /var/lib/docker
-        
-        - name: Re-install Docker
-          run: |
-              curl -fsSL https://get.docker.com -o get-docker.sh
-              sudo sh get-docker.sh
-              docker --version
+              sudo sed -i 's/focal/hirsute/g' /etc/apt/sources.list
+              sudo apt update
+              sudo apt -y dist-upgrade
+              sudo apt install binfmt-support qemu-user-static quilt debootstrap
 
-        - name: Enable experimental features in Docker
-          run: |
-              sudo rm -rf /etc/docker/daemon.json
-              echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-              sudo systemctl restart docker
+        -
+          name: Available platforms
+          run: echo ${{ steps.qemu.outputs.platforms }}
 
         - name: Set image name
           run: |
@@ -51,7 +38,7 @@ jobs:
 
         - name: Debug current working dir
           run: ls -la
-        
+
         - name: Upload artifact
           uses: actions/upload-artifact@v2
           with:

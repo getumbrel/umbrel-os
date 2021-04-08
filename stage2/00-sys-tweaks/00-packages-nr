@@ -1,2 +1,2 @@
+# Workaround for bug in Debian: nfs-common recommends python2, which was removed in Bullseye
 nfs-common
-cifs-utils

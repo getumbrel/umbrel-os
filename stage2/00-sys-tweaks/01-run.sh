@@ -4,14 +4,7 @@ apt-get update
 
 install -m 755 files/resize2fs_once	"${ROOTFS_DIR}/etc/init.d/"
 
-install -d				"${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d"
-install -m 644 files/ttyoutput.conf	"${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d/"
-
-install -m 644 files/50raspi		"${ROOTFS_DIR}/etc/apt/apt.conf.d/"
-
 install -m 644 files/console-setup   	"${ROOTFS_DIR}/etc/default/"
-
-install -m 755 files/rc.local		"${ROOTFS_DIR}/etc/"
 
 on_chroot << EOF
 systemctl disable hwclock.sh
@@ -23,8 +16,6 @@ else
 	systemctl disable ssh
 fi
 systemctl enable regenerate_ssh_host_keys
-
-sed -i -e "s/\/home\/umbrel/\/home\/${FIRST_USER_NAME}/g" /etc/rc.local
 EOF
 
 if [ ! -d $ROOTFS_DIR/home/statuses ]; then

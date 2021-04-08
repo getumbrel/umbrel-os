@@ -16,9 +16,10 @@ htop
 man-db
 policykit-1
 ssh-import-id
-rng-tools
+rng-tools5
 ethtool
 vl805fw
 ntfs-3g
 pciutils
 rpi-eeprom
+cifs-utils
