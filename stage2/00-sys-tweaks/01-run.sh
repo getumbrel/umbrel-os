@@ -2,7 +2,7 @@
 
 apt-get update
 
-install -m 755 files/resize2fs_once	"${ROOTFS_DIR}/etc/init.d/"
+install -m 755 files/resize2fs_once.service	"${ROOTFS_DIR}/etc/systemd/system/"
 
 install -m 644 files/console-setup   	"${ROOTFS_DIR}/etc/default/"
 

@@ -31,6 +31,7 @@ jobs:
         - name: Run build script
           run: |
                 echo "Building $IMAGE_NAME"
+              sudo docker system prune --all --force
                 sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION ./build.sh
 
         - name: Copy ZIP to current working dir

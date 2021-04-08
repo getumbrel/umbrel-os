@@ -9,7 +9,7 @@
 echo "Installing Docker and Docker Compose..."
 echo
 on_chroot << EOF
-apt install docker docker-compose -y
+apt-get install docker docker-compose -y
 usermod -a -G docker $FIRST_USER_NAME
 EOF
 
