@@ -22,7 +22,8 @@ jobs:
               sudo apt update
               sudo apt -y dist-upgrade
               sudo apt install binfmt-support qemu-user-static quilt debootstrap apt-cacher-ng
-              sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
+              sudo sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
+              sudo chmod 0777 /var/cache/apt-cacher-ng
 
         - name: Cache apt packages
           uses: actions/cache@v2
