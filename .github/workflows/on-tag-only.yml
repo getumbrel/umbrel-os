@@ -57,23 +57,23 @@ jobs:
         - name: Debug current working dir
           run: ls -la
 
-      - name: "Get latest Umbrel release from the GitHub API"
-        uses: octokit/request-action@v2.x
-        id: get_last_release
-        with:
-          route: POST /repos/{owner}/{repo}/releases/latest
-          owner: getumbrel
-          repo: umbrel
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: "Get latest Umbrel release from the GitHub API"
+          uses: octokit/request-action@v2.x
+          id: get_last_release
+          with:
+            route: POST /repos/{owner}/{repo}/releases/latest
+            owner: getumbrel
+            repo: umbrel
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create release draft
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            ${{ env.IMAGE_NAME }}.zip
-          name: ${{ github.ref }}
-          draft: true
-          body: ${{ fromJson(steps.get_last_release.outputs.data).body }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Create release draft
+          uses: softprops/action-gh-release@v1
+          with:
+            files: |
+              ${{ env.IMAGE_NAME }}.zip
+            name: ${{ github.ref }}
+            draft: true
+            body: ${{ fromJson(steps.get_last_release.outputs.data).body }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
