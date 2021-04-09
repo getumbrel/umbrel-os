@@ -55,25 +55,24 @@ jobs:
 
         - name: Debug current working dir
           run: ls -la
-      
-        - name: Create release
-          id: create_release
-          uses: actions/create-release@v1
+ 
+        - name: "Get latest Umbrel release from the GitHub API"
+          uses: octokit/request-action@v2.x
+          id: get_last_release
+          with:
+            route: POST /repos/{owner}/{repo}/releases/latest
+            owner: getumbrel
+            repo: umbrel
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ github.ref }}
-            release_name: Release ${{ github.ref }}
-            draft: true
-            prerelease: false
 
-        - name: Upload image
-          id: upload-release-asset 
-          uses: actions/upload-release-asset@v1
+        - name: Create release draft
+          uses: softprops/action-gh-release@v1
+          with:
+            files: |
+              ${{ env.IMAGE_NAME }}.zip
+            name: ${{ github.ref }}
+            draft: true
+            body: ${{ fromJson(steps.get_last_release.outputs.data).body }}
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-            asset_path: ${{ env.IMAGE_NAME }}.zip
-            asset_name: ${{ env.IMAGE_NAME }}.zip
-            asset_content_type: application/gzip
