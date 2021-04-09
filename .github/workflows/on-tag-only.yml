@@ -12,7 +12,7 @@ jobs:
         
         steps:
 
-        - uses: actions/checkout@v2.2.0
+        - uses: actions/checkout@v2
           with:
             fetch-depth: 0
 
@@ -23,7 +23,7 @@ jobs:
               sudo apt -y dist-upgrade
               sudo apt install binfmt-support qemu-user-static quilt debootstrap apt-cacher-ng
               sudo sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
-              sudo chmod 0777 /var/cache/apt-cacher-ng
+              sudo chmod -R 0777 /var/cache/apt-cacher-ng
 
         - name: Cache apt packages
           uses: actions/cache@v2
@@ -57,24 +57,23 @@ jobs:
         - name: Debug current working dir
           run: ls -la
 
-        - name: Create release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ github.ref }}
-            release_name: Release ${{ github.ref }}
-            draft: true
-            prerelease: false
+      - name: "Get latest Umbrel release from the GitHub API"
+        uses: octokit/request-action@v2.x
+        id: get_last_release
+        with:
+          route: POST /repos/{owner}/{repo}/releases/latest
+          owner: getumbrel
+          repo: umbrel
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Upload image
-          id: upload-release-asset 
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-            asset_path: ${{ env.IMAGE_NAME }}.zip
-            asset_name: ${{ env.IMAGE_NAME }}.zip
-            asset_content_type: application/gzip
+      - name: Create release draft
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ${{ env.IMAGE_NAME }}.zip
+          name: ${{ github.ref }}
+          draft: true
+          body: ${{ fromJson(steps.get_last_release.outputs.data).body }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

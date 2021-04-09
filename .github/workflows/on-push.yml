@@ -9,7 +9,7 @@ jobs:
         steps:
         
 
-        - uses: actions/checkout@v2.2.0
+        - uses: actions/checkout@v2
           with:
             fetch-depth: 0
 
@@ -20,7 +20,7 @@ jobs:
               sudo apt -y dist-upgrade
               sudo apt install binfmt-support qemu-user-static quilt debootstrap apt-cacher-ng
               sudo sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
-              sudo chmod 0777 /var/cache/apt-cacher-ng
+              sudo chmod -R 0777 /var/cache/apt-cacher-ng
 
         - name: Set image name
           run: |
