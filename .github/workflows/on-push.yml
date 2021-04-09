@@ -21,10 +21,6 @@ jobs:
               sudo apt install binfmt-support qemu-user-static quilt debootstrap apt-cacher-ng
               sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
 
-        -
-          name: Available platforms
-          run: echo ${{ steps.qemu.outputs.platforms }}
-
         - name: Set image name
           run: |
               UMBREL_OS_VERSION="$(git describe --tags)"
