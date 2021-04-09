@@ -9,16 +9,17 @@ jobs:
         steps:
         
 
-      - uses: actions/checkout@v2.2.0
-        with:
-          fetch-depth: 0
+        - uses: actions/checkout@v2.2.0
+          with:
+            fetch-depth: 0
 
         - name: Dependencies
           run: |
               sudo sed -i 's/focal/hirsute/g' /etc/apt/sources.list
               sudo apt update
               sudo apt -y dist-upgrade
-              sudo apt install binfmt-support qemu-user-static quilt debootstrap
+              sudo apt install binfmt-support qemu-user-static quilt debootstrap apt-cacher-ng
+              sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
 
         -
           name: Available platforms
@@ -30,6 +31,19 @@ jobs:
               IMAGE_NAME="umbrel-os-${UMBREL_OS_VERSION}"
               echo "UMBREL_OS_VERSION=$UMBREL_OS_VERSION"  >> $GITHUB_ENV
               echo "IMAGE_NAME=$IMAGE_NAME"  >> $GITHUB_ENV
+              echo "APT_PROXY=http://localhost:3142" >> $GITHUB_ENV
+
+        - name: Cache apt packages
+          uses: actions/cache@v2
+          env:
+            cache-name: apt-cacher-ng-cache
+          with:
+            path: /var/cache/apt-cacher-ng
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-build-${{ env.cache-name }}-
+              ${{ runner.os }}-build-
+              ${{ runner.os }}-
 
         - name: Run build script
           run: |
