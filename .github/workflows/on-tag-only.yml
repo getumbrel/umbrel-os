@@ -60,9 +60,7 @@ jobs:
           uses: octokit/request-action@v2.x
           id: get_last_release
           with:
-            route: POST /repos/{owner}/{repo}/releases/latest
-            owner: getumbrel
-            repo: umbrel
+            route: GET /repos/getumbrel/umbrel/releases/latest
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,7 +70,6 @@ jobs:
             files: |
               ${{ env.IMAGE_NAME }}.zip
             name: ${{ github.ref }}
-            draft: true
             body: ${{ fromJson(steps.get_last_release.outputs.data).body }}
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
