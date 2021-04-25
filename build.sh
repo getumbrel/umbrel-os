@@ -240,7 +240,19 @@ for STAGE_DIR in $STAGE_LIST; do
 	run_stage
 done
 
-CLEAN=0
+
+if [ ! -f "${WORK_DIR}/RELEASE" ]; then
+	echo "${RELEASE}" > "${WORK_DIR}/RELEASE"
+fi
+
+# If we upgrade the distro
+if [ "$(cat "${WORK_DIR}/RELEASE")" != "${RELEASE}" ]; then
+	echo "Dist upgrade detected! Building from scratch."
+	CLEAN=1
+else
+	CLEAN=0
+fi
+
 for EXPORT_DIR in ${EXPORT_DIRS}; do
 	STAGE_DIR=${BASE_DIR}/export-image
 	# shellcheck source=/dev/null
