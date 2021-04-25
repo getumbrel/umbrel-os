@@ -92,7 +92,7 @@ run_stage(){
 		fi
 	fi
 	if [ ! -f SKIP ]; then
-		if [ "${CLEAN}" = "1" ]; then
+		if [ "${CLEAN}" = "1" ] || [ -f FORCE_RERUN ]; then
 			if [ -d "${ROOTFS_DIR}" ]; then
 				rm -rf "${ROOTFS_DIR}"
 			fi
@@ -157,7 +157,7 @@ export IMG_FILENAME="${IMG_FILENAME:-"${IMG_DATE}-${IMG_NAME}"}"
 export ZIP_FILENAME="${ZIP_FILENAME:-"${IMG_NAME}"}"
 
 export SCRIPT_DIR="${BASE_DIR}/scripts"
-export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/${IMG_DATE}-${IMG_NAME}"}"
+export WORK_DIR="${WORK_DIR:-"${BASE_DIR}/work/current"}"
 export DEPLOY_DIR=${DEPLOY_DIR:-"${BASE_DIR}/deploy"}
 export DEPLOY_ZIP="${DEPLOY_ZIP:-1}"
 export LOG_FILE="${WORK_DIR}/build.log"
@@ -239,7 +239,7 @@ for STAGE_DIR in $STAGE_LIST; do
 	run_stage
 done
 
-CLEAN=1
+CLEAN=0
 for EXPORT_DIR in ${EXPORT_DIRS}; do
 	STAGE_DIR=${BASE_DIR}/export-image
 	# shellcheck source=/dev/null
