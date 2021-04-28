@@ -36,11 +36,11 @@ jobs:
             cache-name: apt-cacher-ng-cache
           with:
             path: /var/cache/apt-cacher-ng
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            key: bullseye-${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('config') }}
             restore-keys: |
-              ${{ runner.os }}-build-${{ env.cache-name }}-
-              ${{ runner.os }}-build-
-              ${{ runner.os }}-
+              bullseye-${{ runner.os }}-build-${{ env.cache-name }}-
+              bullseye-${{ runner.os }}-build-
+              bullseye-${{ runner.os }}-
 
         - name: Run build script
           run: |
