@@ -7,7 +7,6 @@ zerofree
 zip
 mkdosfs:dosfstools
 capsh:libcap2-bin
-bsdtar:libarchive-tools
 grep
 rsync
 xz:xz-utils
@@ -15,6 +14,5 @@ curl
 xxd
 file
 git
-lsmod:kmod
 bc
 docker

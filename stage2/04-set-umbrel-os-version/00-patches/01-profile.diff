@@ -1,7 +1,7 @@
-Index: jessie-stage2/rootfs/etc/profile
+Index: stage2/rootfs/etc/profile
 ===================================================================
---- jessie-stage2.orig/rootfs/etc/profile
-+++ jessie-stage2/rootfs/etc/profile
+--- stage2.orig/rootfs/etc/profile
++++ stage2/rootfs/etc/profile
 @@ -32,3 +32,6 @@
    done
    unset i

@@ -9,10 +9,6 @@ bootstrap(){
 
 	export http_proxy=${APT_PROXY}
 
-	if [ "$(dpkg --print-architecture)" !=  "arm64" ]; then
-		BOOTSTRAP_CMD=qemu-debootstrap
-	fi
-
 	BOOTSTRAP_ARGS+=(--arch arm64)
 	BOOTSTRAP_ARGS+=(--components "main,contrib,non-free")
 	BOOTSTRAP_ARGS+=(--include gnupg)

@@ -1,0 +1,11 @@
+[Unit]
+Description=Resize root filesystem
+Before=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/resize2fs /dev/root
+ExecStartPost=/usr/bin/systemctl disable resize2fs_once
+
+[Install]
+WantedBy=multi-user.target
