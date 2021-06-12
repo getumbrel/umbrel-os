@@ -24,9 +24,9 @@
 # uncomment if hdmi display is not detected and composite is being output
 #hdmi_force_hotplug=1
 
-# uncomment to force a specific HDMI mode (this will force VGA)
-#hdmi_group=1
-#hdmi_mode=1
+# A HDMI mode needs to be enabled for Raspi4 to boot headless (1080p)
+hdmi_group=2
+hdmi_mode=82
 
 # uncomment to force a HDMI mode rather than DVI. This can make audio work in
 # DMT (computer monitor) modes
