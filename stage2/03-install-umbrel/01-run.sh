@@ -40,6 +40,10 @@ git clone ${UMBREL_REPO} .
 git checkout "${UMBREL_BRANCH}"
 fi
 
+on_chroot << EOF
+systemctl enable systemd-networkd-wait-online.service
+EOF
+
 # Enable Umbrel OS systemd services
 cd scripts/umbrel-os/services
 UMBREL_SYSTEMD_SERVICES=$(ls *.service)
