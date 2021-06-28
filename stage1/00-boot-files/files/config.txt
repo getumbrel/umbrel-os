@@ -61,3 +61,6 @@ dtoverlay=vc4-fkms-v3d
 max_framebuffers=2
 
 arm_64bit=1
+
+# Disable Bluetooth
+dtoverlay=disable-bt
