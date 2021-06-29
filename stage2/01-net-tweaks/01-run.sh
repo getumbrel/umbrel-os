@@ -31,3 +31,8 @@ fi
 mkdir -p "${ROOTFS_DIR}/var/lib/systemd/rfkill/"
 echo 1 > "${ROOTFS_DIR}/var/lib/systemd/rfkill/platform-3f300000.mmc:wlan"
 echo 1 > "${ROOTFS_DIR}/var/lib/systemd/rfkill/platform-fe300000.mmc:wlan"
+
+# Make sure dhcpd ignores virtual network interfaces
+dhcpd_conf="${ROOTFS_DIR}/etc/dhcpcd.conf"
+dhcpd_rule="denyinterfaces veth*"
+echo "${dhcpd_rule}" | tee -a "${dhcpd_conf}"
