@@ -86,6 +86,10 @@ The `config` file has system defaults which are used when building the image and
 
 - `UMBREL_BRANCH` - The git branch or commit SHA in the custom repo that should be checked out.
 
+**WIFI setup**
+[Using WiFi instead of Ethernet](https://umbrelinfo.github.io/troubleshooting.html#using-wifi-instead-of-ethernet)
+
+
 Other Raspbian-related stuff can be found in [Raspbian's documentation](https://github.com/RPi-Distro/pi-gen/blob/master/README.md) which is still applicable.
 
 ---
