@@ -1,5 +1,10 @@
 git
 fswatch
 jq
+python3
 python3-qrcode
 unattended-upgrades
+rsync
+curl
+gettext-base
+gnupg

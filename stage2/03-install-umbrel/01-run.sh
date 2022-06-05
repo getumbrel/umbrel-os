@@ -26,6 +26,21 @@ on_chroot << EOF
 sed -i "s/#allow-interfaces=eth0/allow-interfaces=eth0,wlan0/g;" "/etc/avahi/avahi-daemon.conf";
 EOF
 
+echo "Install yq..."
+# Download yq from GitHub
+yq_temp_file="/tmp/yq"
+curl -L "https://github.com/mikefarah/yq/releases/download/v4.24.5/yq_linux_arm64" -o "${yq_temp_file}"
+
+# Check file matches checksum
+if [[ "$(sha256sum "${yq_temp_file}" | awk '{ print $1 }')" == "8879e61c0b3b70908160535ea358ec67989ac4435435510e1fcb2eda5d74a0e9" ]]; then
+    sudo mv "${yq_temp_file}" "${ROOTFS_DIR}/usr/bin/yq"
+    sudo chmod +x "${ROOTFS_DIR}/usr/bin/yq"
+    echo "yq installed successfully..."
+else
+    echo "yq install failed. sha256sum mismatch"
+    exit 1
+fi
+
 # Install Umbrel
 echo "Installing Umbrel..."
 echo
