@@ -49,6 +49,7 @@ echo
 mkdir /umbrel
 cd /umbrel
 if [ -z ${UMBREL_REPO} ]; then
+echo Downloading https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz
 curl -L https://github.com/getumbrel/umbrel/archive/v${UMBREL_VERSION}.tar.gz | tar -xz --strip-components=1
 else
 git clone ${UMBREL_REPO} .
