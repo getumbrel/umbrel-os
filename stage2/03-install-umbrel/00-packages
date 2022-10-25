@@ -8,3 +8,4 @@ rsync
 curl
 gettext-base
 gnupg
+fio
