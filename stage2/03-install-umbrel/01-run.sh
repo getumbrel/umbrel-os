@@ -16,6 +16,7 @@ EOF
 echo "Installing Docker Compose..."
 echo
 on_chroot << EOF
+pip3 install --upgrade pip
 pip3 install docker-compose
 EOF
 
