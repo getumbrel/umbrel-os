@@ -1,20 +1,29 @@
 name: Build image on push or PR
 on: ["push", "pull_request"]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
     build:
 
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
         
         steps:
         
-        - uses: actions/checkout@v1
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0 ## all branches/tags
 
         - name: Run Apt-get update
           run: sudo apt-get update
 
         - name: Install dependencies
-          run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
+          run: |
+              sudo apt-get --fix-missing -y install quilt qemu-user-static debootstrap
+              sudo apt-get --fix-missing -y install bsdtar || echo
+              sudo apt-get --fix-missing -y install libarchive-tools || echo
 
         - name: Nuke current Docker installation
           run: |
@@ -36,7 +45,7 @@ jobs:
 
         - name: Set image name
           run: |
-              UMBREL_OS_VERSION="$(git describe --tags)"
+              UMBREL_OS_VERSION="$(git describe --tags || echo $(date +%s))"
               IMAGE_NAME="umbrel-os-${UMBREL_OS_VERSION}"
               echo "UMBREL_OS_VERSION=$UMBREL_OS_VERSION"  >> $GITHUB_ENV
               echo "IMAGE_NAME=$IMAGE_NAME"  >> $GITHUB_ENV

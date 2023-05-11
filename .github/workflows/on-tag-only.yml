@@ -5,50 +5,58 @@ on:
           - v[0-9]+.[0-9]+.[0-9]+
           - v[0-9]+.[0-9]+.[0-9]+-*
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
     build:
 
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
         
         steps:
         
-        - uses: actions/checkout@v1
-
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0 ## all branches/tags
         - name: Run Apt-get update
           run: sudo apt-get update
 
         - name: Install dependencies
-          run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
+          run: |
+              sudo apt-get --fix-missing -y install quilt qemu-user-static debootstrap
+              sudo apt-get --fix-missing -y install bsdtar || echo
+              sudo apt-get --fix-missing -y install libarchive-tools || echo
 
         - name: Nuke current Docker installation
           run: |
-                sudo systemctl stop docker
-                sudo apt-get purge docker-ce docker-ce-cli containerd.io moby-engine moby-cli
-                sudo rm -rf /var/lib/docker
+              sudo systemctl stop docker
+              sudo apt-get purge docker-ce docker-ce-cli containerd.io moby-engine moby-cli
+              sudo rm -rf /var/lib/docker
         
         - name: Re-install Docker
           run: |
-                curl -fsSL https://get.docker.com -o get-docker.sh
-                sudo sh get-docker.sh
-                docker --version
+              curl -fsSL https://get.docker.com -o get-docker.sh
+              sudo sh get-docker.sh
+              docker --version
 
         - name: Enable experimental features in Docker
           run: |
-                sudo rm -rf /etc/docker/daemon.json
-                echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-                sudo systemctl restart docker
+              sudo rm -rf /etc/docker/daemon.json
+              echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+              sudo systemctl restart docker
         
         - name: Set image name
           run: |
-                UMBREL_OS_VERSION="$(git describe --tags)"
-                IMAGE_NAME="umbrel-os-${UMBREL_OS_VERSION}"
-                echo "UMBREL_OS_VERSION=$UMBREL_OS_VERSION"  >> $GITHUB_ENV
-                echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+              UMBREL_OS_VERSION="$(git describe --tags || echo $(date +%s))"
+              IMAGE_NAME="umbrel-os-${UMBREL_OS_VERSION}"
+              echo "UMBREL_OS_VERSION=$UMBREL_OS_VERSION"  >> $GITHUB_ENV
+              echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
         - name: Run build script
           run: |
-                echo "Building $IMAGE_NAME"
-                sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION ./build.sh
+              echo "Building $IMAGE_NAME"
+              sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION ./build.sh
 
         - name: Copy ZIP to current working dir
           run: cp deploy/*.zip ./
