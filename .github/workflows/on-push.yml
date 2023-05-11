@@ -20,7 +20,10 @@ jobs:
           run: sudo apt-get update
 
         - name: Install dependencies
-          run: sudo apt-get -y install quilt qemu-user-static debootstrap bsdtar
+          run: |
+              sudo apt-get --fix-missing -y install quilt qemu-user-static debootstrap
+              sudo apt-get --fix-missing -y install bsdtar || echo
+              sudo apt-get --fix-missing -y install libarchive-tools || echo
 
         - name: Nuke current Docker installation
           run: |
