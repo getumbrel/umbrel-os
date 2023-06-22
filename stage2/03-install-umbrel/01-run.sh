@@ -58,18 +58,7 @@ git checkout "${UMBREL_BRANCH}"
 fi
 
 # Download umbreld
-machine_arch="$(uname --machine)"
-if [[ "${machine_arch}" = "x86_64" ]]
-then
-    binary_arch="amd64"
-elif [[ "${machine_arch}" = "aarch64" ]]
-then
-    binary_arch="arm64"
-else
-    echo "Unsupported architecture: ${machine_arch}"
-    exit 1
-fi
-binary_url="https://github.com/${UMBREL_REPO}/releases/download/v${UMBREL_VERSION}/umbreld-v${UMBREL_VERSION}-${binary_arch}.tar.gz"
+binary_url="https://github.com/getumbrel/umbrel/releases/download/v${UMBREL_VERSION}/umbreld-v${UMBREL_VERSION}-arm64.tar.gz"
 curl --fail --location "${binary_url}" | tar --extract --gzip --directory="./bin"
 
 
