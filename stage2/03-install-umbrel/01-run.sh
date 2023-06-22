@@ -57,6 +57,11 @@ git clone ${UMBREL_REPO} .
 git checkout "${UMBREL_BRANCH}"
 fi
 
+# Download umbreld
+binary_url="https://github.com/getumbrel/umbrel/releases/download/v${UMBREL_VERSION}/umbreld-v${UMBREL_VERSION}-arm64.tar.gz"
+curl --fail --location "${binary_url}" | tar --extract --gzip --directory="./bin"
+
+
 # Enable Umbrel OS systemd services
 cd scripts/umbrel-os/services
 UMBREL_SYSTEMD_SERVICES=$(ls *.service)
