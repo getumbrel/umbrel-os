@@ -57,6 +57,12 @@ git clone ${UMBREL_REPO} .
 git checkout "${UMBREL_BRANCH}"
 fi
 
+# Apply patches to fix initial git clone timeout
+# Increase git timeout
+sed -i 's/timeout --foreground 30 git/timeout --foreground 300 git/g' ./scripts/repo || true
+# Only do shallow clone
+sed -i 's/timeout --foreground 300 git clone/timeout --foreground 300 git clone --depth 1/g' ./scripts/repo || true
+
 # Download umbreld
 binary_url="https://github.com/getumbrel/umbrel/releases/download/v${UMBREL_VERSION}/umbreld-v${UMBREL_VERSION}-arm64.tar.gz"
 curl --fail --location "${binary_url}" | tar --extract --gzip --directory="./bin"
