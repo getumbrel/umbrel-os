@@ -24,7 +24,7 @@ To run Umbrel on:
 ### Instructions:
 
 1. Make sure you've everything ready:
-    1. [Raspberry Pi 4 with 4GB or 8GB RAM](https://www.amazon.com/gp/product/B08C4SK5C3/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B08C4SK5C3&linkCode=as2&tag=umbrel08-20&linkId=d3f17fd4813568c4863d239839311d67)
+    1. [Raspberry Pi 4 with 4GB or 8GB RAM](https://www.amazon.com/CanaKit-Raspberry-Basic-Kit-8GB/dp/B08DJ9MLHV/ref=sr_1_3?crid=2QCDYXW7U4JXD&dchild=1&keywords=raspberry+pi+4+8gb&qid=1615611754&sprefix=rasp%2Caps%2C309&sr=8-3)
     2. [1TB SSD](https://www.amazon.com/gp/product/B077SF8KMG/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B077SF8KMG&linkId=5fa12eae55f9ecaed22984bdb9ebb546)
     3. [SSD Enclosure](https://www.amazon.com/gp/product/B01LY97QE8/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LY97QE8&linkId=c73e0df3b8ebd4e5a03f37b7e3b371b3)
     4. [16GB+ microSD Card](https://www.amazon.com/gp/product/B07B98GXQT/ref=as_li_tl?ie=UTF8&tag=umbrel08-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B07B98GXQT&linkId=e72147bff5eef2a86d9d74300af70180)
