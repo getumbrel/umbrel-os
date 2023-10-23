@@ -48,6 +48,10 @@ SSH is enabled by default and you can use the following credentials to login to 
 - Hostname: `umbrel.local`  
 - User: `umbrel`  
 - Password: The same password you use to log in to the Umbrel dashboard
+
+```bash
+ssh umbrel@umbrel.local
+```
  
 > If you haven't yet run through the setup process, the password will be set to `moneyprintergobrrr`.
 
