@@ -19,7 +19,7 @@ To run Umbrel on:
 
 - Raspberry Pi 4 (recommended) — [Download the latest Umbrel OS](https://github.com/getumbrel/umbrel-os/releases/latest)
 - Raspberry Pi 3 (no longer supported) - [Download Umbrel OS v0.2.10](https://github.com/getumbrel/umbrel-os/releases/tag/v0.2.10)
-- Any other hardware - [Manually install Umbrel](https://github.com/getumbrel/umbrel#-installation)
+- Any other hardware - [Manually install Umbrel](https://github.com/getumbrel/umbrel#installing-umbrelos)
 
 ### Instructions:
 
