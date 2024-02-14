@@ -90,10 +90,6 @@ Other Raspbian-related stuff can be found in [Raspbian's documentation](https://
 
 ---
 
-### ⚡️ Don't be too reckless
-
-> Umbrel is still in an early stage and things are expected to break every now and then. We **DO NOT** recommend running it on mainnet with real money just yet, unless you want to be really *#reckless*.
-
 ## ❤️ Contributing
 
 We welcome and appreciate new contributions!
